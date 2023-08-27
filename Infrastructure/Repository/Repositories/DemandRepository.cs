@@ -1,4 +1,5 @@
 ﻿using Domain.Interfaces.IGenerics;
+using Domain.Interfaces.IRepositorys;
 using Domain.Interfaces.IServices;
 using Entities.Entities;
 using Infrastructure.Configuration;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository.Repositories
 {
-    public class DemandRepository : RepositoryGeneric<Demand>, IDemandServices
+    public class DemandRepository : RepositoryGeneric<Demand>, IRepositoryDemand
     {
         private readonly DbContextOptions<ContextBase> _OptionsBuilder;
 

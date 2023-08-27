@@ -11,7 +11,7 @@ namespace Domain.Interfaces.IServices
 {
     public interface IDemandServices
     {
-        Task AddDemand(Demand objeto);
+        Task AddDemand(string demandId, string observation, DateTime date, string productId);
 
         Task UpdateDemand(Demand objeto);
 

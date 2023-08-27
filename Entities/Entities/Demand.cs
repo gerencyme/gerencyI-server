@@ -39,7 +39,7 @@ namespace Entities.Entities
 
         }
 
-        public void AlterarTeste(string observation)
+        public void AlterarTeste(string observation, string observation1, DateTime date, string productId)
         {
             if(observation == null)
             {

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Entities.Entities;
+using GerencylApi.Models;
 
 namespace GerencylApi.Config
 {
@@ -9,8 +11,8 @@ namespace GerencylApi.Config
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                //config.CreateMap<ProductVO, Product>();
-                //config.CreateMap<Product, ProductVO>();
+                config.CreateMap<DemandModel, Demand>();
+                config.CreateMap<Demand, DemandModel>();
             });
             return mappingConfig;
         }

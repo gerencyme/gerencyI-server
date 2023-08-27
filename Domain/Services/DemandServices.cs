@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.IRepositorys;
 using Domain.Interfaces.IServices;
 using Entities.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,13 @@ namespace Domain.Services
             _IrepositoryDemand = IrepositoryDemand;
         }
 
-        public async Task AddDemand(Demand objeto)
+        public async Task AddDemand(string demandId, string observation, DateTime date, string productId)
         {
-            await _IrepositoryDemand.Add(objeto);
+            var newDemand = new Demand();
+            newDemand.AddDemand(demandId, observation, date, productId);
+            await _IrepositoryDemand.Add(newDemand);
+
+            return;
         }
 
         public async Task DeleteDemand(string demandId)

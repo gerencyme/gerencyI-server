@@ -37,7 +37,7 @@ namespace Infrastucture.Repository.Generics
             }
         }
 
-        public async Task<T> GetEntityById(int Id)
+        public async Task<T> GetEntityById(string Id)
         {
             using (var data = new ContextBase(_OptionsBuilder))
             {

@@ -1,7 +1,9 @@
-﻿namespace Entities.Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Entities.Entities
 {
 
-    public class Company
+    public class Company : IdentityUser
     {
 
         public int CompanyId { get; set; }
