@@ -13,11 +13,11 @@ namespace Entities
         [Column("quantity")]
         public int Quantity { get; set; }
 
-        [ForeignKey("Demand")]
+       
         public int DemandId { get; set; }
         public virtual Demand Demand { get; set; }
 
-        [ForeignKey("Product")]
+        
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
     }

@@ -93,3 +93,4 @@ C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\refin
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.pdb
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.genruntimeconfig.cache
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\ref\GerencylApi.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.MvcApplicationPartsAssemblyInfo.cs
