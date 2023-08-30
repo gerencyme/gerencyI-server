@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    [Migration("20230829015903_InitialCreation")]
+    [Migration("20230830005744_InitialCreation")]
     partial class InitialCreation
     {
         /// <inheritdoc />
@@ -33,8 +33,14 @@ namespace Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("CNPJ")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("cnpj");
+
                     b.Property<string>("CompanyId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CompanyId");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -55,7 +61,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("NameCompany")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name_company");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -84,10 +91,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("cnpj")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -103,50 +106,50 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Entities.Demand", b =>
                 {
-                    b.Property<string>("DemandId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("DemandId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("DemandId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DemandId"));
 
                     b.Property<DateTime>("DateDemand")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("date_demand");
 
                     b.Property<string>("Observation")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("observation");
 
-                    b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StandId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("StandId")
+                        .HasColumnType("int");
 
                     b.HasKey("DemandId");
 
-                    b.HasIndex("ProductId");
-
                     b.HasIndex("StandId");
 
-                    b.ToTable("Demand");
+                    b.ToTable("DEMAND");
                 });
 
             modelBuilder.Entity("Entities.DemandProduct", b =>
                 {
-                    b.Property<string>("DemandProductId")
-                        .HasMaxLength(191)
-                        .HasColumnType("nvarchar(191)");
+                    b.Property<int>("DemandProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("DemandProductId");
 
-                    b.Property<string>("DemandId")
-                        .IsRequired()
-                        .HasMaxLength(191)
-                        .HasColumnType("nvarchar(191)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DemandProductId"));
 
-                    b.Property<string>("ProductId")
-                        .IsRequired()
-                        .HasMaxLength(191)
-                        .HasColumnType("nvarchar(191)");
+                    b.Property<int>("DemandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("quantity");
 
                     b.HasKey("DemandProductId");
 
@@ -154,13 +157,17 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("DemandProduct");
+                    b.ToTable("DEMAND_PRODUCT");
                 });
 
             modelBuilder.Entity("Entities.Product", b =>
                 {
-                    b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ProductId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
                     b.Property<string>("CompanyId")
                         .IsRequired()
@@ -168,65 +175,80 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("DescriptionProduct")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("description_product");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("product_name");
 
                     b.Property<int>("Stock")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("stock");
 
                     b.Property<int>("UnitPrice")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("unit_price");
 
                     b.HasKey("ProductId");
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Product");
+                    b.ToTable("PRODUCT");
                 });
 
             modelBuilder.Entity("Entities.Stand", b =>
                 {
-                    b.Property<string>("StandId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("StandId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("StandId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StandId"));
 
                     b.Property<string>("CPFResponsible")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("cpf_responsible");
 
                     b.Property<string>("CompanyId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateCreation")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("date_creation");
 
                     b.Property<DateTime>("DateModification")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("date_modification");
 
                     b.Property<float>("PaymentTotal")
-                        .HasColumnType("real");
+                        .HasColumnType("real")
+                        .HasColumnName("payment_total");
 
                     b.Property<bool>("StandAllReadReserved")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("stand_all_read_reserved");
 
                     b.Property<string>("StandNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("stand_number");
 
                     b.Property<int>("StandStatus")
                         .HasColumnType("int");
 
                     b.Property<bool>("UserPermission")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("user_permission");
 
                     b.HasKey("StandId");
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Stand");
+                    b.ToTable("STAND");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -368,17 +390,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Entities.Demand", b =>
                 {
-                    b.HasOne("Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
                     b.HasOne("Entities.Stand", "Stand")
                         .WithMany("Demands")
                         .HasForeignKey("StandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
 
                     b.Navigation("Stand");
                 });

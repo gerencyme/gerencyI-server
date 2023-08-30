@@ -2,11 +2,11 @@
 {
     public class DemandModel
     {
-        public string DemandId { get; set; }
+        public int DemandId { get; set; }
 
         public string Observation { get; set; }
 
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
 
         public DateTime DateDemand { get; set; }
     }

@@ -69,7 +69,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "DWS V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerencyl V1");
     });
 
     app.MapControllers().AllowAnonymous(); //method for disable authentication

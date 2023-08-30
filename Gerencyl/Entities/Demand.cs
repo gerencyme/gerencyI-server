@@ -9,38 +9,36 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+    [Table("DEMAND")]
     public class Demand
     {
         [Key]
-        public string DemandId { get; private set; }
+        [Column("DemandId")]
+        public int DemandId { get; set; }
 
+        [Column("observation")]
+        public string Observation { get; set; }
 
-        public string Observation { get; private set; }
+        [Column("date_demand")]
+        public DateTime DateDemand { get; set; }
 
-
-        public DateTime DateDemand { get; private set; }
-
-        public virtual Product Product { get; private set; }
-
-        public string StandId { get; private set; }
+        [ForeignKey("Stand")]
+        public int StandId { get; set; }
+        public virtual Stand Stand { get; set; }
 
         public ICollection<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
 
-        [ForeignKey("StandId")]
-        public virtual Stand Stand { get; set; }
-
-
-        public Demand()
+    public Demand()
         {
             DateDemand = DateTime.Now;
         }
 
-        public Demand(string demandId) : this()
+        public Demand(int demandId) : this()
         {
             DemandId = demandId;
         }
 
-        public void AddDemand(string demandId, string observation, DateTime date, string standId)
+        public void AddDemand(int demandId, string observation, DateTime date, int standId)
         {
             DemandId = demandId;
             Observation = observation;

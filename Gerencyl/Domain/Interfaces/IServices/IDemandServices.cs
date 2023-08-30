@@ -9,7 +9,7 @@ namespace Domain.Interfaces.IServices
 {
     public interface IDemandServices
     {
-        Task AddDemand(string demandId, string observation, DateTime date, string productId);
+        Task AddDemand(int demandId, string observation, DateTime date, int productId);
 
         Task UpdateDemand(Demand objeto);
 
@@ -17,9 +17,9 @@ namespace Domain.Interfaces.IServices
 
         //Task<bool> VerifyCard(Demand objeto); => método a ser implementado para trazer lista de pedido referente a uma empresa
 
-        Task DeleteDemand(string DemandId);
+        Task DeleteDemand(int DemandId);
 
-        Task<Demand> GetByEntityId(string demandId);
+        Task<Demand> GetByEntityId(int demandId);
 
     }
 }

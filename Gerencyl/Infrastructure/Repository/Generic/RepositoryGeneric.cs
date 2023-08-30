@@ -42,7 +42,7 @@ namespace Infrastructure.Repository.Generic
             }
         }
 
-        public async Task<T> GetEntityById(string Id)
+        public async Task<T> GetEntityById(int Id)
         {
             using (var data = new ContextBase(_OptionsBuilder))
             {

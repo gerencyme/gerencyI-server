@@ -18,7 +18,7 @@ namespace Domain.Services
             _IrepositoryDemand = IrepositoryDemand;
         }
 
-        public async Task AddDemand(string demandId, string observation, DateTime date, string productId)
+        public async Task AddDemand(int demandId, string observation, DateTime date, int productId)
         {
             var newDemand = new Demand();
             newDemand.AddDemand(demandId, observation, date, productId);
@@ -27,13 +27,13 @@ namespace Domain.Services
             return;
         }
 
-        public async Task DeleteDemand(string demandId)
+        public async Task DeleteDemand(int demandId)
         {
             var deleteDemand = await _IrepositoryDemand.GetEntityById(demandId);
             await _IrepositoryDemand.Delete(deleteDemand);
         }
 
-        public Task<Demand> GetByEntityId(string demandId)
+        public Task<Demand> GetByEntityId(int demandId)
         {
             var getDemand = _IrepositoryDemand.GetEntityById(demandId);
             return getDemand;

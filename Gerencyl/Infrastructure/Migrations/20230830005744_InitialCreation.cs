@@ -31,7 +31,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CompanyId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NameCompany = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    name_company = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     cnpj = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -160,21 +160,22 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "PRODUCT",
                 columns: table => new
                 {
-                    ProductId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescriptionProduct = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false),
-                    UnitPrice = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    product_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    description_product = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    stock = table.Column<int>(type: "int", nullable: false),
+                    unit_price = table.Column<int>(type: "int", nullable: false),
                     CompanyId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.ProductId);
+                    table.PrimaryKey("PK_PRODUCT", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Product_AspNetUsers_CompanyId",
+                        name: "FK_PRODUCT_AspNetUsers_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -182,25 +183,26 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stand",
+                name: "STAND",
                 columns: table => new
                 {
-                    StandId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StandNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StandAllReadReserved = table.Column<bool>(type: "bit", nullable: false),
-                    UserPermission = table.Column<bool>(type: "bit", nullable: false),
-                    CPFResponsible = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentTotal = table.Column<float>(type: "real", nullable: false),
-                    DateCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateModification = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StandId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    stand_number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    stand_all_read_reserved = table.Column<bool>(type: "bit", nullable: false),
+                    user_permission = table.Column<bool>(type: "bit", nullable: false),
+                    cpf_responsible = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    payment_total = table.Column<float>(type: "real", nullable: false),
+                    date_creation = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    date_modification = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StandStatus = table.Column<int>(type: "int", nullable: false),
                     CompanyId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stand", x => x.StandId);
+                    table.PrimaryKey("PK_STAND", x => x.StandId);
                     table.ForeignKey(
-                        name: "FK_Stand_AspNetUsers_CompanyId",
+                        name: "FK_STAND_AspNetUsers_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -208,53 +210,49 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Demand",
+                name: "DEMAND",
                 columns: table => new
                 {
-                    DemandId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Observation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateDemand = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProductId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    StandId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    DemandId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    observation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    date_demand = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StandId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Demand", x => x.DemandId);
+                    table.PrimaryKey("PK_DEMAND", x => x.DemandId);
                     table.ForeignKey(
-                        name: "FK_Demand_Product_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Product",
-                        principalColumn: "ProductId");
-                    table.ForeignKey(
-                        name: "FK_Demand_Stand_StandId",
+                        name: "FK_DEMAND_STAND_StandId",
                         column: x => x.StandId,
-                        principalTable: "Stand",
+                        principalTable: "STAND",
                         principalColumn: "StandId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DemandProduct",
+                name: "DEMAND_PRODUCT",
                 columns: table => new
                 {
-                    DemandProductId = table.Column<string>(type: "nvarchar(191)", maxLength: 191, nullable: false),
-                    DemandId = table.Column<string>(type: "nvarchar(191)", maxLength: 191, nullable: false),
-                    ProductId = table.Column<string>(type: "nvarchar(191)", maxLength: 191, nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    DemandProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    DemandId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DemandProduct", x => x.DemandProductId);
+                    table.PrimaryKey("PK_DEMAND_PRODUCT", x => x.DemandProductId);
                     table.ForeignKey(
-                        name: "FK_DemandProduct_Demand_DemandId",
+                        name: "FK_DEMAND_PRODUCT_DEMAND_DemandId",
                         column: x => x.DemandId,
-                        principalTable: "Demand",
+                        principalTable: "DEMAND",
                         principalColumn: "DemandId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DemandProduct_Product_ProductId",
+                        name: "FK_DEMAND_PRODUCT_PRODUCT_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Product",
+                        principalTable: "PRODUCT",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -299,33 +297,28 @@ namespace Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Demand_ProductId",
-                table: "Demand",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Demand_StandId",
-                table: "Demand",
+                name: "IX_DEMAND_StandId",
+                table: "DEMAND",
                 column: "StandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DemandProduct_DemandId",
-                table: "DemandProduct",
+                name: "IX_DEMAND_PRODUCT_DemandId",
+                table: "DEMAND_PRODUCT",
                 column: "DemandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DemandProduct_ProductId",
-                table: "DemandProduct",
+                name: "IX_DEMAND_PRODUCT_ProductId",
+                table: "DEMAND_PRODUCT",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CompanyId",
-                table: "Product",
+                name: "IX_PRODUCT_CompanyId",
+                table: "PRODUCT",
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stand_CompanyId",
-                table: "Stand",
+                name: "IX_STAND_CompanyId",
+                table: "STAND",
                 column: "CompanyId");
         }
 
@@ -348,19 +341,19 @@ namespace Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DemandProduct");
+                name: "DEMAND_PRODUCT");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Demand");
+                name: "DEMAND");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "PRODUCT");
 
             migrationBuilder.DropTable(
-                name: "Stand");
+                name: "STAND");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

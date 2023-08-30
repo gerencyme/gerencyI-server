@@ -78,7 +78,6 @@ C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\Geren
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.AssemblyInfoInputs.cache
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.AssemblyInfo.cs
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.csproj.CoreCompileInputs.cache
-C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\staticwebassets\msbuild.GerencylApi.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\staticwebassets\msbuild.build.GerencylApi.props
