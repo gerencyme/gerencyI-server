@@ -1,0 +1,7 @@
+# Arquivos de configuração do aplicativo
+appsettings.json
+appsettings.*.json
+ContextBase.cs
+ContextBase.*.cs
+ocelot.json
+ocelot.*.json

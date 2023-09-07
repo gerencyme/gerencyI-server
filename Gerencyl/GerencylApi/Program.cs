@@ -1,3 +1,4 @@
+using ApiAuthentication.Token;
 using AutoMapper;
 using Domain.Interfaces.IGeneric;
 using Domain.Interfaces.IRepositorys;
@@ -47,10 +48,12 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 //JWT
-
+builder.Configuration.AddJsonFile("appsettings.json");
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
       .AddJwtBearer(option =>
       {
+          var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
           option.TokenValidationParameters = new TokenValidationParameters
           {
               ValidateIssuer = false,
@@ -58,9 +61,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
               ValidateLifetime = true,
               ValidateIssuerSigningKey = true,
 
-              ValidIssuer = "Teste.Securiry.Bearer",
-              ValidAudience = "Teste.Securiry.Bearer",
-              IssuerSigningKey = JwtSecurityKey.Create("Secret_Key-12345678")
+              ValidIssuer = jwtSettings.Issuer,
+              ValidAudience = jwtSettings.Audience,
+              IssuerSigningKey = JwtSecurityKey.Create(jwtSettings.SecurityKey)
           };
 
           option.Events = new JwtBearerEvents

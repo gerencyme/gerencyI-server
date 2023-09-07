@@ -1,8 +1,10 @@
 ﻿using ApiAuthentication.Models;
 using ApiAuthentication.Services.Interfaces.InterfacesServices;
+using ApiAuthentication.Token;
 using ApiAuthentication.Views;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Options;
 using System.Text;
 using WebAPIs.Token;
 
@@ -12,9 +14,11 @@ namespace ApiAuthentication.Services
     {
         private readonly SignInManager<GerencylRegister> _signInManager;
         private readonly UserManager<GerencylRegister> _userManager;
+        private readonly JwtSettings _jwtSettings;
 
-        public AuthenticationService(SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager)
+        public AuthenticationService(SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager, IOptions<JwtSettings> jwtSettings)
         {
+            _jwtSettings = jwtSettings.Value;
             _signInManager = signInManager;
             _userManager = userManager;
         }
@@ -35,13 +39,13 @@ namespace ApiAuthentication.Services
             if (resultado.Succeeded)
             {
                 var userCurrent = await _userManager.FindByNameAsync(cnpj);
-                var idUsuario = userCurrent.Id;
+                string idUsuario = userCurrent.CNPJ;
 
                 var token = new TokenJWTBuilder()
-                    .AddSecurityKey(JwtSecurityKey.Create("Secret_Key-12345678"))
-                    .AddSubject("Empresa - Canal Dev Net Core")
-                    .AddIssuer("Teste.Securiry.Bearer")
-                    .AddAudience("Teste.Securiry.Bearer")
+                    .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                    .AddSubject("Empresa - GerencyI")
+                    .AddIssuer(_jwtSettings.Issuer)
+                    .AddAudience(_jwtSettings.Audience)
                     .AddClaim("idUsuario", idUsuario)
                     .AddExpiry(5)
                     .Builder();
