@@ -1,4 +1,6 @@
 using ApiAuthentication.Models;
+using ApiAuthentication.Services;
+using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using AutoMapper;
 using Configuration;
 using GerencylApi.Config;
@@ -52,6 +54,10 @@ builder.Services.AddDbContext<ContextBase>(options =>
 
 builder.Services.AddDefaultIdentity<GerencylRegister>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ContextBase>();
+
+
+//Config Services
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 // Config Auto Mapping
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();

@@ -1,26 +1,19 @@
-﻿using ApiAuthentication.Models;
+﻿using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Views;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using System.Text;
-using WebAPIs.Token;
 
 namespace ApiAuthentication.Controllers
 {
     public class GerencylLoginController : ControllerBase
     {
-        private readonly UserManager<GerencylRegister> _userManager;
-        private readonly SignInManager<GerencylRegister> _signInManager;
+        private readonly IAuthenticationService _authenticationService;
         private readonly IConfiguration _configuration;
-        public GerencylLoginController(UserManager<GerencylRegister> userManager,
-            SignInManager<GerencylRegister> signInManager,
+        public GerencylLoginController(IAuthenticationService authenticationService,
             IConfiguration configuration)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _configuration = configuration;
+            _authenticationService = authenticationService;
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
 
@@ -29,88 +22,26 @@ namespace ApiAuthentication.Controllers
         [HttpPost("/api/GenereateTokenIdentity")]
         public async Task<IActionResult> CriarTokenIdentity([FromQuery] GerencylLoginView login)
         {
-            if (string.IsNullOrWhiteSpace(login.CNPJ) || string.IsNullOrWhiteSpace(login.Senha))
+
+            try
             {
-                return Unauthorized();
+                var token = await _authenticationService.CriarTokenAsync(login.CNPJ, login.Senha);
+                return Ok(token);
             }
-
-            var resultado = await
-                _signInManager.PasswordSignInAsync(
-                    login.CNPJ,
-                    login.Senha,
-                    false,
-                    lockoutOnFailure: false);
-
-            if (resultado.Succeeded)
+            catch (UnauthorizedAccessException ex)
             {
-                // Recupera Usuário Logadomonte
-                var userCurrent = await _userManager.FindByIdAsync(login.CNPJ);
-                var idUsuario = userCurrent.CNPJ;
-
-                var token = new TokenJWTBuilder()
-                    .AddSecurityKey(JwtSecurityKey.Create("Secret_Key-12345678"))
-                .AddSubject("Empresa - Canal Dev Net Core")
-                .AddIssuer("Teste.Securiry.Bearer")
-                .AddAudience("Teste.Securiry.Bearer")
-                .AddClaim("idUsuario", idUsuario)
-                .AddExpiry(5)
-                .Builder();
-
-                return Ok(token.value);
+                return Unauthorized(ex.Message);
             }
-            else
-            {
-                return Unauthorized();
-            }
-
         }
 
         [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/AddUserIdentity")]
-        public async Task<IActionResult> AdicionaUsuarioIdentity([FromQuery] GerencylRegisterView login)
+        public async Task<IActionResult> AdicionaUsuarioIdentity([FromQuery] GerencylRegisterView register)
         {
-            if (string.IsNullOrWhiteSpace(login.Email) || string.IsNullOrWhiteSpace(login.Senha))
-                return Ok("Falta alguns dados");
-
-
-            var user = new GerencylRegister
-            {
-                Email = login.Email,
-                Senha = login.Senha,
-                Name  = login.Name,
-                CNPJ = login.CNPJ,
-                PhantasyName = login.PhantasyName,
-                CreationDate = DateTime.Now,
-            };
-
-            var resultado = await _userManager.CreateAsync(user, login.Senha);
-
-            if (resultado.Errors.Any())
-            {
-                return Ok(resultado.Errors);
-            }
-
-
-
-            // Geração de Confirmação caso precise
-            var userId = await _userManager.GetUserIdAsync(user);
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-            // retorno email 
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var resultado2 = await _userManager.ConfirmEmailAsync(user, code);
-
-            if (resultado2.Succeeded)
-                return Ok("Usuário Adicionado com Sucesso");
-            else
-                return Ok("Erro ao confirmar usuários");
-
+            var result = await _authenticationService.AdicionarUsuarioAsync(register);
+            return Ok(result);
         }
-
-
-
 
     }
 }
