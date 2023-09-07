@@ -119,42 +119,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("observation");
 
-                    b.Property<int>("StandId")
-                        .HasColumnType("int");
-
                     b.HasKey("DemandId");
 
-                    b.HasIndex("StandId");
-
                     b.ToTable("DEMAND");
-                });
-
-            modelBuilder.Entity("Entities.DemandProduct", b =>
-                {
-                    b.Property<int>("DemandProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("DemandProductId");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DemandProductId"));
-
-                    b.Property<int>("DemandId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("quantity");
-
-                    b.HasKey("DemandProductId");
-
-                    b.HasIndex("DemandId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("DEMAND_PRODUCT");
                 });
 
             modelBuilder.Entity("Entities.Product", b =>
@@ -193,59 +160,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("PRODUCT");
-                });
-
-            modelBuilder.Entity("Entities.Stand", b =>
-                {
-                    b.Property<int>("StandId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("StandId");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StandId"));
-
-                    b.Property<string>("CPFResponsible")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("cpf_responsible");
-
-                    b.Property<string>("CompanyId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateCreation")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("date_creation");
-
-                    b.Property<DateTime>("DateModification")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("date_modification");
-
-                    b.Property<float>("PaymentTotal")
-                        .HasColumnType("real")
-                        .HasColumnName("payment_total");
-
-                    b.Property<bool>("StandAllReadReserved")
-                        .HasColumnType("bit")
-                        .HasColumnName("stand_all_read_reserved");
-
-                    b.Property<string>("StandNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("stand_number");
-
-                    b.Property<int>("StandStatus")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("UserPermission")
-                        .HasColumnType("bit")
-                        .HasColumnName("user_permission");
-
-                    b.HasKey("StandId");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("STAND");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -385,51 +299,10 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Demand", b =>
-                {
-                    b.HasOne("Entities.Stand", "Stand")
-                        .WithMany("Demands")
-                        .HasForeignKey("StandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Stand");
-                });
-
-            modelBuilder.Entity("Entities.DemandProduct", b =>
-                {
-                    b.HasOne("Entities.Demand", "Demand")
-                        .WithMany("DemandProducts")
-                        .HasForeignKey("DemandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Product", "Product")
-                        .WithMany("DemandProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Demand");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Entities.Product", b =>
                 {
                     b.HasOne("Entities.Company", "Company")
-                        .WithMany("Products")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("Entities.Stand", b =>
-                {
-                    b.HasOne("Entities.Company", "Company")
-                        .WithMany("Stands")
+                        .WithMany("Product")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -490,24 +363,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Entities.Company", b =>
                 {
-                    b.Navigation("Products");
-
-                    b.Navigation("Stands");
-                });
-
-            modelBuilder.Entity("Entities.Demand", b =>
-                {
-                    b.Navigation("DemandProducts");
-                });
-
-            modelBuilder.Entity("Entities.Product", b =>
-                {
-                    b.Navigation("DemandProducts");
-                });
-
-            modelBuilder.Entity("Entities.Stand", b =>
-                {
-                    b.Navigation("Demands");
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

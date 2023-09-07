@@ -5,10 +5,13 @@ using Domain.Interfaces.IServices;
 using Domain.Services;
 using Entities;
 using GerencylApi.Config;
+using GerencylApi.TokenJWT;
 using Infrastructure.Configuration;
 using Infrastructure.Repository.Generic;
 using Infrastructure.Repository.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,12 +46,52 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityRequirement(securityRequirement);
 });
 
+//JWT
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+      .AddJwtBearer(option =>
+      {
+          option.TokenValidationParameters = new TokenValidationParameters
+          {
+              ValidateIssuer = false,
+              ValidateAudience = false,
+              ValidateLifetime = true,
+              ValidateIssuerSigningKey = true,
+
+              ValidIssuer = "Teste.Securiry.Bearer",
+              ValidAudience = "Teste.Securiry.Bearer",
+              IssuerSigningKey = JwtSecurityKey.Create("Secret_Key-12345678")
+          };
+
+          option.Events = new JwtBearerEvents
+          {
+              OnAuthenticationFailed = context =>
+              {
+                  Console.WriteLine("OnAuthenticationFailed: " + context.Exception.Message);
+                  return Task.CompletedTask;
+              },
+              OnTokenValidated = context =>
+              {
+                  Console.WriteLine("OnTokenValidated: " + context.SecurityToken);
+                  return Task.CompletedTask;
+              }
+          };
+      });
+
 builder.Services.AddDbContext<ContextBase>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDefaultIdentity<Company>(options => options.SignIn.RequireConfirmedAccount = true)
 .AddEntityFrameworkStores<ContextBase>();
+
+/*configuration for mysql
+    var configString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ContextBase>(options =>
+    options.UseMySql(configString, new MySqlServerVersion(new Version(8, 0, 5))));
+
+builder.Services.AddDefaultIdentity<Company>(options => options.SignIn.RequireConfirmedAccount = true)
+.AddEntityFrameworkStores<ContextBase>();*/
 
 builder.Services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGeneric<>));
 builder.Services.AddSingleton<IRepositoryDemand, DemandRepository>();

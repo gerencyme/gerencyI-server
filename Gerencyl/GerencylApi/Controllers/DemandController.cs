@@ -22,7 +22,7 @@ namespace GerencylApi.Controllers
         [HttpPost("/api/Add")]
         public async Task<IActionResult> Add([FromQuery] DemandModel demand)
         {
-            await _IDemandServices.AddDemand(demand.DemandId, demand.Observation, demand.DateDemand, demand.ProductId);
+            await _IDemandServices.AddDemand(demand.DemandId, demand.Observation, demand.DateDemand);
 
             return Ok();
 

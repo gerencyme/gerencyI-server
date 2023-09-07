@@ -20,9 +20,9 @@ namespace Infrastructure.Configuration
 
         public DbSet<Product> Product { get; set; }
 
-        public DbSet<Stand> Stand { get; set; }
+        //public DbSet<Stand> Stand { get; set; }
 
-        public DbSet<DemandProduct> DemandProduct { get; set; }
+        //public DbSet<DemandProduct> DemandProduct { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -13,6 +13,7 @@ C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Azure
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Humanizer.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\System.Net.Http.Formatting.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\System.Web.Http.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -41,7 +42,9 @@ C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Micro
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\MySqlConnector.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -78,6 +81,7 @@ C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\Geren
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.AssemblyInfoInputs.cache
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.AssemblyInfo.cs
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.csproj.CoreCompileInputs.cache
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\staticwebassets\msbuild.GerencylApi.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\staticwebassets\msbuild.build.GerencylApi.props
@@ -93,4 +97,3 @@ C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\refin
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.pdb
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.genruntimeconfig.cache
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\ref\GerencylApi.dll
-C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.MvcApplicationPartsAssemblyInfo.cs

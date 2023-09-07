@@ -11,13 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{BD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{0D9BBBA6-6DBF-4C4F-88DD-5BE466A527F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{C22F601C-1AF1-4877-8F1B-51EE7060D00E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{C22F601C-1AF1-4877-8F1B-51EE7060D00E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{8A88530D-D016-458E-B2D2-983BC2D77FED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{8A88530D-D016-458E-B2D2-983BC2D77FED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{CA270844-BD63-40ED-8706-47AB33F16C9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{CA270844-BD63-40ED-8706-47AB33F16C9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerencylApi", "GerencylApi\GerencylApi.csproj", "{4C07CF9D-D08B-4873-B12A-81A3443A46FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerencylApi", "GerencylApi\GerencylApi.csproj", "{4C07CF9D-D08B-4873-B12A-81A3443A46FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

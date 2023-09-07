@@ -18,10 +18,10 @@ namespace Domain.Services
             _IrepositoryDemand = IrepositoryDemand;
         }
 
-        public async Task AddDemand(int demandId, string observation, DateTime date, int productId)
+        public async Task AddDemand(int demandId, string observation, DateTime date)
         {
             var newDemand = new Demand();
-            newDemand.AddDemand(demandId, observation, date, productId);
+            newDemand.AddDemand(demandId, observation, date);
             await _IrepositoryDemand.Add(newDemand);
 
             return;

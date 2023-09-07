@@ -12,7 +12,7 @@ namespace Entities
     [Table("DEMAND")]
     public class Demand
     {
-        [Key]
+        
         [Column("DemandId")]
         public int DemandId { get; set; }
 
@@ -22,11 +22,11 @@ namespace Entities
         [Column("date_demand")]
         public DateTime DateDemand { get; set; }
 
-        [ForeignKey("Stand")]
+       /* [ForeignKey("Stand")]
         public int StandId { get; set; }
-        public virtual Stand Stand { get; set; }
+        public virtual Stand Stand { get; set; }*/
 
-        public ICollection<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
+        //public ICollection<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
 
     public Demand()
         {
@@ -38,12 +38,12 @@ namespace Entities
             DemandId = demandId;
         }
 
-        public void AddDemand(int demandId, string observation, DateTime date, int standId)
+        public void AddDemand(int demandId, string observation, DateTime date)
         {
             DemandId = demandId;
             Observation = observation;
             DateDemand = date;
-            StandId = standId;
+            //StandId = standId;
 
         }
 

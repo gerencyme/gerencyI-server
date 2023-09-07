@@ -9,11 +9,11 @@ using Entities.Enums;
 
 namespace Entities
 {
-    [Table("STAND")]
+   /* [Table("STAND")]
     public class Stand
     {
-        [Key]
-        [Column("StandId")]
+        
+        [Column("Stand_Id")]
         public int StandId { get; set; }
 
         [Column("stand_number")]
@@ -39,11 +39,11 @@ namespace Entities
 
         public OrderStatus StandStatus { get; set; }
 
-        [ForeignKey("Company")]
+        *//*[ForeignKey("Company")]
         public string CompanyId { get; set; }
-        public virtual Company Company { get; set; }
+        public virtual Company Company { get; set; }*//*
 
-        public ICollection<Demand> Demands { get; set; } = new List<Demand>();
-    }
+        //public virtual ICollection<Demand> Demand { get; set; } = new List<Demand>();
+    }*/
 
 }

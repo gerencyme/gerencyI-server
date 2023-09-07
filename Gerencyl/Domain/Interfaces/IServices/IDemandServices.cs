@@ -9,7 +9,7 @@ namespace Domain.Interfaces.IServices
 {
     public interface IDemandServices
     {
-        Task AddDemand(int demandId, string observation, DateTime date, int productId);
+        Task AddDemand(int demandId, string observation, DateTime date);
 
         Task UpdateDemand(Demand objeto);
 

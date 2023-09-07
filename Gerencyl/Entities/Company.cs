@@ -13,7 +13,7 @@ namespace Entities
     [Table("COMPANY")]
     public class Company : IdentityUser
     {
-        [Key]
+        
         [Column("CompanyId")]
         public string CompanyId { get; set; }
 
@@ -23,8 +23,8 @@ namespace Entities
         [Column("cnpj")]
         public string CNPJ { get; set; }
 
-        public ICollection<Stand> Stands { get; set; } = new List<Stand>();
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        //public virtual ICollection<Stand> Stands { get; set; } = new List<Stand>();
+        public virtual ICollection<Product> Product { get; set; } = new List<Product>();
     }
 
 }
