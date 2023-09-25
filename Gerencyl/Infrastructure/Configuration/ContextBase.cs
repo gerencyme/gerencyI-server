@@ -14,30 +14,26 @@ namespace Infrastructure.Configuration
 
         }
 
-        public DbSet<Demand> Demand { get; set; }
-
         public DbSet<Company> Company { get; set; }
-
-        public DbSet<Product> Product { get; set; }
-
-        //public DbSet<Stand> Stand { get; set; }
-
-        //public DbSet<DemandProduct> DemandProduct { get; set; }
+        public DbSet<Stand> Stands { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Demand> Demands { get; set; }
+        public DbSet<DemandProduct> DemandProducts { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(ObterStringConexao());
+                optionsBuilder.UseSqlite(ObterStringConexao());
                 base.OnConfiguring(optionsBuilder);
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Company>().ToTable("AspNetUsers").HasKey(t => t.CompanyId);
-            base.OnModelCreating(builder);
+            modelBuilder.Entity<Company>().ToTable("AspNetUsers").HasKey(t => t.Id);
+            base.OnModelCreating(modelBuilder);
         }
 
         public string ObterStringConexao()

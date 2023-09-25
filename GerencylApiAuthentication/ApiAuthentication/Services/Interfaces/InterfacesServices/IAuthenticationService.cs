@@ -1,4 +1,6 @@
-﻿using ApiAuthentication.Views;
+﻿using ApiAuthentication.Models;
+using ApiAuthentication.Views;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiAuthentication.Services.Interfaces.InterfacesServices
 {
@@ -7,5 +9,7 @@ namespace ApiAuthentication.Services.Interfaces.InterfacesServices
         Task<string> CriarTokenAsync(string cnpj, string senha);
 
         Task<string> AdicionarUsuarioAsync(GerencylRegisterView register);
+
+        Task<GerencylRegisterView> ReturnUser(GerencylRegisterView returnUser);
     }
 }

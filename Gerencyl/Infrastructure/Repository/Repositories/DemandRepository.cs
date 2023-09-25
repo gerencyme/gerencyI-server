@@ -3,12 +3,7 @@ using Entities;
 using Infrastructure.Configuration;
 using Infrastructure.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repository.Repositories
 {
@@ -26,7 +21,7 @@ namespace Infrastructure.Repository.Repositories
         public async Task<List<Demand>> ListDemand(Expression<Func<Demand, bool>> exDemand)
         {
             using var banco = new ContextBase(_OptionsBuilder);
-            return await banco.Demand.Where(exDemand).AsNoTracking().ToListAsync();
+            return await banco.Demands.Where(exDemand).AsNoTracking().ToListAsync();
         }
 
 

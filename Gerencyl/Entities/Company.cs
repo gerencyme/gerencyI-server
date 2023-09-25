@@ -23,7 +23,7 @@ namespace Entities
         [Column("cnpj")]
         public string CNPJ { get; set; }
 
-        //public virtual ICollection<Stand> Stands { get; set; } = new List<Stand>();
+        public virtual ICollection<Stand> Stands { get; set; } = new List<Stand>();
         public virtual ICollection<Product> Product { get; set; } = new List<Product>();
     }
 

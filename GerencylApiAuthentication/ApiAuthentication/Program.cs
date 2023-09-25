@@ -50,7 +50,7 @@ builder.Services.AddSwaggerGen(c =>
 
 
 builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(
+    options.UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDefaultIdentity<GerencylRegister>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -121,9 +121,9 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+/*
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");*/
 
 app.Run();

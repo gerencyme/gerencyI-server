@@ -26,7 +26,7 @@ namespace Configuration
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<GerencylRegister>().ToTable("AspNetUsers").HasKey(t => t.Id);
+            builder.Entity<GerencylRegister>().ToTable("AspNetUsers").HasKey(t => t.CNPJ);
             base.OnModelCreating(builder);
         }
 

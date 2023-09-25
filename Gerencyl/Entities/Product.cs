@@ -11,7 +11,7 @@ namespace Entities
     [Table("PRODUCT")]
     public class Product
     {
-        
+
         [Column("ProductId")]
         public int ProductId { get; set; }
 
@@ -31,6 +31,6 @@ namespace Entities
         public string CompanyId { get; set; }
         public virtual Company Company { get; set; }
 
-        //public ICollection<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
+        public ICollection<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
+        }
     }
-}

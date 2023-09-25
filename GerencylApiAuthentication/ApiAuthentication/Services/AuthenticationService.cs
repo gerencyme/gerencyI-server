@@ -39,7 +39,7 @@ namespace ApiAuthentication.Services
             if (resultado.Succeeded)
             {
                 var userCurrent = await _userManager.FindByNameAsync(cnpj);
-                string idUsuario = userCurrent.CNPJ;
+                string idUsuario = userCurrent.Id;
 
                 var token = new TokenJWTBuilder()
                     .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
@@ -54,9 +54,52 @@ namespace ApiAuthentication.Services
             }
             else
             {
-                throw new UnauthorizedAccessException("Credenciais inválidas.");
+                throw new UnauthorizedAccessException();
             }
         }
+
+        public async Task<GerencylRegisterView> ReturnUser(GerencylRegisterView returnUser)
+        {
+            if (returnUser == null)
+            {
+
+                return null;
+            }
+
+            var user = new GerencylRegister
+            {
+                CNPJ = returnUser.CNPJ,
+                Senha = returnUser.Senha,
+                PhantasyName = returnUser.PhantasyName,
+                Name = returnUser.Name,
+                Email = returnUser.Email,
+            };
+
+            if (_userManager == null)
+            {
+                return null;
+            }
+
+            var recupera = await _userManager.FindByNameAsync(user.CNPJ);
+
+            if (recupera == null)
+            {
+                return null;
+            }
+
+            var converte = new GerencylRegisterView
+            {
+                CNPJ = recupera.CNPJ,
+                Senha = recupera.Senha,
+                Name = recupera.Name,
+                PhantasyName = recupera.PhantasyName,
+                Email = recupera.Email,
+                ConfirmSenha = recupera.Senha,
+            };
+
+            return converte;
+        }
+
         public async Task<string> AdicionarUsuarioAsync(GerencylRegisterView register)
         {
             if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Senha))
@@ -72,6 +115,7 @@ namespace ApiAuthentication.Services
                 CNPJ = register.CNPJ,
                 PhantasyName = register.PhantasyName,
                 CreationDate = DateTime.Now,
+                UserName = register.CNPJ
             };
 
             var resultado = await _userManager.CreateAsync(user, register.Senha);

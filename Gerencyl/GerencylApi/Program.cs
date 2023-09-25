@@ -56,8 +56,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
           var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
           option.TokenValidationParameters = new TokenValidationParameters
           {
-              ValidateIssuer = false,
-              ValidateAudience = false,
+              ValidateIssuer = true,
+              ValidateAudience = true,
               ValidateLifetime = true,
               ValidateIssuerSigningKey = true,
 
@@ -82,7 +82,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
       });
 
 builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(
+    options.UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDefaultIdentity<Company>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -124,11 +124,11 @@ else app.MapControllers();
 
 app.MapGet("/", () => "Hello World!");
 
-var devClient = " http://localhost:4200 ";
+/*var devClient = " http://localhost:4200 ";
 app.UseCors(x => x
 .AllowAnyOrigin()
 .AllowAnyMethod()
-.AllowAnyHeader().WithOrigins(devClient));
+.AllowAnyHeader().WithOrigins(devClient));*/
 
 app.UseHttpsRedirection();
 

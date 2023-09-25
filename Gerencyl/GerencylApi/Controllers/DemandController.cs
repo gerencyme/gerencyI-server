@@ -19,7 +19,7 @@ namespace GerencylApi.Controllers
 
 
         [Produces("application/json")]
-        [HttpPost("/api/Add")]
+        [HttpPost("/api/AddDemand")]
         public async Task<IActionResult> Add([FromQuery] DemandModel demand)
         {
             await _IDemandServices.AddDemand(demand.DemandId, demand.Observation, demand.DateDemand);

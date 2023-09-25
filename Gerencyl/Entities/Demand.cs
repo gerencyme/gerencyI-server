@@ -22,11 +22,10 @@ namespace Entities
         [Column("date_demand")]
         public DateTime DateDemand { get; set; }
 
-       /* [ForeignKey("Stand")]
+        [ForeignKey("StandId")]
         public int StandId { get; set; }
-        public virtual Stand Stand { get; set; }*/
-
-        //public ICollection<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
+        public virtual Stand Stand { get; set; }
+        public ICollection<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
 
     public Demand()
         {

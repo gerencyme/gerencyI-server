@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "xAKiI8OrKw1rmfwP2c/czHDhCo14wEjPvQYx9nNadoc=",
+  "Source": "ApiGatewayGerencyl",
+  "BasePath": "_content/ApiGatewayGerencyl",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

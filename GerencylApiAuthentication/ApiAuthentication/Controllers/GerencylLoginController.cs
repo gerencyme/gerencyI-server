@@ -1,4 +1,5 @@
-﻿using ApiAuthentication.Services.Interfaces.InterfacesServices;
+﻿using ApiAuthentication.Models;
+using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,28 @@ namespace ApiAuthentication.Controllers
         }
 
 
+
+        [AllowAnonymous]
+        [Produces("application/json")]
+        [HttpGet("/api/ReturnUser")]
+        public async Task<IActionResult> ReturnUser([FromQuery] GerencylRegisterView returnUser)
+        {
+            var user = await _authenticationService.ReturnUser(returnUser);
+            try
+            {
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+                else return BadRequest("não foi possível localizar o usúario");
+            }
+            catch (Exception ex) {
+
+                return StatusCode(500, ex.Message);
+
+            }
+        }
+
         [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/GenereateTokenIdentity")]
@@ -25,7 +48,7 @@ namespace ApiAuthentication.Controllers
 
             try
             {
-                var token = await _authenticationService.CriarTokenAsync(login.CNPJ, login.Senha);
+                var token = await _authenticationService.CriarTokenAsync(login.CNPJ, login.Senha );
                 return Ok(token);
             }
             catch (UnauthorizedAccessException ex)
