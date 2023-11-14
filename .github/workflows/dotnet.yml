@@ -5,9 +5,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: ["dev"]
   pull_request:
-    branches: [ "dev" ]
+    branches: ["dev"]
 
 jobs:
   build:
@@ -15,14 +15,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Gerencyl/Gerencyl.sln
+
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build Gerencyl/Gerencyl.sln --no-restore
+
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test Gerencyl/Gerencyl.sln --no-build --verbosity normal
