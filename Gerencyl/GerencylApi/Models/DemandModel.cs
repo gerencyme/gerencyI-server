@@ -1,8 +1,10 @@
-﻿namespace GerencylApi.Models
+﻿using MongoDB.Bson;
+
+namespace GerencylApi.Models
 {
     public class DemandModel
     {
-        public int DemandId { get; set; }
+        public ObjectId DemandId { get; set; }
 
         public string Observation { get; set; }
 

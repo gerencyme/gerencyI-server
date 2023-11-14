@@ -125,3 +125,16 @@ C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\refin
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.pdb
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\GerencylApi.genruntimeconfig.cache
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\obj\Debug\net7.0\ref\GerencylApi.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\AWSSDK.Core.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\AWSSDK.SecurityToken.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\DnsClient.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\MongoDB.Bson.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\MongoDB.Driver.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\MongoDB.Driver.Core.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\MongoDB.Libmongocrypt.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\SharpCompress.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\Snappier.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\ZstdSharp.dll
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\runtimes\linux\native\libmongocrypt.so
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\runtimes\osx\native\libmongocrypt.dylib
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\GerencylApi\bin\Debug\net7.0\runtimes\win\native\mongocrypt.dll

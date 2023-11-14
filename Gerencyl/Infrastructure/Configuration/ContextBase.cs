@@ -1,4 +1,4 @@
-﻿using Entities;
+﻿/*using Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -47,3 +47,4 @@ namespace Infrastructure.Configuration
         }
     }
 }
+*/

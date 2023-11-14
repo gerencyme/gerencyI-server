@@ -4,14 +4,12 @@ using Domain.Interfaces.IGeneric;
 using Domain.Interfaces.IRepositorys;
 using Domain.Interfaces.IServices;
 using Domain.Services;
-using Entities;
 using GerencylApi.Config;
 using GerencylApi.TokenJWT;
 using Infrastructure.Configuration;
 using Infrastructure.Repository.Generic;
 using Infrastructure.Repository.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -81,12 +79,39 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
           };
       });
 
-builder.Services.AddDbContext<ContextBase>(options =>
+
+
+// Adicione a leitura das configurações do appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json");
+
+// Configure as configurações do MongoDB
+var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
+
+// Registra as configurações como um serviço no DI (Dependency Injection)
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
+
+// Registra o RepositoryMongoDBGeneric como serviço
+builder.Services.AddSingleton(typeof(IGenericMongoDb<>), typeof(RepositoryMongoDBGeneric<>));
+//builder.Services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGeneric<>));
+builder.Services.AddSingleton<IRepositoryDemand, DemandRepository>();
+builder.Services.AddSingleton<IDemandServices, DemandServices>();
+builder.Services.AddSingleton<IRepositoryProduct, ProductRepository>();
+builder.Services.AddSingleton<IProductServices, ProductServices>();
+
+
+// Config Auto Mapping
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+/*builder.Services.AddDbContext<ContextBase>(options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDefaultIdentity<Company>(options => options.SignIn.RequireConfirmedAccount = true)
-.AddEntityFrameworkStores<ContextBase>();
+.AddEntityFrameworkStores<ContextBase>();*/
+
 
 /*configuration for mysql
     var configString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -95,17 +120,6 @@ builder.Services.AddDbContext<ContextBase>(options =>
 
 builder.Services.AddDefaultIdentity<Company>(options => options.SignIn.RequireConfirmedAccount = true)
 .AddEntityFrameworkStores<ContextBase>();*/
-
-builder.Services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGeneric<>));
-builder.Services.AddSingleton<IRepositoryDemand, DemandRepository>();
-
-builder.Services.AddSingleton<IDemandServices, DemandServices>();
-
-// Config Auto Mapping
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 
 var app = builder.Build();
 

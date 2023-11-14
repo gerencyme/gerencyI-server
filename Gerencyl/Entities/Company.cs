@@ -1,30 +1,22 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Entities
 {
-    [Table("COMPANY")]
-    public class Company : IdentityUser
+    public class Company
     {
-        
-        [Column("CompanyId")]
-        public string CompanyId { get; set; }
+        [BsonId]
+        public ObjectId CompanyId { get; set; }
 
-        [Column("name_company")]
-        public string NameCompany { get; set; }
+        public string? CompanyCod { get; set; }
 
-        [Column("cnpj")]
-        public string CNPJ { get; set; }
+        public string? NameCompany { get; set; }
 
-        public virtual ICollection<Stand> Stands { get; set; } = new List<Stand>();
-        public virtual ICollection<Product> Product { get; set; } = new List<Product>();
+        public string? CNPJ { get; set; }
+
+        public List<Stand> Stands { get; set; } = new List<Stand>();
+
+        public List<Product> Products { get; set; } = new List<Product>();
+
     }
-
 }

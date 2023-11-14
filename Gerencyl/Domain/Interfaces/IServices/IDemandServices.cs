@@ -1,25 +1,19 @@
 ﻿using Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace Domain.Interfaces.IServices
 {
     public interface IDemandServices
     {
-        Task AddDemand(int demandId, string observation, DateTime date);
+        Task AddDemand(ObjectId demandId, string observation, DateTime date);
 
         Task UpdateDemand(Demand objeto);
 
         Task<List<Demand>> ListDemand();
 
-        //Task<bool> VerifyCard(Demand objeto); => método a ser implementado para trazer lista de pedido referente a uma empresa
+        Task DeleteDemand(Demand Demand);
 
-        Task DeleteDemand(int DemandId);
-
-        Task<Demand> GetByEntityId(int demandId);
+        Task<Demand> GetByEntityId(ObjectId demandId);
 
     }
 }

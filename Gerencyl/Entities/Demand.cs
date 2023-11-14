@@ -1,59 +1,40 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Entities
 {
-    [Table("DEMAND")]
     public class Demand
     {
-        
-        [Column("DemandId")]
-        public int DemandId { get; set; }
+        [BsonId]
+        public ObjectId DemandId { get; set; }
 
-        [Column("observation")]
         public string Observation { get; set; }
 
-        [Column("date_demand")]
-        public DateTime DateDemand { get; set; }
+        public DateTime OpenDateDemand { get; set; }
 
-        [ForeignKey("StandId")]
-        public int StandId { get; set; }
-        public virtual Stand Stand { get; set; }
-        public ICollection<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
+        public DateTime ClosedDateDemand { get; set; }
 
-    public Demand()
+        public ObjectId StandId { get; set; }
+
+        public List<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
+
+        public Demand()
         {
-            DateDemand = DateTime.Now;
+            DemandId = ObjectId.GenerateNewId();
+            OpenDateDemand = DateTime.Now;
         }
 
-        public Demand(int demandId) : this()
+        public void AddDemand(ObjectId standId, string observation, DateTime date)
         {
-            DemandId = demandId;
-        }
-
-        public void AddDemand(int demandId, string observation, DateTime date)
-        {
-            DemandId = demandId;
+            StandId = standId;
             Observation = observation;
-            DateDemand = date;
-            //StandId = standId;
-
+            OpenDateDemand = date;
+            // Set other properties as needed.
         }
 
-        public void AlterarTeste(string observation)
+        public void AlterObservation(string observation)
         {
-            if (observation == null)
-            {
-                Observation = "";
-            }
-            Observation = observation;
+            Observation = observation ?? "";
         }
-
     }
 }

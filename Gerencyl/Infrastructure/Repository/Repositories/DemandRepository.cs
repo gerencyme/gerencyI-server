@@ -2,35 +2,18 @@
 using Entities;
 using Infrastructure.Configuration;
 using Infrastructure.Repository.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace Infrastructure.Repository.Repositories
 {
-    public class DemandRepository : RepositoryGeneric<Demand>, IRepositoryDemand
+    public class DemandRepository : RepositoryMongoDBGeneric<Demand>, IRepositoryDemand
     {
-        private readonly DbContextOptions<ContextBase> _OptionsBuilder;
+        private readonly IMongoCollection<Demand> _collection;
 
-        public DemandRepository()
+        public DemandRepository(IOptions<MongoDbSettings> settings) : base(settings)
         {
-
-            _OptionsBuilder = new DbContextOptions<ContextBase>();
-
         }
 
-        public async Task<List<Demand>> ListDemand(Expression<Func<Demand, bool>> exDemand)
-        {
-            using var banco = new ContextBase(_OptionsBuilder);
-            return await banco.Demands.Where(exDemand).AsNoTracking().ToListAsync();
-        }
-
-
-        /*public Task UpdateDemandObservation(int demandId, string observation)
-        {
-            using var banco = new ContextBase(_OptionsBuilder);
-            var recupera = banco.Demand.(demandId, observation);
-
-            throw new NotImplementedException();
-        }*/
     }
 }

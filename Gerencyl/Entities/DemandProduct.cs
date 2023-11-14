@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Entities
 {
     public class DemandProduct
     {
-        public string Id { get; set; }
-        public string DemandId { get; set; }
-        public string ProductId { get; set; }
+        [BsonId]
+        public ObjectId DemandProductId { get; set; }
+
+        public ObjectId DemandId { get; set; }
+
+        public ObjectId ProductId { get; set; }
+
         public int Quantity { get; set; }
 
-        [ForeignKey("Company")]
-        public string CompanyId { get; set; }
-        public Demand Demand { get; set; }
-        public Product Product { get; set; }
+        public ObjectId CompanyId { get; set; }
+
     }
 }

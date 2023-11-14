@@ -1,14 +1,10 @@
-﻿using Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson;
 
 namespace Domain.Interfaces.IServices
 {
-    public class IProductServices
+    public interface IProductServices
     {
-        
+        Task AddProduct(ObjectId productId, string productName, string descriptionProduct);
+
     }
 }

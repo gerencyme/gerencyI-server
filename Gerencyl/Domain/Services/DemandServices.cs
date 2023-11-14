@@ -1,11 +1,7 @@
 ﻿using Domain.Interfaces.IRepositorys;
 using Domain.Interfaces.IServices;
 using Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace Domain.Services
 {
@@ -18,7 +14,7 @@ namespace Domain.Services
             _IrepositoryDemand = IrepositoryDemand;
         }
 
-        public async Task AddDemand(int demandId, string observation, DateTime date)
+        public async Task AddDemand(ObjectId demandId, string observation, DateTime date)
         {
             var newDemand = new Demand();
             newDemand.AddDemand(demandId, observation, date);
@@ -27,21 +23,21 @@ namespace Domain.Services
             return;
         }
 
-        public async Task DeleteDemand(int demandId)
+        public async Task DeleteDemand(Demand demand)
         {
-            var deleteDemand = await _IrepositoryDemand.GetEntityById(demandId);
+            var deleteDemand = await _IrepositoryDemand.GetById(demand.DemandId);
             await _IrepositoryDemand.Delete(deleteDemand);
         }
 
-        public Task<Demand> GetByEntityId(int demandId)
+        public Task<Demand> GetByEntityId(ObjectId demandId)
         {
-            var getDemand = _IrepositoryDemand.GetEntityById(demandId);
+            var getDemand = _IrepositoryDemand.GetById(demandId);
             return getDemand;
         }
 
         public async Task<List<Demand>> ListDemand()
         {
-            var list = await _IrepositoryDemand.List();
+            var list = await _IrepositoryDemand.GetAll();
             return list;
         }
 
