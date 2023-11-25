@@ -7,20 +7,15 @@ namespace Entities
     {
         [BsonId]
         public ObjectId DemandId { get; set; }
-
-        public string Observation { get; set; }
-
+        public string? Observation { get; set; }
         public DateTime OpenDateDemand { get; set; }
-
         public DateTime ClosedDateDemand { get; set; }
-
         public ObjectId StandId { get; set; }
-
-        public List<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
+        public string? NumberStand { get; set; }
+        public ICollection<DemandProduct> DemandProducts { get; set; } = new List<DemandProduct>();
 
         public Demand()
         {
-            DemandId = ObjectId.GenerateNewId();
             OpenDateDemand = DateTime.Now;
         }
 

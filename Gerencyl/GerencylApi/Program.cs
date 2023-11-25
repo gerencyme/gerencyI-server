@@ -12,6 +12,7 @@ using Infrastructure.Repository.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,7 +74,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
               },
               OnTokenValidated = context =>
               {
-                  Console.WriteLine("OnTokenValidated: " + context.SecurityToken);
+                  var token = context.SecurityToken as JwtSecurityToken;
+                  if (token != null)
+                  {
+                      Console.WriteLine("Token Claims: " + string.Join(", ", token.Claims.Select(c => $"{c.Type}={c.Value}")));
+                      Console.WriteLine("Issuer: " + token.Issuer);
+                      Console.WriteLine("Audience: " + token.Audiences.FirstOrDefault());
+                  }
                   return Task.CompletedTask;
               }
           };
@@ -132,7 +139,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerencyl V1");
     });
 
-    app.MapControllers().AllowAnonymous(); //method for disable authentication
+    //app.MapControllers().AllowAnonymous(); //method for disable authentication
 }
 else app.MapControllers();
 

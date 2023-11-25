@@ -9,15 +9,15 @@ namespace Entities
         [BsonId]
         public ObjectId StandId { get; set; }
 
-        public string StandNumber { get; set; }
+        public string? NumberStand { get; set; }
 
         public bool StandAllReadReserved { get; set; }
 
         public bool UserPermission { get; set; }
 
-        public string CPFResponsible { get; set; }
+        public string? CPFResponsible { get; set; }
 
-        public float PaymentTotal { get; set; }
+        public decimal PaymentTotal { get; set; }
 
         public DateTime DateCreation { get; set; }
 

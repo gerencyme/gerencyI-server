@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiAuthentication.Controllers
 {
+    [ApiController]
     public class GerencylLoginController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
@@ -48,7 +49,7 @@ namespace ApiAuthentication.Controllers
 
             try
             {
-                var token = await _authenticationService.CriarTokenAsync(login.CNPJ, login.Senha );
+                var token = await _authenticationService.CriarTokenTeste(login.CNPJ, login.Senha );
                 return Ok(token);
             }
             catch (UnauthorizedAccessException ex)
@@ -59,10 +60,10 @@ namespace ApiAuthentication.Controllers
 
         [AllowAnonymous]
         [Produces("application/json")]
-        [HttpPost("/api/AddUserIdentity")]
+        [HttpPost("/api/AddUserIdentityTeste")]
         public async Task<IActionResult> AdicionaUsuarioIdentity([FromQuery] GerencylRegisterView register)
         {
-            var result = await _authenticationService.AdicionarUsuarioAsync(register);
+            var result = await _authenticationService.AdicionarUsuarioTeste(register);
             return Ok(result);
         }
 

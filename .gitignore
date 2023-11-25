@@ -1,7 +1,11 @@
-# Arquivos de configuração do aplicativo
+# Ignore application configuration files
 appsettings.json
 appsettings.*.json
+
+# Ignore database context files
 ContextBase.cs
 ContextBase.*.cs
+
+# Ignore Ocelot configuration files
 ocelot.json
 ocelot.*.json

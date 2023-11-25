@@ -15,12 +15,14 @@ namespace ApiAuthentication.Services
         private readonly SignInManager<GerencylRegister> _signInManager;
         private readonly UserManager<GerencylRegister> _userManager;
         private readonly JwtSettings _jwtSettings;
+        private List<GerencylRegister> _usuarios;
 
-        public AuthenticationService(SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager, IOptions<JwtSettings> jwtSettings)
+        public AuthenticationService(SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager, IOptions<JwtSettings> jwtSettings, List<GerencylRegister> usuarios)
         {
             _jwtSettings = jwtSettings.Value;
             _signInManager = signInManager;
             _userManager = userManager;
+            _usuarios = usuarios;
         }
 
         public async Task<string> CriarTokenAsync(string cnpj, string senha)
@@ -46,7 +48,6 @@ namespace ApiAuthentication.Services
                     .AddSubject("Empresa - GerencyI")
                     .AddIssuer(_jwtSettings.Issuer)
                     .AddAudience(_jwtSettings.Audience)
-                    .AddClaim("idUsuario", idUsuario)
                     .AddExpiry(5)
                     .Builder();
 
@@ -56,6 +57,41 @@ namespace ApiAuthentication.Services
             {
                 throw new UnauthorizedAccessException();
             }
+        }
+
+        public async Task<string> CriarTokenTeste(string cnpj, string senha)
+        {
+            if (string.IsNullOrWhiteSpace(cnpj) || string.IsNullOrWhiteSpace(senha))
+            {
+                throw new UnauthorizedAccessException("CNPJ e senha são obrigatórios.");
+            }
+
+            var usuario = _usuarios.FirstOrDefault(u =>
+                            u.CNPJ.Equals(cnpj, StringComparison.OrdinalIgnoreCase) &&
+                            u.Senha.Equals(senha, StringComparison.Ordinal));
+
+            if (usuario != null)
+            {
+                // Simula a autenticação (sem acessar o banco de dados real)
+                var resultado = IdentityResult.Success;
+
+                if (!string.IsNullOrEmpty(senha) && resultado.Succeeded)
+                {
+                    var idUsuario = usuario.Id;
+
+                    var token = new TokenJWTBuilder()
+                        .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                        .AddSubject("Empresa - GerencyI")
+                        .AddIssuer(_jwtSettings.Issuer)
+                        .AddAudience(_jwtSettings.Audience)
+                        .AddExpiry(5)
+                        .Builder();
+
+                    return token.value;
+                }
+            }
+
+            throw new UnauthorizedAccessException();
         }
 
         public async Task<GerencylRegisterView> ReturnUser(GerencylRegisterView returnUser)
@@ -69,7 +105,7 @@ namespace ApiAuthentication.Services
             var user = new GerencylRegister
             {
                 CNPJ = returnUser.CNPJ,
-                Senha = returnUser.Senha,
+                Senha = returnUser.Password.Pawssord,
                 PhantasyName = returnUser.PhantasyName,
                 Name = returnUser.Name,
                 Email = returnUser.Email,
@@ -90,11 +126,9 @@ namespace ApiAuthentication.Services
             var converte = new GerencylRegisterView
             {
                 CNPJ = recupera.CNPJ,
-                Senha = recupera.Senha,
                 Name = recupera.Name,
                 PhantasyName = recupera.PhantasyName,
                 Email = recupera.Email,
-                ConfirmSenha = recupera.Senha,
             };
 
             return converte;
@@ -102,7 +136,7 @@ namespace ApiAuthentication.Services
 
         public async Task<string> AdicionarUsuarioAsync(GerencylRegisterView register)
         {
-            if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Senha))
+            if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Password.Pawssord))
             {
                 return "Falta alguns dados";
             }
@@ -110,7 +144,7 @@ namespace ApiAuthentication.Services
             var user = new GerencylRegister
             {
                 Email = register.Email,
-                Senha = register.Senha,
+                Senha = register.Password.Pawssord,
                 Name = register.Name,
                 CNPJ = register.CNPJ,
                 PhantasyName = register.PhantasyName,
@@ -118,7 +152,7 @@ namespace ApiAuthentication.Services
                 UserName = register.CNPJ
             };
 
-            var resultado = await _userManager.CreateAsync(user, register.Senha);
+            var resultado = await _userManager.CreateAsync(user, register.Password.Pawssord);
 
             if (resultado.Errors.Any())
             {
@@ -143,5 +177,51 @@ namespace ApiAuthentication.Services
                 return "Erro ao confirmar usuários";
             }
         }
+
+        public async Task<string> AdicionarUsuarioTeste(GerencylRegisterView register)
+        {
+            if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Password.Pawssord))
+            {
+                return "Falta alguns dados";
+            }
+
+            var user = new GerencylRegister
+            {
+                Email = register.Email,
+                Senha = register.Password.Pawssord,
+                Name = register.Name,
+                CNPJ = register.CNPJ,
+                PhantasyName = register.PhantasyName,
+                CreationDate = DateTime.Now,
+                UserName = register.CNPJ
+            };
+
+            _usuarios.Add(user);
+
+            // Simula a criação do usuário (sem acessar o banco de dados real)
+            var resultado = IdentityResult.Success;
+
+            if (resultado.Errors.Any())
+            {
+                return string.Join(", ", resultado.Errors.Select(e => e.Description));
+            }
+
+            // Geração de Confirmação caso precise
+            var userId = Guid.NewGuid().ToString(); // Simula um novo ID do usuário
+            var code = Guid.NewGuid().ToString();   // Simula um código de confirmação
+
+            // Simula a confirmação do email (sem acessar o banco de dados real)
+            var resultado2 = IdentityResult.Success;
+
+            if (resultado2.Succeeded)
+            {
+                return "Usuário Adicionado com Sucesso";
+            }
+            else
+            {
+                return "Erro ao confirmar usuários";
+            }
+        }
+
     }
 }

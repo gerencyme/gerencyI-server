@@ -8,7 +8,11 @@ namespace ApiAuthentication.Services.Interfaces.InterfacesServices
     {
         Task<string> CriarTokenAsync(string cnpj, string senha);
 
+        Task<string> CriarTokenTeste(string cnpj, string senha);
+
         Task<string> AdicionarUsuarioAsync(GerencylRegisterView register);
+
+        Task<string> AdicionarUsuarioTeste(GerencylRegisterView register);
 
         Task<GerencylRegisterView> ReturnUser(GerencylRegisterView returnUser);
     }

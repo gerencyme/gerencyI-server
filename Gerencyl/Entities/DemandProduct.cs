@@ -7,13 +7,11 @@ namespace Entities
     {
         [BsonId]
         public ObjectId DemandProductId { get; set; }
-
-        public ObjectId DemandId { get; set; }
-
+        public string? NumberDemandProduct { get; init; }
+        public int Quantity { get; set; } // Quantidade de produtos selecionados
+        public decimal TotalValue { get; set; } // Valor total do produto * quantidade
         public ObjectId ProductId { get; set; }
-
-        public int Quantity { get; set; }
-
+        public Product? Product { get; set; } // Referência ao produto associado
         public ObjectId CompanyId { get; set; }
 
     }

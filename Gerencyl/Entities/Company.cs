@@ -16,7 +16,7 @@ namespace Entities
 
         public List<Stand> Stands { get; set; } = new List<Stand>();
 
-        public List<Product> Products { get; set; } = new List<Product>();
+        //public List<DemandProduct> Products { get; set; } = new List<DemandProduct>();
 
     }
 }

@@ -59,6 +59,7 @@ builder.Services.AddDefaultIdentity<GerencylRegister>(options => options.SignIn.
 
 //Config Services
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddSingleton<List<GerencylRegister>>();
 
 // Config Auto Mapping
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();

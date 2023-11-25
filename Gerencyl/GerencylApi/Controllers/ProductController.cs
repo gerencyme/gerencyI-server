@@ -2,10 +2,13 @@
 using Domain.Interfaces.IServices;
 using Entities;
 using GerencylApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GerencylApi.Controllers
 {
+    [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IMapper _IMapper;

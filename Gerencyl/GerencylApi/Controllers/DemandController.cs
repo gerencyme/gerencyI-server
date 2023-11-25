@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Domain.Interfaces.IServices;
 using GerencylApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GerencylApi.Controllers
 {
+    
+    [ApiController]
     public class DemandController : ControllerBase
     {
         private readonly IMapper _IMapper;
@@ -17,10 +20,10 @@ namespace GerencylApi.Controllers
             _IMapper = IMapper;
         }
 
-
+        [Authorize]
         [Produces("application/json")]
         [HttpPost("/api/AddDemand")]
-        public async Task<IActionResult> Add([FromQuery] DemandModel demand)
+        public async Task<IActionResult> Add([FromBody] DemandModel demand)
         {
             await _IDemandServices.AddDemand(demand.DemandId, demand.Observation, demand.DateDemand);
 
