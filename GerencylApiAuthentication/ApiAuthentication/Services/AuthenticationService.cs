@@ -68,7 +68,7 @@ namespace ApiAuthentication.Services
 
             var usuario = _usuarios.FirstOrDefault(u =>
                             u.CNPJ.Equals(cnpj, StringComparison.OrdinalIgnoreCase) &&
-                            u.Senha.Equals(senha, StringComparison.Ordinal));
+                            u.Password.Equals(senha, StringComparison.Ordinal));
 
             if (usuario != null)
             {
@@ -105,8 +105,8 @@ namespace ApiAuthentication.Services
             var user = new GerencylRegister
             {
                 CNPJ = returnUser.CNPJ,
-                Senha = returnUser.Password.Pawssord,
-                PhantasyName = returnUser.PhantasyName,
+                Password = returnUser.Password.Pawssord,
+                PhantasyName = returnUser.CorporateReason,
                 Name = returnUser.Name,
                 Email = returnUser.Email,
             };
@@ -127,7 +127,7 @@ namespace ApiAuthentication.Services
             {
                 CNPJ = recupera.CNPJ,
                 Name = recupera.Name,
-                PhantasyName = recupera.PhantasyName,
+                CorporateReason = recupera.PhantasyName,
                 Email = recupera.Email,
             };
 
@@ -144,10 +144,10 @@ namespace ApiAuthentication.Services
             var user = new GerencylRegister
             {
                 Email = register.Email,
-                Senha = register.Password.Pawssord,
+                Password = register.Password.Pawssord,
                 Name = register.Name,
                 CNPJ = register.CNPJ,
-                PhantasyName = register.PhantasyName,
+                PhantasyName = register.CorporateReason,
                 CreationDate = DateTime.Now,
                 UserName = register.CNPJ
             };
@@ -180,7 +180,7 @@ namespace ApiAuthentication.Services
 
         public async Task<string> AdicionarUsuarioTeste(GerencylRegisterView register)
         {
-            if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Password.Pawssord))
+            if (string.IsNullOrWhiteSpace(register.Email))
             {
                 return "Falta alguns dados";
             }
@@ -188,10 +188,10 @@ namespace ApiAuthentication.Services
             var user = new GerencylRegister
             {
                 Email = register.Email,
-                Senha = register.Password.Pawssord,
+                Password = register.Password.Pawssord,
                 Name = register.Name,
                 CNPJ = register.CNPJ,
-                PhantasyName = register.PhantasyName,
+                PhantasyName = register.CorporateReason,
                 CreationDate = DateTime.Now,
                 UserName = register.CNPJ
             };

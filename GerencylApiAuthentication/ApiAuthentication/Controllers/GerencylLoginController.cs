@@ -49,7 +49,7 @@ namespace ApiAuthentication.Controllers
 
             try
             {
-                var token = await _authenticationService.CriarTokenTeste(login.CNPJ, login.Senha );
+                var token = await _authenticationService.CriarTokenTeste(login.CNPJ, login.Password );
                 return Ok(token);
             }
             catch (UnauthorizedAccessException ex)

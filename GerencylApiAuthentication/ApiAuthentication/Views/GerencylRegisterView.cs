@@ -10,7 +10,7 @@ namespace ApiAuthentication.Views
 
         public required string CNPJ { get; set; }
 
-        public required string PhantasyName { get; set; }
+        public required string CorporateReason { get; set; }
 
         public required string Name { get; set; }
 
@@ -18,6 +18,6 @@ namespace ApiAuthentication.Views
 
         public DateTime UpdateDate { get; set; }
 
-        public PasswordView? Password { get; set; }
+        public PasswordView Password { get; set; }
     }
 }

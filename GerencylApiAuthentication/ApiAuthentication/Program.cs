@@ -23,7 +23,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DWS", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gerencyl-Authentication", Version = "v1" });
 
     // Configuração para autenticação com Bearer Token
     var securityScheme = new OpenApiSecurityScheme

@@ -7,7 +7,7 @@ namespace ApiAuthentication.Models
 
         public required string Email { get; set; }
 
-        public required string Senha { get; set; }
+        public required string Password { get; set; }
 
         public required string CNPJ { get; set; }
 
