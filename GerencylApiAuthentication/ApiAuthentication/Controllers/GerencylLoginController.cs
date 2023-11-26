@@ -1,5 +1,4 @@
-﻿using ApiAuthentication.Models;
-using ApiAuthentication.Services.Interfaces.InterfacesServices;
+﻿using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +18,10 @@ namespace ApiAuthentication.Controllers
         }
 
 
-
         [AllowAnonymous]
         [Produces("application/json")]
         [HttpGet("/api/ReturnUser")]
-        public async Task<IActionResult> ReturnUser([FromQuery] GerencylRegisterView returnUser)
+        public async Task<IActionResult> ReturnUser([FromBody] GerencylRegisterView returnUser)
         {
             var user = await _authenticationService.ReturnUser(returnUser);
             try
@@ -34,7 +32,8 @@ namespace ApiAuthentication.Controllers
                 }
                 else return BadRequest("não foi possível localizar o usúario");
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
 
                 return StatusCode(500, ex.Message);
 
@@ -44,12 +43,12 @@ namespace ApiAuthentication.Controllers
         [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/GenereateTokenIdentity")]
-        public async Task<IActionResult> CriarTokenIdentity([FromQuery] GerencylLoginView login)
+        public async Task<IActionResult> CriarTokenIdentity([FromBody] GerencylLoginView login)
         {
 
             try
             {
-                var token = await _authenticationService.CriarTokenTeste(login.CNPJ, login.Password );
+                var token = await _authenticationService.CriarTokenTeste(login.CNPJ, login.Password);
                 return Ok(token);
             }
             catch (UnauthorizedAccessException ex)
@@ -61,10 +60,18 @@ namespace ApiAuthentication.Controllers
         [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/AddUserIdentityTeste")]
-        public async Task<IActionResult> AdicionaUsuarioIdentity([FromQuery] GerencylRegisterView register)
+        public async Task<IActionResult> AdicionaUsuarioIdentity([FromBody] GerencylRegisterView register)
         {
-            var result = await _authenticationService.AdicionarUsuarioTeste(register);
-            return Ok(result);
+            try
+            {
+                var result = await _authenticationService.AdicionarUsuarioTeste(register);
+                return Ok(result);
+            }
+            catch (HttpStatusExceptionCustom ex)
+            {
+
+                return StatusCode(ex.StatusCode, ex.Message);
+            }
         }
 
     }

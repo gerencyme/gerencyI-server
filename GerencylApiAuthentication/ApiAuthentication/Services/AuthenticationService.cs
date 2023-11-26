@@ -2,6 +2,7 @@
 using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Token;
 using ApiAuthentication.Views;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
@@ -84,7 +85,7 @@ namespace ApiAuthentication.Services
                         .AddSubject("Empresa - GerencyI")
                         .AddIssuer(_jwtSettings.Issuer)
                         .AddAudience(_jwtSettings.Audience)
-                        .AddExpiry(5)
+                        .AddExpiry(60)
                         .Builder();
 
                     return token.value;
@@ -106,7 +107,7 @@ namespace ApiAuthentication.Services
             {
                 CNPJ = returnUser.CNPJ,
                 Password = returnUser.Password.Pawssord,
-                PhantasyName = returnUser.CorporateReason,
+                CorporateReason = returnUser.CorporateReason,
                 Name = returnUser.Name,
                 Email = returnUser.Email,
             };
@@ -127,7 +128,7 @@ namespace ApiAuthentication.Services
             {
                 CNPJ = recupera.CNPJ,
                 Name = recupera.Name,
-                CorporateReason = recupera.PhantasyName,
+                CorporateReason = recupera.CorporateReason,
                 Email = recupera.Email,
             };
 
@@ -138,7 +139,11 @@ namespace ApiAuthentication.Services
         {
             if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Password.Pawssord))
             {
-                return "Falta alguns dados";
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
+            }
+            if (register.Password.ConfirmPassword != register.Password.Pawssord)
+            {
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
             }
 
             var user = new GerencylRegister
@@ -147,7 +152,7 @@ namespace ApiAuthentication.Services
                 Password = register.Password.Pawssord,
                 Name = register.Name,
                 CNPJ = register.CNPJ,
-                PhantasyName = register.CorporateReason,
+                CorporateReason = register.CorporateReason,
                 CreationDate = DateTime.Now,
                 UserName = register.CNPJ
             };
@@ -180,9 +185,24 @@ namespace ApiAuthentication.Services
 
         public async Task<string> AdicionarUsuarioTeste(GerencylRegisterView register)
         {
-            if (string.IsNullOrWhiteSpace(register.Email))
+
+            var verifica = await verifyUser(register.CNPJ);
+
+            if (verifica == true)
             {
-                return "Falta alguns dados";
+                return "usuario já existe";
+                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
+            }
+
+            if (string.IsNullOrWhiteSpace(register.Password.Pawssord))
+            {
+                return "Senha é obrigatório!";
+                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
+            }
+            if (register.Password.ConfirmPassword != register.Password.Pawssord)
+            {
+                return "confirmação de senha deve ser igual a senha";
+                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
             }
 
             var user = new GerencylRegister
@@ -191,7 +211,7 @@ namespace ApiAuthentication.Services
                 Password = register.Password.Pawssord,
                 Name = register.Name,
                 CNPJ = register.CNPJ,
-                PhantasyName = register.CorporateReason,
+                CorporateReason = register.CorporateReason,
                 CreationDate = DateTime.Now,
                 UserName = register.CNPJ
             };
@@ -221,6 +241,14 @@ namespace ApiAuthentication.Services
             {
                 return "Erro ao confirmar usuários";
             }
+        }
+
+        private async Task<bool> verifyUser(string CNPJ)
+        {
+
+            var userExists = _usuarios.Any(u => u.CNPJ == CNPJ);
+
+            return userExists;
         }
 
     }

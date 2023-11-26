@@ -55,8 +55,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
           var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
           option.TokenValidationParameters = new TokenValidationParameters
           {
-              ValidateIssuer = true,
-              ValidateAudience = true,
+              ValidateIssuer = false,
+              ValidateAudience = false,
               ValidateLifetime = true,
               ValidateIssuerSigningKey = true,
 
@@ -74,13 +74,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
               },
               OnTokenValidated = context =>
               {
-                  var token = context.SecurityToken as JwtSecurityToken;
-                  if (token != null)
-                  {
-                      Console.WriteLine("Token Claims: " + string.Join(", ", token.Claims.Select(c => $"{c.Type}={c.Value}")));
-                      Console.WriteLine("Issuer: " + token.Issuer);
-                      Console.WriteLine("Audience: " + token.Audiences.FirstOrDefault());
-                  }
+                  Console.WriteLine("OnTokenValidated: " + context.SecurityToken);
                   return Task.CompletedTask;
               }
           };

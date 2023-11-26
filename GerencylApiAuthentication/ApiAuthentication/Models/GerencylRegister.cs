@@ -1,23 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiAuthentication.Models
 {
-    public class GerencylRegister : IdentityUser
+    public class GerencylRegister : Register
     {
-
-        public required string Email { get; set; }
-
-        public required string Password { get; set; }
-
+        [MaxLength(20)]
         public required string CNPJ { get; set; }
 
-        public required string PhantasyName { get; set; }
-
-        public required string Name { get; set; }
-
-        public DateTime CreationDate { get; set; }
-
-        public DateTime UpdateDate { get; set; }
+        [MaxLength(150)]
+        public required string CorporateReason { get; set; }
 
     }
 }

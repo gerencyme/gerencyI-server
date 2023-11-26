@@ -17,6 +17,7 @@
         { StatusCodeEnum.BadRequest, "Bad Request - The request could not be understood or was missing necessary information." },
         { StatusCodeEnum.NoContent, "No Content - The request was successful, but there is no content in the response body." },
         { StatusCodeEnum.InternalServerError, "Internal Server Error - An unexpected error occurred on the server." },
+        { StatusCodeEnum.NotAcceptable, "notacceptabel" },
         // Adicione outros códigos de status e mensagens aqui
     };
 
