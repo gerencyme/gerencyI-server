@@ -114,3 +114,7 @@ C:\Projetos\Gerencyl\gerencyI-server\GerencylApiAuthentication\ApiAuthentication
 C:\Projetos\Gerencyl\gerencyI-server\GerencylApiAuthentication\ApiAuthentication\obj\Debug\net7.0\ApiAuthentication.pdb
 C:\Projetos\Gerencyl\gerencyI-server\GerencylApiAuthentication\ApiAuthentication\obj\Debug\net7.0\ApiAuthentication.genruntimeconfig.cache
 C:\Projetos\Gerencyl\gerencyI-server\GerencylApiAuthentication\ApiAuthentication\obj\Debug\net7.0\ref\ApiAuthentication.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencylApiAuthentication\ApiAuthentication\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencylApiAuthentication\ApiAuthentication\bin\Debug\net7.0\SendGrid.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencylApiAuthentication\ApiAuthentication\bin\Debug\net7.0\SendGrid.Extensions.DependencyInjection.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencylApiAuthentication\ApiAuthentication\bin\Debug\net7.0\StarkbankEcdsa.dll

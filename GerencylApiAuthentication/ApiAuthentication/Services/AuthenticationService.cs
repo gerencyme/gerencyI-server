@@ -2,10 +2,12 @@
 using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Token;
 using ApiAuthentication.Views;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Azure.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System.Text;
 using WebAPIs.Token;
 
@@ -16,14 +18,23 @@ namespace ApiAuthentication.Services
         private readonly SignInManager<GerencylRegister> _signInManager;
         private readonly UserManager<GerencylRegister> _userManager;
         private readonly JwtSettings _jwtSettings;
+        private readonly ISendGridClient _sendGridClient;
+        private readonly IConfiguration _configuration;
         private List<GerencylRegister> _usuarios;
+        private readonly EmailConfirmationService _sendEmaail;
 
-        public AuthenticationService(SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager, IOptions<JwtSettings> jwtSettings, List<GerencylRegister> usuarios)
+        public AuthenticationService(SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager,
+            ISendGridClient sendGridClient, IOptions<JwtSettings> jwtSettings,
+            IConfiguration configuration, List<GerencylRegister> usuarios,
+            EmailConfirmationService sendEmaail)
         {
             _jwtSettings = jwtSettings.Value;
             _signInManager = signInManager;
+            _sendGridClient = sendGridClient;
+            _configuration = configuration;
             _userManager = userManager;
             _usuarios = usuarios;
+            _sendEmaail = sendEmaail;
         }
 
         public async Task<string> CriarTokenAsync(string cnpj, string senha)
@@ -62,6 +73,14 @@ namespace ApiAuthentication.Services
 
         public async Task<string> CriarTokenTeste(string cnpj, string senha)
         {
+
+            var verifica = await verifyUser(cnpj);
+
+            if (verifica != true)
+            {
+                return "usuario não existe";
+                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
+            }
             if (string.IsNullOrWhiteSpace(cnpj) || string.IsNullOrWhiteSpace(senha))
             {
                 throw new UnauthorizedAccessException("CNPJ e senha são obrigatórios.");
@@ -103,14 +122,15 @@ namespace ApiAuthentication.Services
                 return null;
             }
 
-            var user = new GerencylRegister
-            {
-                CNPJ = returnUser.CNPJ,
-                Password = returnUser.Password.Pawssord,
-                CorporateReason = returnUser.CorporateReason,
-                Name = returnUser.Name,
-                Email = returnUser.Email,
-            };
+            var user = new GerencylRegister(
+                creationDate: returnUser.CreationDate,
+                updateDate: returnUser.UpdateDate,
+                email: returnUser.Email,
+                password: returnUser.Password.Password,
+                name: returnUser.Name,
+                cnpj: returnUser.CNPJ,
+                corporateReason: returnUser.CorporateReason
+            );
 
             if (_userManager == null)
             {
@@ -137,27 +157,26 @@ namespace ApiAuthentication.Services
 
         public async Task<string> AdicionarUsuarioAsync(GerencylRegisterView register)
         {
-            if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Password.Pawssord))
+            if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Password.Password))
             {
                 throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
             }
-            if (register.Password.ConfirmPassword != register.Password.Pawssord)
+            if (register.Password.ConfirmPassword != register.Password.Password)
             {
                 throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
             }
 
-            var user = new GerencylRegister
-            {
-                Email = register.Email,
-                Password = register.Password.Pawssord,
-                Name = register.Name,
-                CNPJ = register.CNPJ,
-                CorporateReason = register.CorporateReason,
-                CreationDate = DateTime.Now,
-                UserName = register.CNPJ
-            };
+            var user = new GerencylRegister(
+                email: register.Email,
+                password: register.Password.Password,
+                name: register.Name,
+                cnpj: register.CNPJ,
+                corporateReason: register.CorporateReason,
+                creationDate: register.CreationDate,
+                updateDate: register.UpdateDate
+            );
 
-            var resultado = await _userManager.CreateAsync(user, register.Password.Pawssord);
+            var resultado = await _userManager.CreateAsync(user, register.Password.Password);
 
             if (resultado.Errors.Any())
             {
@@ -191,30 +210,29 @@ namespace ApiAuthentication.Services
             if (verifica == true)
             {
                 return "usuario já existe";
-                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
             }
 
-            if (string.IsNullOrWhiteSpace(register.Password.Pawssord))
+            if (string.IsNullOrWhiteSpace(register.Password.Password))
             {
                 return "Senha é obrigatório!";
                 //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
             }
-            if (register.Password.ConfirmPassword != register.Password.Pawssord)
+            if (register.Password.ConfirmPassword != register.Password.Password)
             {
                 return "confirmação de senha deve ser igual a senha";
                 //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
             }
 
-            var user = new GerencylRegister
-            {
-                Email = register.Email,
-                Password = register.Password.Pawssord,
-                Name = register.Name,
-                CNPJ = register.CNPJ,
-                CorporateReason = register.CorporateReason,
-                CreationDate = DateTime.Now,
-                UserName = register.CNPJ
-            };
+            var user = new GerencylRegister(
+               email: register.Email,
+               password: register.Password.Password,
+               name: register.Name,
+               cnpj: register.CNPJ,
+               corporateReason: register.CorporateReason,
+               creationDate: register.CreationDate,
+               updateDate: register.UpdateDate
+           );
 
             _usuarios.Add(user);
 
@@ -226,7 +244,11 @@ namespace ApiAuthentication.Services
                 return string.Join(", ", resultado.Errors.Select(e => e.Description));
             }
 
-            // Geração de Confirmação caso precise
+            await _sendEmaail.SendEmailConfirmationAsync(user);
+
+            return resultado.ToString();
+
+            /*// Geração de Confirmação caso precise
             var userId = Guid.NewGuid().ToString(); // Simula um novo ID do usuário
             var code = Guid.NewGuid().ToString();   // Simula um código de confirmação
 
@@ -240,10 +262,10 @@ namespace ApiAuthentication.Services
             else
             {
                 return "Erro ao confirmar usuários";
-            }
+            }*/
         }
 
-        private async Task<bool> verifyUser(string CNPJ)
+            private async Task<bool> verifyUser(string CNPJ)
         {
 
             var userExists = _usuarios.Any(u => u.CNPJ == CNPJ);
