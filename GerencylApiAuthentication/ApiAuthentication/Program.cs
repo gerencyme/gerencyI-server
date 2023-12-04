@@ -11,12 +11,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WebAPIs.Token;
 using SendGrid.Extensions.DependencyInjection;
+using SendGrid.Helpers.Mail;
+using SendGrid;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 
 
 builder.Services.AddControllers();
@@ -58,6 +59,8 @@ builder.Services.AddDefaultIdentity<GerencylRegister>(options => options.SignIn.
 //Config Services
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddSingleton<List<GerencylRegister>>();
+builder.Services.AddScoped<EmailConfirmationService>();
+
 
 // Config Auto Mapping
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
@@ -74,8 +77,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
           var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
           option.TokenValidationParameters = new TokenValidationParameters
           {
-              ValidateIssuer = false,
-              ValidateAudience = false,
+              ValidateIssuer = true,
+              ValidateAudience = true,
               ValidateLifetime = true,
               ValidateIssuerSigningKey = true,
 
@@ -107,6 +110,21 @@ builder.Services.AddSendGrid(options =>
     options.ApiKey = builder.Configuration
     .GetSection("SendGridEmailSettings").GetValue<string>("APIKey");
 });
+
+        
+/*    static async Task Execute()
+    {
+        //var apiKey = Environment.GetEnvironmentVariable("");
+        var client = new SendGridClient("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");
+        var from = new EmailAddress("guerreiroxx8@gmail.com", "Zsly");
+        var subject = "Sending with SendGrid is Fun";
+        var to = new EmailAddress("joaorossetto7065@gmail.com", "Zsly");
+        var plainTextContent = "and easy to do anywhere, even with C#";
+        var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
+        var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+        var response = await client.SendEmailAsync(msg);
+    }
+Execute().Wait();*/
 
 
 var app = builder.Build();

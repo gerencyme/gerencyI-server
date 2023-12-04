@@ -4,6 +4,8 @@ namespace ApiAuthentication.Views
 {
     public class GerencylRegisterView
     {
+        public string Id { get; set; }
+
         [EmailAddress()]
         public required string Email { get; set; }
 
