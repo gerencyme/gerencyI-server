@@ -244,11 +244,11 @@ namespace ApiAuthentication.Services
                 return string.Join(", ", resultado.Errors.Select(e => e.Description));
             }
 
-            //await _sendEmaail.SendEmailConfirmationAsync(user);
-            //return resultado.ToString();
+            await _sendEmaail.SendEmailConfirmationAsync(user);
 
+            return resultado.ToString();
 
-            // Geração de Confirmação caso precise
+            /*// Geração de Confirmação caso precise
             var userId = Guid.NewGuid().ToString(); // Simula um novo ID do usuário
             var code = Guid.NewGuid().ToString();   // Simula um código de confirmação
 
@@ -262,8 +262,7 @@ namespace ApiAuthentication.Services
             else
             {
                 return "Erro ao confirmar usuários";
-            }
-
+            }*/
         }
 
             private async Task<bool> verifyUser(string CNPJ)
