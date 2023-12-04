@@ -2,12 +2,10 @@
 using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Token;
 using ApiAuthentication.Views;
-using Azure.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using SendGrid;
-using SendGrid.Helpers.Mail;
 using System.Text;
 using WebAPIs.Token;
 
@@ -114,37 +112,30 @@ namespace ApiAuthentication.Services
             throw new UnauthorizedAccessException();
         }
 
-        public async Task<GerencylRegisterView> ReturnUser(GerencylRegisterView returnUser)
+        public async Task<GerencylRegister> ReturnUser(GerencylRegisterView returnUser)
         {
-            if (returnUser == null)
+            /*if (returnUser == null)
             {
 
                 return null;
             }
 
-            var user = new GerencylRegister(
-                creationDate: returnUser.CreationDate,
-                updateDate: returnUser.UpdateDate,
-                email: returnUser.Email,
-                password: returnUser.Password.Password,
-                name: returnUser.Name,
-                cnpj: returnUser.CNPJ,
-                corporateReason: returnUser.CorporateReason
-            );
+
+            var user = new GerencylRegister();
 
             if (_userManager == null)
             {
                 return null;
-            }
+            }*/
 
-            var recupera = await _userManager.FindByNameAsync(user.CNPJ);
+            var recupera = await _userManager.FindByNameAsync(returnUser.CNPJ);
 
             if (recupera == null)
             {
                 return null;
             }
 
-            var converte = new GerencylRegisterView
+            var converte = new GerencylRegister
             {
                 CNPJ = recupera.CNPJ,
                 Name = recupera.Name,
@@ -166,15 +157,28 @@ namespace ApiAuthentication.Services
                 throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
             }
 
+            var user = new GerencylRegister()
+            {
+                Email = register.Email,
+                Password = register.Password.Password,
+                CreationDate = DateTime.Now,
+                CNPJ = register.CNPJ,
+                UpdateDate = DateTime.Now,
+                Name = register.Name,
+                UserName = register.Name,
+                CorporateReason = register.CorporateReason,
+
+            };
+            /*
             var user = new GerencylRegister(
-                email: register.Email,
-                password: register.Password.Password,
-                name: register.Name,
-                cnpj: register.CNPJ,
-                corporateReason: register.CorporateReason,
-                creationDate: register.CreationDate,
-                updateDate: register.UpdateDate
-            );
+                creationDate: returnUser.CreationDate,
+                updateDate: returnUser.UpdateDate,
+                email: returnUser.Email,
+                password: returnUser.Password.Password,
+                name: returnUser.Name,
+                cnpj: returnUser.CNPJ,
+                corporateReason: returnUser.CorporateReason
+            );*/
 
             var resultado = await _userManager.CreateAsync(user, register.Password.Password);
 
@@ -224,7 +228,20 @@ namespace ApiAuthentication.Services
                 //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
             }
 
-            var user = new GerencylRegister(
+            var user = new GerencylRegister()
+            {
+                Email = register.Email,
+                Password = register.Password.Password,
+                CreationDate = DateTime.Now,
+                CNPJ = register.CNPJ,
+                UpdateDate = DateTime.Now,
+                Name = register.Name,
+                UserName = register.Name,
+                CorporateReason = register.CorporateReason,
+
+            };
+
+            /*var user = new GerencylRegister(
                email: register.Email,
                password: register.Password.Password,
                name: register.Name,
@@ -232,9 +249,17 @@ namespace ApiAuthentication.Services
                corporateReason: register.CorporateReason,
                creationDate: register.CreationDate,
                updateDate: register.UpdateDate
-           );
+           );*/
 
             _usuarios.Add(user);
+
+
+            var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
+
+            await _sendEmaail.SendEmailConfirmationAsync(confirmationLink, user.Email);
+
+
+            //await _sendEmaail.SendEmailConfirmationAsync(user);
 
             // Simula a criação do usuário (sem acessar o banco de dados real)
             var resultado = IdentityResult.Success;
@@ -244,11 +269,10 @@ namespace ApiAuthentication.Services
                 return string.Join(", ", resultado.Errors.Select(e => e.Description));
             }
 
-            //await _sendEmaail.SendEmailConfirmationAsync(user);
-            //return resultado.ToString();
+            return resultado.ToString();
 
 
-            // Geração de Confirmação caso precise
+            /*// Geração de Confirmação caso precise
             var userId = Guid.NewGuid().ToString(); // Simula um novo ID do usuário
             var code = Guid.NewGuid().ToString();   // Simula um código de confirmação
 
@@ -262,7 +286,7 @@ namespace ApiAuthentication.Services
             else
             {
                 return "Erro ao confirmar usuários";
-            }
+            }*/
 
         }
 

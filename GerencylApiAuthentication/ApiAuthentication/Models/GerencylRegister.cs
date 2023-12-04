@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-
-namespace ApiAuthentication.Models
+﻿namespace ApiAuthentication.Models
 {
     public class GerencylRegister : Register
     { 
@@ -9,36 +6,31 @@ namespace ApiAuthentication.Models
         private string _cnpj;
         private string? _corporateReason;
 
-        /*public GerencylRegister(string email, string password, string name, string cnpj, string corporateReason)
+        public GerencylRegister()
+        {
+        }
+
+        /*public GerencylRegister(string email, string password, string name, string cnpj, string corporateReason, DateTime creationDate, DateTime updateDate)
         {
             Email = email;
             Password = password;
             Name = name;
+            CreationDate = creationDate;
+            UpdateDate = updateDate;
             CNPJ = cnpj;
             CorporateReason = corporateReason;
         }*/
 
-        public GerencylRegister(string email, string password, string name, string cnpj, string corporateReason, DateTime creationDate, DateTime updateDate)
-        : base(email,
-               password,
-               name,
-               creationDate,
-               updateDate)
-        {
-            CNPJ = cnpj;
-            CorporateReason = corporateReason;
-        }
-
         public string CNPJ
         {
             get { return _cnpj; }
-            private set { _cnpj = value; }
+            set { _cnpj = value; }
         }
 
         public string CorporateReason
         {
             get { return _corporateReason; }
-            private set { _corporateReason = value; }
+            set { _corporateReason = value; }
         }
 
     }
