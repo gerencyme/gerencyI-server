@@ -9,3 +9,4 @@ ContextBase.*.cs
 # Ignore Ocelot configuration files
 ocelot.json
 ocelot.*.json
+/GerencylApiAuthentication/ApiAuthentication/appsettings.json
