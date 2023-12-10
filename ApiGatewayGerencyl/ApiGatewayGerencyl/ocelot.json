@@ -1,0 +1,61 @@
+{
+  "Routes": [
+    //Api1
+    {
+      "UpstreamPathTemplate": "/api/GenereateTokenIdentity",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5252
+        }
+      ],
+      "DownstreamPathTemplate": "/api/GenereateTokenIdentity"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/AddUserIdentity",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5252
+        }
+      ],
+      "DownstreamPathTemplate": "/api/AddUserIdentity"
+    },
+
+    //Api2
+    {
+      "UpstreamPathTemplate": "/api/AddDemand",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5092
+        }
+      ],
+      "DownstreamPathTemplate": "/api/AddDemand"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/DeleteDemand/{customerId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5092
+        }
+      ],
+      "DownstreamPathTemplate": "/api/DeleteDemand/{customerId}"
+    }
+  ],
+
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5185"
+  }
+}

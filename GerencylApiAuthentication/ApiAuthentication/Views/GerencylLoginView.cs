@@ -2,6 +2,7 @@
 
 namespace ApiAuthentication.Views
 {
+    [Serializable]
     public class GerencylLoginView
     {
 

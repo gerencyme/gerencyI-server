@@ -2,11 +2,10 @@
 using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Token;
 using ApiAuthentication.Views;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using SendGrid;
-using System.Text;
 using WebAPIs.Token;
 
 namespace ApiAuthentication.Services
@@ -19,13 +18,15 @@ namespace ApiAuthentication.Services
         private readonly ISendGridClient _sendGridClient;
         private readonly IConfiguration _configuration;
         private List<GerencylRegister> _usuarios;
+        private readonly IMapper _mapper;
         private readonly EmailConfirmationService _sendEmaail;
 
         public AuthenticationService(SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager,
             ISendGridClient sendGridClient, IOptions<JwtSettings> jwtSettings,
             IConfiguration configuration, List<GerencylRegister> usuarios,
-            EmailConfirmationService sendEmaail)
+            EmailConfirmationService sendEmaail, IMapper mapper)
         {
+            _mapper = mapper;
             _jwtSettings = jwtSettings.Value;
             _signInManager = signInManager;
             _sendGridClient = sendGridClient;
@@ -112,97 +113,54 @@ namespace ApiAuthentication.Services
             throw new UnauthorizedAccessException();
         }
 
-        public async Task<GerencylRegister> ReturnUser(GerencylRegisterView returnUser)
+        public async Task<GerencylRegister> ReturnUser(string cnpj)
         {
-            /*if (returnUser == null)
-            {
 
-                return null;
-            }
-
-
-            var user = new GerencylRegister();
-
-            if (_userManager == null)
-            {
-                return null;
-            }*/
-
-            var recupera = await _userManager.FindByNameAsync(returnUser.CNPJ);
+            var recupera =  _usuarios.Find(r => r.CNPJ == cnpj);
 
             if (recupera == null)
             {
-                return null;
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotFound);
             }
 
-            var converte = new GerencylRegister
-            {
-                CNPJ = recupera.CNPJ,
-                Name = recupera.Name,
-                CorporateReason = recupera.CorporateReason,
-                Email = recupera.Email,
-            };
-
-            return converte;
+            return recupera;
         }
 
         public async Task<string> AdicionarUsuarioAsync(GerencylRegisterView register)
         {
-            if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Password.Password))
+            var verifica = await verifyUser(register.CNPJ);
+
+            if (verifica == true)
+            {
+                //return "usuario já existe";
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
+            }
+            if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Password))
             {
                 throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
             }
-            if (register.Password.ConfirmPassword != register.Password.Password)
+            if (register.ConfirmPassword != register.Password)
             {
                 throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
             }
 
-            var user = new GerencylRegister()
-            {
-                Email = register.Email,
-                Password = register.Password.Password,
-                CreationDate = DateTime.Now,
-                CNPJ = register.CNPJ,
-                UpdateDate = DateTime.Now,
-                Name = register.Name,
-                UserName = register.Name,
-                CorporateReason = register.CorporateReason,
+            var user = _mapper.Map<GerencylRegister>(register);
 
-            };
-            /*
-            var user = new GerencylRegister(
-                creationDate: returnUser.CreationDate,
-                updateDate: returnUser.UpdateDate,
-                email: returnUser.Email,
-                password: returnUser.Password.Password,
-                name: returnUser.Name,
-                cnpj: returnUser.CNPJ,
-                corporateReason: returnUser.CorporateReason
-            );*/
-
-            var resultado = await _userManager.CreateAsync(user, register.Password.Password);
+            var resultado = await _userManager.CreateAsync(user, register.Password);
 
             if (resultado.Errors.Any())
             {
                 return string.Join(", ", resultado.Errors.Select(e => e.Description));
             }
-
-            // Geração de Confirmação caso precise
-            var userId = await _userManager.GetUserIdAsync(user);
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-            // retorno email 
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var resultado2 = await _userManager.ConfirmEmailAsync(user, code);
-
-            if (resultado2.Succeeded)
-            {
-                return "Usuário Adicionado com Sucesso";
-            }
             else
             {
-                return "Erro ao confirmar usuários";
+                var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
+
+                await _sendEmaail.SendEmailConfirmationAsync(confirmationLink, user.Email);
+
+                var retornaToken = await CriarTokenTeste(user.CNPJ, user.Password);
+
+                return retornaToken.ToString();
             }
         }
 
@@ -217,49 +175,21 @@ namespace ApiAuthentication.Services
                 throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
             }
 
-            if (string.IsNullOrWhiteSpace(register.Password.Password))
+            if (string.IsNullOrWhiteSpace(register.Password))
             {
                 return "Senha é obrigatório!";
                 //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
             }
-            if (register.Password.ConfirmPassword != register.Password.Password)
+            if (register.ConfirmPassword != register.Password)
             {
                 return "confirmação de senha deve ser igual a senha";
                 //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
             }
 
-            var user = new GerencylRegister()
-            {
-                Email = register.Email,
-                Password = register.Password.Password,
-                CreationDate = DateTime.Now,
-                CNPJ = register.CNPJ,
-                UpdateDate = DateTime.Now,
-                Name = register.Name,
-                UserName = register.Name,
-                CorporateReason = register.CorporateReason,
-
-            };
-
-            /*var user = new GerencylRegister(
-               email: register.Email,
-               password: register.Password.Password,
-               name: register.Name,
-               cnpj: register.CNPJ,
-               corporateReason: register.CorporateReason,
-               creationDate: register.CreationDate,
-               updateDate: register.UpdateDate
-           );*/
+            var user = _mapper.Map<GerencylRegister>(register);
 
             _usuarios.Add(user);
 
-
-            var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
-
-            await _sendEmaail.SendEmailConfirmationAsync(confirmationLink, user.Email);
-
-
-            //await _sendEmaail.SendEmailConfirmationAsync(user);
 
             // Simula a criação do usuário (sem acessar o banco de dados real)
             var resultado = IdentityResult.Success;
@@ -267,26 +197,16 @@ namespace ApiAuthentication.Services
             if (resultado.Errors.Any())
             {
                 return string.Join(", ", resultado.Errors.Select(e => e.Description));
-            }
-
-            return resultado.ToString();
-
-
-            /*// Geração de Confirmação caso precise
-            var userId = Guid.NewGuid().ToString(); // Simula um novo ID do usuário
-            var code = Guid.NewGuid().ToString();   // Simula um código de confirmação
-
-            // Simula a confirmação do email (sem acessar o banco de dados real)
-            var resultado2 = IdentityResult.Success;
-
-            if (resultado2.Succeeded)
+            }else
             {
-                return "Usuário Adicionado com Sucesso";
+                var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
+
+                await _sendEmaail.SendEmailConfirmationAsync(confirmationLink, user.Email);
+
+                var retornaToken = await CriarTokenTeste(user.CNPJ, user.Password);
+
+                return retornaToken.ToString();
             }
-            else
-            {
-                return "Erro ao confirmar usuários";
-            }*/
 
         }
 

@@ -12,6 +12,9 @@ namespace GerencylApi.Config
             {
                 config.CreateMap<GerencylRegisterView, GerencylRegister>();
                 config.CreateMap<GerencylRegister, GerencylRegisterView>();
+                config.CreateMap<GerencylRegister, GerencylLoginView>();
+                config.CreateMap<GerencylLoginView, GerencylRegister>();
+
             });
             return mappingConfig;
         }

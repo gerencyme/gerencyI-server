@@ -1,25 +1,31 @@
 ﻿namespace ApiAuthentication.Models
 {
+    [Serializable]
     public class GerencylRegister : Register
     { 
 
         private string _cnpj;
         private string? _corporateReason;
 
+        private ZipCode _zipCode { get; set; } = new ZipCode();
         public GerencylRegister()
         {
+            // Lógica de inicialização, se necessário
         }
 
-        /*public GerencylRegister(string email, string password, string name, string cnpj, string corporateReason, DateTime creationDate, DateTime updateDate)
+        public GerencylRegister(string cnpj, string corporateReason, ZipCode zipCode)
         {
-            Email = email;
-            Password = password;
-            Name = name;
-            CreationDate = creationDate;
-            UpdateDate = updateDate;
-            CNPJ = cnpj;
-            CorporateReason = corporateReason;
-        }*/
+            _cnpj = cnpj;
+            _corporateReason = corporateReason;
+            _zipCode = zipCode;
+        }
+
+
+        public ZipCode ZipCode
+        {
+            get { return _zipCode; }
+            set { _zipCode = value; }
+        }
 
         public string CNPJ
         {

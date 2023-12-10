@@ -2,6 +2,7 @@
 
 namespace ApiAuthentication.Models
 {
+    [Serializable]
     public class GerencylClientRegister
     {
 

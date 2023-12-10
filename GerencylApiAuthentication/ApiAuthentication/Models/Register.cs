@@ -3,21 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiAuthentication.Models
 {
+    [Serializable]
     public class Register : IdentityUser
     {
         private string _password;
         private string _name;
         private DateTime _creationDate;
         private DateTime _updateDate;
-
-       /* public Register(string userName, string password, string name, DateTime creationDate, DateTime updateDate) : base(userName)
-        {
-            _password = password;
-            _name = name;
-            _creationDate = creationDate;
-            _updateDate = updateDate;
-            UserName = userName;
-        }*/
 
 
         [MaxLength(30)]

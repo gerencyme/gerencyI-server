@@ -20,10 +20,10 @@ namespace ApiAuthentication.Controllers
 
         [AllowAnonymous]
         [Produces("application/json")]
-        [HttpGet("/api/ReturnUser")]
-        public async Task<IActionResult> ReturnUser([FromBody] GerencylRegisterView returnUser)
+        [HttpPost("/api/ReturnUser")]
+        public async Task<IActionResult> ReturnUser([FromBody] string cnpj)
         {
-            var user = await _authenticationService.ReturnUser(returnUser);
+            var user = await _authenticationService.ReturnUser(cnpj);
             try
             {
                 if (user != null)
@@ -32,10 +32,10 @@ namespace ApiAuthentication.Controllers
                 }
                 else return BadRequest("não foi possível localizar o usúario");
             }
-            catch (Exception ex)
+            catch (HttpStatusExceptionCustom ex)
             {
 
-                return StatusCode(500, ex.Message);
+                return StatusCode(ex.StatusCode, ex.Message);
 
             }
         }

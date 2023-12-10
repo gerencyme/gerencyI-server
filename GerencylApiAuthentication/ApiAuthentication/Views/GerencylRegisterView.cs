@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ApiAuthentication.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiAuthentication.Views
 {
+    [Serializable]
     public class GerencylRegisterView
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [EmailAddress()]
         public required string Email { get; set; }
@@ -22,6 +24,18 @@ namespace ApiAuthentication.Views
 
         public DateTime UpdateDate { get; set; }
 
-        public PasswordView Password { get; set; }
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$",
+            ErrorMessage = "A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número, um caractere especial e ter pelo menos 8 caracteres.")]
+        [StringLength(30, MinimumLength = 8, ErrorMessage = "A senha deve ter pelo menos 8 caracteres.")]
+        public string? Password { get; set; }
+
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$",
+            ErrorMessage = "A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número, um caractere especial e ter pelo menos 8 caracteres.")]
+        [StringLength(30, MinimumLength = 8, ErrorMessage = "A senha deve ter pelo menos 8 caracteres.")]
+        public string? ConfirmPassword { get; set; }
+
+        //public PasswordView Password { get; set; }
+
+        //public Cep cep { get; set; }
     }
 }
