@@ -14,6 +14,8 @@ namespace ApiAuthentication.Services.Interfaces.InterfacesServices
 
         Task<string> AdicionarUsuarioTeste(GerencylRegisterView register);
 
+        Task<string> UpdateUserAsync(GerencylFullRegisterView register);
+
         Task<GerencylFullRegisterView> ReturnUser(string cnpj);
     }
 }

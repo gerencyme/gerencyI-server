@@ -16,7 +16,7 @@
                 }
                 else
                 {
-                    throw new ArgumentException("Invalid ZIP code.");
+                    throw new ("Invalid ZIP code.");
                 }
             }
         }

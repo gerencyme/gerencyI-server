@@ -212,7 +212,33 @@ namespace ApiAuthentication.Services
 
         }
 
-            private async Task<bool> verifyUser(string CNPJ)
+        public async Task<string> UpdateUserAsync(GerencylFullRegisterView register)
+        {
+
+            var user = _mapper.Map<GerencylRegister>(register);
+
+            var recuperaUser = _usuarios.Find(u => u.Id == user.Id);
+
+
+            if (recuperaUser == null)
+            {
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotFound);
+            }
+
+
+            // Atualiza automaticamente todas as propriedades de recuperaUser com os valores correspondentes de user
+            var properties = typeof(GerencylRegister).GetProperties();
+            foreach (var property in properties)
+            {
+                var value = property.GetValue(user);
+                property.SetValue(recuperaUser, value);
+            }
+
+            return "Update User Success";
+
+        }
+
+        private async Task<bool> verifyUser(string CNPJ)
         {
 
             var userExists = _usuarios.Any(u => u.CNPJ == CNPJ);

@@ -60,11 +60,28 @@ namespace ApiAuthentication.Controllers
         [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/AddUserIdentityTeste")]
-        public async Task<IActionResult> AdicionaUsuarioIdentity([FromBody] GerencylRegisterView register)
+        public async Task<IActionResult> AddUserIdentity([FromBody] GerencylRegisterView register)
         {
             try
             {
                 var result = await _authenticationService.AdicionarUsuarioTeste(register);
+                return Ok(result);
+            }
+            catch (HttpStatusExceptionCustom ex)
+            {
+
+                return StatusCode(ex.StatusCode, ex.Message);
+            }
+        }
+
+        [AllowAnonymous]
+        [Produces("application/json")]
+        [HttpPost("/api/UpdateUserIdentityTeste")]
+        public async Task<IActionResult> UpdateUserIdentity([FromBody] GerencylFullRegisterView register)
+        {
+            try
+            {
+                var result = await _authenticationService.UpdateUserAsync(register);
                 return Ok(result);
             }
             catch (HttpStatusExceptionCustom ex)
