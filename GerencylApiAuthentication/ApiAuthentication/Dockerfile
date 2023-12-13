@@ -9,10 +9,10 @@ ENV ASPNETCORE_ENVIRONMENT=Development
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["ApiAuthentication/ApiAuthentication.csproj"]
+COPY ["ApiAuthentication/ApiAuthentication.csproj", "ApiAuthentication/"]
 RUN dotnet restore "ApiAuthentication/ApiAuthentication.csproj"
 COPY . .
-WORKDIR "ApiAuthentication/ApiAuthentication.csproj"
+WORKDIR "/src/ApiAuthentication"
 RUN dotnet build "ApiAuthentication.csproj" -c Release -o /app/build
 
 FROM build AS publish
