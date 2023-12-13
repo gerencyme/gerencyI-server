@@ -59,7 +59,11 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKERUSER }}
           password: ${{ secrets.DOCKERPASSW }}
-
+          
+      - name: Prune Buildx cache
+        if: github.event_name == 'schedule'
+        run: docker buildx prune --all
+        
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
@@ -96,6 +100,3 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
-      - name: Prune Buildx cache
-        if: github.event_name == 'schedule'
-        run: docker buildx prune --all
