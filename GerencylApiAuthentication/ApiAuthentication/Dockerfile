@@ -9,6 +9,9 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY . .
 WORKDIR "/src/ApiAuthentication"
+
+# Adiciona comandos de debug
+RUN ls -la    # Lista os arquivos no diretório
 RUN dotnet restore && \
     dotnet build -c Release -o /app/build
 
