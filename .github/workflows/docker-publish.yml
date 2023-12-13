@@ -78,8 +78,7 @@ jobs:
           context: GerencylApiAuthentication/ApiAuthentication/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          dockerfile: GerencylApiAuthentication/ApiAuthentication/Dockerfile  # Specify the correct path to the Dockerfile
+          labels: ${{ steps.meta.outputs.labels }} # Specify the correct path to the Dockerfile
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
