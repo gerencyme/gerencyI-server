@@ -27,4 +27,4 @@ jobs:
           tags: |
             gerencyi:v1
             gerencyi:latest
-          dockerfile: gerencyI-server/GerencylApiAuthentication/ApiAuthentication/Dockerfile
+          dockerfile: gerencyI-server/GerencylApiAuthentication/ApiAuthentication/Dockerfile teste
