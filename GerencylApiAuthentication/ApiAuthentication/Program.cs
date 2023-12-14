@@ -27,7 +27,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gerencyl-Authentication", Version = "v1" });
 
-    // Configuração para autenticação com Bearer Token
+    // ConfiguraÃ§Ã£o para autenticaÃ§Ã£o com Bearer Token
     var securityScheme = new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -106,7 +106,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //SENDGRID
 
 builder.Services.AddSendGrid(options =>
-{
+
     options.ApiKey = builder.Configuration
     .GetSection("SendGridEmailSettings").GetValue<string>("APIKey");
 });
