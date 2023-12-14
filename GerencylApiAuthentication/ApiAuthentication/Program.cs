@@ -106,7 +106,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //SENDGRID
 
 builder.Services.AddSendGrid(options =>
-
+{
     options.ApiKey = builder.Configuration
     .GetSection("SendGridEmailSettings").GetValue<string>("APIKey");
 });
