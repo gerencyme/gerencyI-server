@@ -8,16 +8,19 @@
         private string? _corporateReason;
 
         private ZipCode _zipCode { get; set; } = new ZipCode();
+
+        private Supplier _supplier { get; set; } = new Supplier();
         public GerencylRegister()
         {
             // Lógica de inicialização, se necessário
         }
 
-        public GerencylRegister(string cnpj, string corporateReason, ZipCode zipCode)
+        public GerencylRegister(string cnpj, string corporateReason, ZipCode zipCode, Supplier supplier)
         {
             _cnpj = cnpj;
             _corporateReason = corporateReason;
             _zipCode = zipCode;
+            _supplier = supplier;
         }
 
 
@@ -25,6 +28,12 @@
         {
             get { return _zipCode; }
             set { _zipCode = value; }
+        }
+
+        public Supplier Supplier
+        {
+            get { return _supplier; }
+            set { _supplier = value; }
         }
 
         public string CNPJ

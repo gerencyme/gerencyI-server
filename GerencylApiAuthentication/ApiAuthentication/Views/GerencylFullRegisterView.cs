@@ -29,5 +29,7 @@ namespace ApiAuthentication.Views
 
         public ZipCode ZipCode { get; set; }
 
+        public Supplier Supplier { get; set; }
+
     }
 }

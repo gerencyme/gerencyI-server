@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AspNetCore.Identity.MongoDbCore.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace ApiAuthentication.Models
 {
     [Serializable]
-    public class Register : IdentityUser
+    public class Register : MongoIdentityUser<Guid>
     {
         private string _password;
         private string _name;

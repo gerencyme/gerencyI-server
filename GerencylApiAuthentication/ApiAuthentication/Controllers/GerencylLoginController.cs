@@ -18,7 +18,7 @@ namespace ApiAuthentication.Controllers
         }
 
 
-        [AllowAnonymous]
+        [Authorize]
         [Produces("application/json")]
         [HttpPost("/api/ReturnUser")]
         public async Task<IActionResult> ReturnUser([FromBody] string cnpj)
@@ -48,7 +48,7 @@ namespace ApiAuthentication.Controllers
 
             try
             {
-                var token = await _authenticationService.CriarTokenTeste(login.CNPJ, login.Password);
+                var token = await _authenticationService.CriarTokenAsync(login.CNPJ, login.Password);
                 return Ok(token);
             }
             catch (UnauthorizedAccessException ex)
@@ -59,12 +59,12 @@ namespace ApiAuthentication.Controllers
 
         [AllowAnonymous]
         [Produces("application/json")]
-        [HttpPost("/api/AddUserIdentityTeste")]
+        [HttpPost("/api/AddUserIdentity")]
         public async Task<IActionResult> AddUserIdentity([FromBody] GerencylRegisterView register)
         {
             try
             {
-                var result = await _authenticationService.AdicionarUsuarioTeste(register);
+                var result = await _authenticationService.AdicionarUsuarioAsync(register);
                 return Ok(result);
             }
             catch (HttpStatusExceptionCustom ex)
@@ -74,9 +74,9 @@ namespace ApiAuthentication.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [Produces("application/json")]
-        [HttpPost("/api/UpdateUserIdentityTeste")]
+        [HttpPost("/api/UpdateUserIdentity")]
         public async Task<IActionResult> UpdateUserIdentity([FromBody] GerencylFullRegisterView register)
         {
             try

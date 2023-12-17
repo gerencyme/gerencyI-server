@@ -17,7 +17,8 @@
         { StatusCodeEnum.BadRequest, "Bad Request - The request could not be understood or was missing necessary information." },
         { StatusCodeEnum.NoContent, "No Content - The request was successful, but there is no content in the response body." },
         { StatusCodeEnum.InternalServerError, "Internal Server Error - An unexpected error occurred on the server." },
-        { StatusCodeEnum.NotAcceptable, "notacceptabel" },
+        { StatusCodeEnum.NotAcceptable, "NotAcceptable" },
+        { StatusCodeEnum.Conflict, "Conflict" },
         // Adicione outros códigos de status e mensagens aqui
     };
 
@@ -26,6 +27,33 @@
             string message;
 
             if (StatusCodeMessages.TryGetValue(statusCode, out message))
+            {
+                return new HttpStatusExceptionCustom(statusCode, message);
+            }
+            else
+            {
+                // Se o código de status não estiver no dicionário, você pode lançar uma exceção genérica ou personalizada aqui.
+                // Por exemplo, lançando uma exceção com código de status 500 (InternalServerError) e uma mensagem genérica.
+                return new HttpStatusExceptionCustom(StatusCodeEnum.InternalServerError, "Internal Server Error - An unexpected error occurred on the server.");
+            }
+        }
+
+        private static readonly Dictionary<StatusCodeEnum, string> StatusCodeMessagesCustom = new Dictionary<StatusCodeEnum, string>
+    {
+        { StatusCodeEnum.Ok, "Ok, Success - The request was successful." },
+        { StatusCodeEnum.BadRequest, "Email ou Senha inválidoS" },
+        { StatusCodeEnum.NoContent, "No Content - The request was successful, but there is no content in the response body." },
+        { StatusCodeEnum.InternalServerError, "Internal Server Error - An unexpected error occurred on the server." },
+        { StatusCodeEnum.NotAcceptable, "NotAcceptable" },
+        { StatusCodeEnum.Conflict, "Usuário já existe" },
+        // Adicione outros códigos de status e mensagens aqui
+    };
+
+        public static HttpStatusExceptionCustom HtttpStatusCodeExceptionCustom(StatusCodeEnum statusCode)
+        {
+            string message;
+
+            if (StatusCodeMessagesCustom.TryGetValue(statusCode, out message))
             {
                 return new HttpStatusExceptionCustom(statusCode, message);
             }

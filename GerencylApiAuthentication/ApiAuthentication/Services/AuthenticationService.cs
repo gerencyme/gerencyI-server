@@ -5,92 +5,38 @@ using ApiAuthentication.Views;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using SendGrid;
+using MongoDB.Driver;
 using WebAPIs.Token;
 
 namespace ApiAuthentication.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
+        private readonly IMongoCollection<GerencylRegister> _usersCollection;
         private readonly SignInManager<GerencylRegister> _signInManager;
         private readonly UserManager<GerencylRegister> _userManager;
         private readonly JwtSettings _jwtSettings;
-        private readonly ISendGridClient _sendGridClient;
-        private readonly IConfiguration _configuration;
-        private List<GerencylRegister> _usuarios;
         private readonly IMapper _mapper;
         private readonly EmailConfirmationService _sendEmaail;
 
-        public AuthenticationService(SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager,
-            ISendGridClient sendGridClient, IOptions<JwtSettings> jwtSettings,
-            IConfiguration configuration, List<GerencylRegister> usuarios,
-            EmailConfirmationService sendEmaail, IMapper mapper)
+        public AuthenticationService(IMongoDatabase database, SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager,
+            IOptions<JwtSettings> jwtSettings,EmailConfirmationService sendEmaail, IMapper mapper)
         {
             _mapper = mapper;
             _jwtSettings = jwtSettings.Value;
             _signInManager = signInManager;
-            _sendGridClient = sendGridClient;
-            _configuration = configuration;
             _userManager = userManager;
-            _usuarios = usuarios;
             _sendEmaail = sendEmaail;
+            _usersCollection = database.GetCollection<GerencylRegister>("Users");
         }
 
         public async Task<GerencylFullRegisterView> CriarTokenAsync(string cnpj, string senha)
         {
-            if (string.IsNullOrWhiteSpace(cnpj) || string.IsNullOrWhiteSpace(senha))
-            {
-                throw new UnauthorizedAccessException("CNPJ e senha são obrigatórios.");
-            }
-
-            var resultado = await _signInManager.PasswordSignInAsync(
-                cnpj,
-                senha,
-                false,
-                lockoutOnFailure: false);
-
-            if (resultado.Succeeded)
-            {
-                var userCurrent = await _userManager.FindByNameAsync(cnpj);
-                string idUsuario = userCurrent.Id;
-
-                var token = new TokenJWTBuilder()
-                    .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
-                    .AddSubject("Empresa - GerencyI")
-                    .AddIssuer(_jwtSettings.Issuer)
-                    .AddAudience(_jwtSettings.Audience)
-                    .AddExpiry(5)
-                    .Builder();
-
-                var returnLogin = await ReturnUser(cnpj);
-
-                returnLogin.Token = token.value;
-
-                return returnLogin;
-            }
-            else
-            {
-                throw new UnauthorizedAccessException();
-            }
-        }
-
-        public async Task<GerencylFullRegisterView> CriarTokenTeste(string cnpj, string senha)
-        {
-
-            var verifica = await verifyUser(cnpj);
-
-            if (verifica != true)
-            {
-                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
-            }
-            if (string.IsNullOrWhiteSpace(cnpj) || string.IsNullOrWhiteSpace(senha))
-            {
-                throw new UnauthorizedAccessException("CNPJ e senha são obrigatórios.");
-            }
-
-            var usuario = _usuarios.FirstOrDefault(u =>
-                            u.CNPJ.Equals(cnpj, StringComparison.OrdinalIgnoreCase) &&
-                            u.Password.Equals(senha, StringComparison.Ordinal));
+            // Verifica se o usuário existe no MongoDB
+            var usuario = await _usersCollection.Find(u =>
+                u.CNPJ.Equals(cnpj, StringComparison.OrdinalIgnoreCase) &&
+                u.PasswordHash.Equals(senha, StringComparison.Ordinal))
+                .FirstOrDefaultAsync();
 
             if (usuario != null)
             {
@@ -122,8 +68,7 @@ namespace ApiAuthentication.Services
 
         public async Task<GerencylFullRegisterView> ReturnUser(string cnpj)
         {
-
-            var recupera =  _usuarios.Find(r => r.CNPJ == cnpj);
+            var recupera = await _usersCollection.Find(r => r.CNPJ == cnpj).FirstOrDefaultAsync();
 
             if (recupera == null)
             {
@@ -135,18 +80,17 @@ namespace ApiAuthentication.Services
             return user;
         }
 
-        public async Task<string> AdicionarUsuarioAsync(GerencylRegisterView register)
+        public async Task<GerencylFullRegisterView> AdicionarUsuarioAsync(GerencylRegisterView register)
         {
-            var verifica = await verifyUser(register.CNPJ);
+            var verifica = await VerifyUserAsync(register.CNPJ);
 
             if (verifica == true)
             {
-                //return "usuario já existe";
-                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionCustom(StatusCodeEnum.Conflict);
             }
             if (string.IsNullOrWhiteSpace(register.Email) || string.IsNullOrWhiteSpace(register.Password))
             {
-                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionCustom(StatusCodeEnum.BadRequest);
             }
             if (register.ConfirmPassword != register.Password)
             {
@@ -154,102 +98,49 @@ namespace ApiAuthentication.Services
             }
 
             var user = _mapper.Map<GerencylRegister>(register);
+            // Realize operações personalizadas para adicionar um usuário ao MongoDB
+            // Por exemplo, configurar propriedades adicionais, manipular senhas, etc.
 
-            var resultado = await _userManager.CreateAsync(user, register.Password);
+            user.PasswordHash = register.Password;// hash da senha, se necessário;
 
-            if (resultado.Errors.Any())
-            {
-                return string.Join(", ", resultado.Errors.Select(e => e.Description));
-            }
-            else
-            {
-                var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
+            user.ZipCode.Code = "88888888";
 
-                await _sendEmaail.SendEmailConfirmationAsync(confirmationLink, user.Email);
+            await _userManager.UpdateSecurityStampAsync(user);
 
-                var retornaToken = await CriarTokenTeste(user.CNPJ, user.Password);
+            await _usersCollection.InsertOneAsync(user);
 
-                return retornaToken.ToString();
-            }
-        }
+            var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
 
-        public async Task<GerencylFullRegisterView> AdicionarUsuarioTeste(GerencylRegisterView register)
-        {
-
-            var verifica = await verifyUser(register.CNPJ);
-
-            if (verifica == true)
-            {
-                //return "usuario já existe";
-                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
-            }
-
-            if (string.IsNullOrWhiteSpace(register.Password))
-            {
-                //return "Senha é obrigatório!";
-                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
-            }
-            if (register.ConfirmPassword != register.Password)
-            {
-                //return "confirmação de senha deve ser igual a senha";
-                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
-            }
-
-            var user = _mapper.Map<GerencylRegister>(register);
-
-            _usuarios.Add(user);
+            await _sendEmaail.SendEmailConfirmationAsync(confirmationLink, user.Email);
 
 
-            // Simula a criação do usuário (sem acessar o banco de dados real)
-            var resultado = IdentityResult.Success;
+            var retornaToken = await CriarTokenAsync(user.CNPJ, register.Password);
 
-            if (resultado.Errors.Any())
-            {
-                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
-            }
-            else
-            {
-                var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
-
-                await _sendEmaail.SendEmailConfirmationAsync(confirmationLink, user.Email);
-
-                var retornaToken = await CriarTokenTeste(user.CNPJ, user.Password);
-
-                return retornaToken;
-            }
-
+            return retornaToken;
         }
 
         public async Task<string> UpdateUserAsync(GerencylFullRegisterView register)
         {
-
             var user = _mapper.Map<GerencylRegister>(register);
 
-            var recuperaUser = _usuarios.Find(u => u.Id == user.Id);
+            // Localize o usuário no MongoDB pelo Id
+            var filter = Builders<GerencylRegister>.Filter.Eq(u => u.Id, user.Id);
 
+            // Execute a atualização apenas se o usuário existir
+            var updateResult = await _usersCollection.ReplaceOneAsync(filter, user);
 
-            if (recuperaUser == null)
+            if (updateResult.ModifiedCount == 0)
             {
                 throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotFound);
             }
 
-
-            // Atualiza automaticamente todas as propriedades de recuperaUser com os valores correspondentes de user
-            var properties = typeof(GerencylRegister).GetProperties();
-            foreach (var property in properties)
-            {
-                var value = property.GetValue(user);
-                property.SetValue(recuperaUser, value);
-            }
-
             return "Update User Success";
-
         }
 
-        private async Task<bool> verifyUser(string CNPJ)
+        private async Task<bool> VerifyUserAsync(string cnpj)
         {
-
-            var userExists = _usuarios.Any(u => u.CNPJ == CNPJ);
+            var filter = Builders<GerencylRegister>.Filter.Eq(u => u.CNPJ, cnpj);
+            var userExists = await _usersCollection.Find(filter).AnyAsync();
 
             return userExists;
         }

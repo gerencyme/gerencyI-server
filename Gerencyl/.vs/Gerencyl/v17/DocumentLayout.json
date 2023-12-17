@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8A88530D-D016-458E-B2D2-983BC2D77FED}|Entities\\Entities.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencyl\\entities\\purchase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8A88530D-D016-458E-B2D2-983BC2D77FED}|Entities\\Entities.csproj|solutionrelative:entities\\purchase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8A88530D-D016-458E-B2D2-983BC2D77FED}|Entities\\Entities.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencyl\\entities\\similarcompany.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8A88530D-D016-458E-B2D2-983BC2D77FED}|Entities\\Entities.csproj|solutionrelative:entities\\similarcompany.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C22F601C-1AF1-4877-8F1B-51EE7060D00E}|Infrastructure\\Infrastructure.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencyl\\infrastructure\\configuration\\contextmongodb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C22F601C-1AF1-4877-8F1B-51EE7060D00E}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configuration\\contextmongodb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,37 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SimilarCompany.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Entities\\SimilarCompany.cs",
-              "RelativeDocumentMoniker": "Entities\\SimilarCompany.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Entities\\SimilarCompany.cs",
-              "RelativeToolTip": "Entities\\SimilarCompany.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-15T02:24:30.05Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Purchase.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Entities\\Purchase.cs",
-              "RelativeDocumentMoniker": "Entities\\Purchase.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Entities\\Purchase.cs",
-              "RelativeToolTip": "Entities\\Purchase.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAQwAoAAAAlAAAA",
+              "Title": "ContextMongoDb.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Infrastructure\\Configuration\\ContextMongoDb.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Configuration\\ContextMongoDb.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Infrastructure\\Configuration\\ContextMongoDb.cs",
+              "RelativeToolTip": "Infrastructure\\Configuration\\ContextMongoDb.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-15T02:23:49.215Z",
+              "WhenOpened": "2023-12-17T01:46:12.933Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             }
           ]
         }

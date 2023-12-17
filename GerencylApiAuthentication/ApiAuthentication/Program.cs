@@ -3,16 +3,17 @@ using ApiAuthentication.Services;
 using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Token;
 using AutoMapper;
-using Configuration;
 using GerencylApi.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WebAPIs.Token;
 using SendGrid.Extensions.DependencyInjection;
-using SendGrid.Helpers.Mail;
-using SendGrid;
+using Microsoft.AspNetCore.Identity;
+using AspNetCore.Identity.Mongo;
+using Interfaces.IGeneric;
+using Repository.Generic;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,17 +49,32 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityRequirement(securityRequirement);
 });
 
-builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlite(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+// Configure as configurações do MongoDB
+var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
 
-builder.Services.AddDefaultIdentity<GerencylRegister>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ContextBase>();
+// Registra as configurações como um serviço no DI (Dependency Injection)
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
+
+// Registra o IMongoClient e IMongoDatabase
+builder.Services.AddSingleton<IMongoClient>(sp => new MongoClient(mongoDbSettings.ConnectionString));
+builder.Services.AddScoped<IMongoDatabase>(sp => sp.GetRequiredService<IMongoClient>().GetDatabase(mongoDbSettings.DatabaseName));
+
+// Registra o ContextMongoDb
+builder.Services.AddScoped<ContextMongoDb>();
+
+// Registra o RepositoryMongoDBGeneric como serviço
+builder.Services.AddSingleton(typeof(IGenericMongoDb<>), typeof(RepositoryMongoDBGeneric<>));
+
+// Registra o Identity com MongoDB
+builder.Services.AddIdentity<GerencylRegister, IdentityRole2>()
+    .AddMongoDbStores<GerencylRegister, IdentityRole2, Guid>(
+        mongoDbSettings.ConnectionString, 
+        mongoDbSettings.DatabaseName)
+    .AddDefaultTokenProviders();
 
 
 //Config Services
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-builder.Services.AddSingleton<List<GerencylRegister>>();
 builder.Services.AddScoped<EmailConfirmationService>();
 
 
@@ -111,24 +127,7 @@ builder.Services.AddSendGrid(options =>
     .GetSection("SendGridEmailSettings").GetValue<string>("APIKey");
 });
 
-        
-/*    static async Task Execute()
-    {
-        //var apiKey = Environment.GetEnvironmentVariable("");
-        var client = new SendGridClient("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");
-        var from = new EmailAddress("guerreiroxx8@gmail.com", "Zsly");
-        var subject = "Sending with SendGrid is Fun";
-        var to = new EmailAddress("joaorossetto7065@gmail.com", "Zsly");
-        var plainTextContent = "and easy to do anywhere, even with C#";
-        var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
-        var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-        var response = await client.SendEmailAsync(msg);
-    }
-Execute().Wait();*/
-
-
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

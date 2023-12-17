@@ -8,11 +8,7 @@ namespace ApiAuthentication.Services.Interfaces.InterfacesServices
     {
         Task<GerencylFullRegisterView> CriarTokenAsync(string cnpj, string senha);
 
-        Task<GerencylFullRegisterView> CriarTokenTeste(string cnpj, string senha);
-
-        Task<string> AdicionarUsuarioAsync(GerencylRegisterView register);
-
-        Task<GerencylFullRegisterView> AdicionarUsuarioTeste(GerencylRegisterView register);
+        Task<GerencylFullRegisterView> AdicionarUsuarioAsync(GerencylRegisterView register);
 
         Task<string> UpdateUserAsync(GerencylFullRegisterView register);
 
