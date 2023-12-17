@@ -82,7 +82,7 @@ namespace ApiAuthentication.Services
 
         public async Task<GerencylFullRegisterView> AdicionarUsuarioAsync(GerencylRegisterView register)
         {
-            var verifica = await VerifyUserAsync(register.CNPJ);
+            var verifica = await VerifyUserAsync(register.CNPJ, register.Email);
 
             if (verifica == true)
             {
@@ -137,13 +137,19 @@ namespace ApiAuthentication.Services
             return "Update User Success";
         }
 
-        private async Task<bool> VerifyUserAsync(string cnpj)
+        private async Task<bool> VerifyUserAsync(string cnpj, string email)
         {
             var filter = Builders<GerencylRegister>.Filter.Eq(u => u.CNPJ, cnpj);
+            var filter2 = Builders<GerencylRegister>.Filter.Eq(u => u.Email, email);
             var userExists = await _usersCollection.Find(filter).AnyAsync();
+            var userExists2 = await _usersCollection.Find(filter2).AnyAsync();
 
-            return userExists;
+            if(userExists || userExists2)
+            {
+                return true;
+            }
+            else
+            return false;
         }
-
     }
 }
