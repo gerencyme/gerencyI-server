@@ -36,7 +36,7 @@ namespace ApiAuthentication.Services
             _sendEmaail = sendEmaail;
         }
 
-        public async Task<string> CriarTokenAsync(string cnpj, string senha)
+        public async Task<GerencylFullRegisterView> CriarTokenAsync(string cnpj, string senha)
         {
             if (string.IsNullOrWhiteSpace(cnpj) || string.IsNullOrWhiteSpace(senha))
             {
@@ -62,7 +62,11 @@ namespace ApiAuthentication.Services
                     .AddExpiry(5)
                     .Builder();
 
-                return token.value;
+                var returnLogin = await ReturnUser(cnpj);
+
+                returnLogin.Token = token.value;
+
+                return returnLogin;
             }
             else
             {
@@ -70,15 +74,14 @@ namespace ApiAuthentication.Services
             }
         }
 
-        public async Task<string> CriarTokenTeste(string cnpj, string senha)
+        public async Task<GerencylFullRegisterView> CriarTokenTeste(string cnpj, string senha)
         {
 
             var verifica = await verifyUser(cnpj);
 
             if (verifica != true)
             {
-                return "usuario não existe";
-                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
             }
             if (string.IsNullOrWhiteSpace(cnpj) || string.IsNullOrWhiteSpace(senha))
             {
@@ -106,7 +109,11 @@ namespace ApiAuthentication.Services
                         .AddExpiry(60)
                         .Builder();
 
-                    return token.value;
+                    var returnLogin = await ReturnUser(cnpj);
+
+                    returnLogin.Token = token.value;
+
+                    return returnLogin;
                 }
             }
 
@@ -166,26 +173,26 @@ namespace ApiAuthentication.Services
             }
         }
 
-        public async Task<string> AdicionarUsuarioTeste(GerencylRegisterView register)
+        public async Task<GerencylFullRegisterView> AdicionarUsuarioTeste(GerencylRegisterView register)
         {
 
             var verifica = await verifyUser(register.CNPJ);
 
             if (verifica == true)
             {
-                return "usuario já existe";
+                //return "usuario já existe";
                 throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.Conflict);
             }
 
             if (string.IsNullOrWhiteSpace(register.Password))
             {
-                return "Senha é obrigatório!";
-                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
+                //return "Senha é obrigatório!";
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
             }
             if (register.ConfirmPassword != register.Password)
             {
-                return "confirmação de senha deve ser igual a senha";
-                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
+                //return "confirmação de senha deve ser igual a senha";
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotAcceptable);
             }
 
             var user = _mapper.Map<GerencylRegister>(register);
@@ -198,8 +205,9 @@ namespace ApiAuthentication.Services
 
             if (resultado.Errors.Any())
             {
-                return string.Join(", ", resultado.Errors.Select(e => e.Description));
-            }else
+                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.BadRequest);
+            }
+            else
             {
                 var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
 
@@ -207,7 +215,7 @@ namespace ApiAuthentication.Services
 
                 var retornaToken = await CriarTokenTeste(user.CNPJ, user.Password);
 
-                return retornaToken.ToString();
+                return retornaToken;
             }
 
         }

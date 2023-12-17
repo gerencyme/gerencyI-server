@@ -6,13 +6,13 @@ namespace ApiAuthentication.Services.Interfaces.InterfacesServices
 {
     public interface IAuthenticationService
     {
-        Task<string> CriarTokenAsync(string cnpj, string senha);
+        Task<GerencylFullRegisterView> CriarTokenAsync(string cnpj, string senha);
 
-        Task<string> CriarTokenTeste(string cnpj, string senha);
+        Task<GerencylFullRegisterView> CriarTokenTeste(string cnpj, string senha);
 
         Task<string> AdicionarUsuarioAsync(GerencylRegisterView register);
 
-        Task<string> AdicionarUsuarioTeste(GerencylRegisterView register);
+        Task<GerencylFullRegisterView> AdicionarUsuarioTeste(GerencylRegisterView register);
 
         Task<string> UpdateUserAsync(GerencylFullRegisterView register);
 

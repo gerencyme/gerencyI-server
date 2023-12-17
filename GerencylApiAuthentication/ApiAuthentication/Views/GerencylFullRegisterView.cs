@@ -9,6 +9,8 @@ namespace ApiAuthentication.Views
 
         public string Id { get; set; }
 
+        public string? Token { get; set; }
+
         [EmailAddress()]
         public required string Email { get; set; }
 
