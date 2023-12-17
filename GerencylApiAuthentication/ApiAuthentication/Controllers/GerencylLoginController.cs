@@ -30,7 +30,7 @@ namespace ApiAuthentication.Controllers
                 {
                     return Ok(user);
                 }
-                else return BadRequest("não foi possível localizar o usúario");
+                else return NotFound("não foi possível localizar o usúario");
             }
             catch (HttpStatusExceptionCustom ex)
             {
@@ -53,7 +53,7 @@ namespace ApiAuthentication.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                return Unauthorized(ex.Message);
+                return Unauthorized("Senha ou CNPJ inválido");
             }
         }
 
