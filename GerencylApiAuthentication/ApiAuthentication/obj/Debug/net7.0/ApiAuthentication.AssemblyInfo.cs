@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiAuthentication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de1ccb378408d4498c5d166f83b5a7a7a2a4b177")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f46d180beaa47f5b0929417c9195e134ddbfa1b")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiAuthentication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiAuthentication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

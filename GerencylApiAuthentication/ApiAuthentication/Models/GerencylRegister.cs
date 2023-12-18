@@ -6,6 +6,7 @@
 
         private string _cnpj;
         private string? _corporateReason;
+        private string? _telephone;
 
         private ZipCode _zipCode { get; set; } = new ZipCode();
 
@@ -36,6 +37,11 @@
             set { _supplier = value; }
         }
 
+        public string Telephone
+        {
+            get { return _telephone; }
+            set { _telephone = value; }
+        }
         public string CNPJ
         {
             get { return _cnpj; }

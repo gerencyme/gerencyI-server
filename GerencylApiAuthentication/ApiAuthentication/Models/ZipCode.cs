@@ -42,6 +42,7 @@
                 address += $", {Neighborhood}, {City} - {State}, {Country}";
                 return address;
             }
+            set {}
         }
 
         public ZipCode(string code, string street, string number, string streetType, string neighborhood, string city, string state, string country, string complement = null)
