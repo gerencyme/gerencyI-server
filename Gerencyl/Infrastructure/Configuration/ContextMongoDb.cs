@@ -14,11 +14,6 @@ namespace Infrastructure.Configuration
             _database = client.GetDatabase(settings.Value.DatabaseName);
         }
 
-        public IMongoCollection<Company> Companies => _database.GetCollection<Company>("Companies");
-        public IMongoCollection<Stand> Stands => _database.GetCollection<Stand>("Stands");
-        public IMongoCollection<Product> Products => _database.GetCollection<Product>("Products");
-        public IMongoCollection<Demand> Demands => _database.GetCollection<Demand>("Demands");
-        public IMongoCollection<DemandProduct> DemandProducts => _database.GetCollection<DemandProduct>("DemandProducts");
 
     }
     public class MongoDbSettings

@@ -11,6 +11,7 @@ C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Infrastructure\obj\Debug\net7.0\In
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Infrastructure\obj\Debug\net7.0\Infrastructure.AssemblyInfoInputs.cache
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Infrastructure\obj\Debug\net7.0\Infrastructure.AssemblyInfo.cs
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Infrastructure\obj\Debug\net7.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Infrastructure\obj\Debug\net7.0\Infrastructure.sourcelink.json
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Infrastructure\obj\Debug\net7.0\Infrastructure.csproj.CopyComplete
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Infrastructure\obj\Debug\net7.0\Infrastructure.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Infrastructure\obj\Debug\net7.0\refint\Infrastructure.dll

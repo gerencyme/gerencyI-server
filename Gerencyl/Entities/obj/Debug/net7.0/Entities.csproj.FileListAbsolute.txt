@@ -7,6 +7,7 @@ C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Entities\obj\Debug\net7.0\Entities
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Entities\obj\Debug\net7.0\Entities.AssemblyInfoInputs.cache
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Entities\obj\Debug\net7.0\Entities.AssemblyInfo.cs
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Entities\obj\Debug\net7.0\Entities.csproj.CoreCompileInputs.cache
+C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Entities\obj\Debug\net7.0\Entities.sourcelink.json
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Entities\obj\Debug\net7.0\Entities.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Entities\obj\Debug\net7.0\refint\Entities.dll
 C:\Projetos\Gerencyl\gerencyI-server\Gerencyl\Entities\obj\Debug\net7.0\Entities.pdb
