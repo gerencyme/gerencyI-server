@@ -126,8 +126,24 @@ namespace ApiAuthentication.Services
             // Localize o usuário no MongoDB pelo Id
             var filter = Builders<GerencylRegister>.Filter.Eq(u => u.Id, user.Id);
 
+            // Crie a atualização usando o operador $set
+            var updateDefinition = Builders<GerencylRegister>.Update
+                .Set(u => u.Telephone, user.Telephone)
+                .Set(u => u.ZipCode.Street, user.ZipCode.Street)
+                .Set(u => u.ZipCode.State, user.ZipCode.State)
+                .Set(u => u.ZipCode.City, user.ZipCode.City)
+                .Set(u => u.ZipCode.Code, user.ZipCode.Code)
+                .Set(u => u.ZipCode.Complement, user.ZipCode.Complement)
+                .Set(u => u.ZipCode.Country, user.ZipCode.Country)
+                .Set(u => u.Supplier.Endereco, user.Supplier.Endereco)
+                .Set(u => u.Supplier.SupplierId, user.Supplier.SupplierId)
+                .Set(u => u.Supplier.Telephone, user.Supplier.Telephone)
+                .Set(u => u.Supplier.Cnpj, user.Supplier.Cnpj)
+                .Set(u => u.Supplier.Email, user.Supplier.Email);
+        // Adicione outros campos conforme necessário
+
             // Execute a atualização apenas se o usuário existir
-            var updateResult = await _usersCollection.ReplaceOneAsync(filter, user);
+    var updateResult = await _usersCollection.UpdateOneAsync(filter, updateDefinition);
 
             if (updateResult.ModifiedCount == 0)
             {
