@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{C22F601C-1AF1-4877-8F1B-51EE7060D00E}|Infrastructure\\Infrastructure.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencyl\\infrastructure\\configuration\\contextmongodb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C22F601C-1AF1-4877-8F1B-51EE7060D00E}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configuration\\contextmongodb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C22F601C-1AF1-4877-8F1B-51EE7060D00E}|Infrastructure\\Infrastructure.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencyl\\infrastructure\\repository\\repositories\\demandrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C22F601C-1AF1-4877-8F1B-51EE7060D00E}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repository\\repositories\\demandrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,36 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DemandRepository.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Infrastructure\\Repository\\Repositories\\DemandRepository.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repository\\Repositories\\DemandRepository.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Infrastructure\\Repository\\Repositories\\DemandRepository.cs",
-              "RelativeToolTip": "Infrastructure\\Repository\\Repositories\\DemandRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-17T16:12:34.031Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ContextMongoDb.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Infrastructure\\Configuration\\ContextMongoDb.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configuration\\ContextMongoDb.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Infrastructure\\Configuration\\ContextMongoDb.cs",
-              "RelativeToolTip": "Infrastructure\\Configuration\\ContextMongoDb.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-17T01:46:12.933Z",
-              "EditorCaption": ""
             }
           ]
         }
