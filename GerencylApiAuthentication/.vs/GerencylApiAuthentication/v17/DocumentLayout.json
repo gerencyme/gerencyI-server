@@ -50,8 +50,7 @@
               "RelativeToolTip": "ApiAuthentication\\Views\\GerencylFullRegisterView.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-18T22:52:55.328Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-18T22:52:55.328Z"
             },
             {
               "$type": "Document",
@@ -73,7 +72,7 @@
               "RelativeDocumentMoniker": "ApiAuthentication\\Services\\AuthenticationService.cs",
               "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Services\\AuthenticationService.cs",
               "RelativeToolTip": "ApiAuthentication\\Services\\AuthenticationService.cs",
-              "ViewState": "AQIAAHAAAAAAAAAAAAAswJkAAAAJAAAA",
+              "ViewState": "AQIAAG0AAAAAAAAAAAAswI8AAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-12-17T06:01:48.861Z",
               "EditorCaption": ""
@@ -88,8 +87,7 @@
               "RelativeToolTip": "ApiAuthentication\\Models\\GerencylRegister.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwAMAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-18T23:41:06.178Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-18T23:41:06.178Z"
             },
             {
               "$type": "Document",
