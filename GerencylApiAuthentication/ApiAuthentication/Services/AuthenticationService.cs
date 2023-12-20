@@ -142,7 +142,6 @@ namespace ApiAuthentication.Services
                 .Set(u => u.Supplier.Telephone, user.Supplier.Telephone)
                 .Set(u => u.Supplier.Cnpj, user.Supplier.Cnpj)
                 .Set(u => u.Supplier.Email, user.Supplier.Email);
-        // Adicione outros campos conforme necessário
 
             // Execute a atualização apenas se o usuário existir
     var updateResult = await _usersCollection.UpdateOneAsync(filter, updateDefinition);
