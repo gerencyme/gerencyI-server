@@ -1,10 +1,12 @@
-﻿namespace ApiAuthentication.Models
+﻿using System.Net;
+
+namespace ApiAuthentication.Models
 {
     [Serializable]
     public class ZipCode
     {
         private string _code;
-
+        private string _streetType;
         public string Code
         {
             get => _code;
@@ -16,19 +18,19 @@
                 }
                 else
                 {
-                    throw new ("Invalid ZIP code.");
+                    throw new("Invalid ZIP code.");
                 }
             }
         }
 
-        public string Street { get; set; }
-        public string Number { get; set; }
-        public string StreetType { get; set; }
-        public string Neighborhood { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }
-        public string Complement { get; set; }
+        public string? Street { get; set; }
+        public string? Number { get; set; }
+        public string? StreetType { get; set; }
+        public string? Neighborhood { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? Country { get; set; }
+        public string? Complement { get; set; }
 
         public string FullAddress
         {
@@ -42,10 +44,10 @@
                 address += $", {Neighborhood}, {City} - {State}, {Country}";
                 return address;
             }
-            set {}
+            set => FullAddressSet();
         }
 
-        public ZipCode(string code, string street, string number, string streetType, string neighborhood, string city, string state, string country, string complement = null)
+        public ZipCode(string code, string street, string number, string streetType, string neighborhood, string city, string state, string country, string complement = "")
         {
             Code = code;
             Street = street;
@@ -61,6 +63,35 @@
         public ZipCode()
         {
 
+        }
+
+        public string FullAddressSet()
+        {
+            if (string.IsNullOrEmpty(FullAddress))
+            {
+                return "";
+            }
+            else
+            {
+                string address = $"{StreetType} {Street}, {Number}";
+                if (!string.IsNullOrEmpty(Complement))
+                {
+                    address += $" - {Complement}";
+                }
+                address += $", {Neighborhood}, {City} - {State}, {Country}";
+                return address;
+            }
+
+        }
+
+        public string StreetTypeSet()
+        {
+            if (!string.IsNullOrEmpty(StreetType))
+            {
+
+                return StreetType = "teste";
+            }
+            return StreetType;
         }
 
         public string FormatZipCode()

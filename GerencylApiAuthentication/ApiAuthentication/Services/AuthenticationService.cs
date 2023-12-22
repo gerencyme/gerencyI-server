@@ -20,7 +20,7 @@ namespace ApiAuthentication.Services
         private readonly EmailConfirmationService _sendEmaail;
 
         public AuthenticationService(IMongoDatabase database, SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager,
-            IOptions<JwtSettings> jwtSettings,EmailConfirmationService sendEmaail, IMapper mapper)
+            IOptions<JwtSettings> jwtSettings, EmailConfirmationService sendEmaail, IMapper mapper)
         {
             _mapper = mapper;
             _jwtSettings = jwtSettings.Value;
@@ -144,11 +144,12 @@ namespace ApiAuthentication.Services
                 .Set(u => u.Supplier.Email, user.Supplier.Email);
 
             // Execute a atualização apenas se o usuário existir
-    var updateResult = await _usersCollection.UpdateOneAsync(filter, updateDefinition);
+            var updateResult = await _usersCollection.UpdateOneAsync(filter, updateDefinition);
 
             if (updateResult.ModifiedCount == 0)
             {
-                throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionGeneric(StatusCodeEnum.NotFound);
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NoContent, "Não houve alteraçào no usuário.");
+                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionCustom(StatusCodeEnum.NoContent);
             }
 
             return "Update User Success";
@@ -161,12 +162,12 @@ namespace ApiAuthentication.Services
             var userExists = await _usersCollection.Find(filter).AnyAsync();
             var userExists2 = await _usersCollection.Find(filter2).AnyAsync();
 
-            if(userExists || userExists2)
+            if (userExists || userExists2)
             {
                 return true;
             }
             else
-            return false;
+                return false;
         }
     }
 }
