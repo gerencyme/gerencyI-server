@@ -6,19 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiAuthentication.Controllers
 {
     [ApiController]
+    [Authorize]
     public class GerencylLoginController : ControllerBase
     {
-        private readonly IAuthenticationService _authenticationService;
-        private readonly IConfiguration _configuration;
-        public GerencylLoginController(IAuthenticationService authenticationService,
-            IConfiguration configuration)
+        private readonly IAuthenticationServicess _authenticationService;
+        public GerencylLoginController(IAuthenticationServicess authenticationService)
         {
             _authenticationService = authenticationService;
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
 
-        [Authorize]
         [Produces("application/json")]
         [HttpPost("/api/ReturnUser")]
         public async Task<IActionResult> ReturnUser([FromBody] string cnpj)
@@ -40,7 +37,6 @@ namespace ApiAuthentication.Controllers
             }
         }
 
-        [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/GenereateTokenIdentity")]
         public async Task<IActionResult> CriarTokenIdentity([FromBody] GerencylLoginView login)
@@ -57,7 +53,6 @@ namespace ApiAuthentication.Controllers
             }
         }
 
-        [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/AddUserIdentity")]
         public async Task<IActionResult> AddUserIdentity([FromBody] GerencylRegisterView register)
@@ -74,7 +69,6 @@ namespace ApiAuthentication.Controllers
             }
         }
 
-        [Authorize]
         [Produces("application/json")]
         [HttpPost("/api/UpdateUserIdentity")]
         public async Task<IActionResult> UpdateUserIdentity([FromBody] GerencylFullRegisterView register)

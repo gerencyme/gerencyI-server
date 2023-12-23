@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\controllers\\gerencyllogincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\controllers\\gerencyllogincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\dockerfilelocal||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\dockerfilelocal||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\controllers\\testecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\controllers\\testecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,50 +26,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\appsettings.json",
+              "RelativeDocumentMoniker": "ApiAuthentication\\appsettings.json",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\appsettings.json",
+              "RelativeToolTip": "ApiAuthentication\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2023-12-23T19:01:06.734Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DockerfileLocal",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\DockerfileLocal",
-              "RelativeDocumentMoniker": "ApiAuthentication\\DockerfileLocal",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\DockerfileLocal",
-              "RelativeToolTip": "ApiAuthentication\\DockerfileLocal",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2023-12-23T04:25:04.027Z",
+              "Title": "TesteController.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Controllers\\TesteController.cs",
+              "RelativeDocumentMoniker": "ApiAuthentication\\Controllers\\TesteController.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Controllers\\TesteController.cs",
+              "RelativeToolTip": "ApiAuthentication\\Controllers\\TesteController.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAWwBIAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-23T07:09:35.871Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Dockerfile",
-              "RelativeDocumentMoniker": "ApiAuthentication\\Dockerfile",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Dockerfile",
-              "RelativeToolTip": "ApiAuthentication\\Dockerfile",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2023-12-23T04:24:50.597Z",
+              "Title": "GerencylLoginController.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Controllers\\GerencylLoginController.cs",
+              "RelativeDocumentMoniker": "ApiAuthentication\\Controllers\\GerencylLoginController.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Controllers\\GerencylLoginController.cs",
+              "RelativeToolTip": "ApiAuthentication\\Controllers\\GerencylLoginController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-23T05:44:11.527Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Program.cs",
               "RelativeDocumentMoniker": "ApiAuthentication\\Program.cs",
               "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Program.cs",
               "RelativeToolTip": "ApiAuthentication\\Program.cs",
-              "ViewState": "AQIAAGYAAAAAAAAAAAAAAIcAAAAZAAAA",
+              "ViewState": "AQIAAGkAAAAAAAAAAAAAAIgAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-12-23T04:23:56.727Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             }
           ]
         }

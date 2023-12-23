@@ -1,4 +1,4 @@
-using ApiAuthentication.Models;
+
 using ApiAuthentication.Services;
 using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Token;
@@ -14,19 +14,17 @@ using AspNetCore.Identity.Mongo;
 using Interfaces.IGeneric;
 using Repository.Generic;
 using MongoDB.Driver;
+using ApiAuthentication.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-
 builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gerencyl-Authentication", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gerencyl", Version = "v1" });
 
     // Configuração para autenticação com Bearer Token
     var securityScheme = new OpenApiSecurityScheme
@@ -74,7 +72,7 @@ builder.Services.AddIdentity<GerencylRegister, IdentityRole2>()
 
 
 //Config Services
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IAuthenticationServicess, AuthenticationService>();
 builder.Services.AddScoped<EmailConfirmationService>();
 
 
@@ -82,7 +80,6 @@ builder.Services.AddScoped<EmailConfirmationService>();
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 
 //JWT
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -93,8 +90,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
           var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
           option.TokenValidationParameters = new TokenValidationParameters
           {
-              ValidateIssuer = true,
-              ValidateAudience = true,
+              ValidateIssuer = false,
+              ValidateAudience = false,
               ValidateLifetime = true,
               ValidateIssuerSigningKey = true,
 
@@ -118,7 +115,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
           };
       });
 
-
 //SENDGRID
 
 builder.Services.AddSendGrid(options =>
@@ -135,21 +131,27 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "GerencyI V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerencyl V1");
     });
-
-    //app.MapControllers().AllowAnonymous(); //method for disable authentication
+    //app.MapControllers();
+    app.MapControllers().AllowAnonymous(); //method for disable authentication
 }
 else app.MapControllers();
-app.UseStaticFiles();
 
-app.UseRouting();
+app.MapGet("/", () => "Hello World!");
+
+/*var devClient = " http://localhost:4200 ";
+app.UseCors(x => x
+.AllowAnyOrigin()
+.AllowAnyMethod()
+.AllowAnyHeader().WithOrigins(devClient));*/
+
+app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-/*
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");*/
+
+app.MapControllers();
+app.UseSwaggerUI();
 
 app.Run();

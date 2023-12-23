@@ -10,7 +10,7 @@ using WebAPIs.Token;
 
 namespace ApiAuthentication.Services
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationService : IAuthenticationServicess
     {
         private readonly IMongoCollection<GerencylRegister> _usersCollection;
         private readonly SignInManager<GerencylRegister> _signInManager;
