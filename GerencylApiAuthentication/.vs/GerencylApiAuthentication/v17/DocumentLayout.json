@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\controllers\\gerencyllogincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\controllers\\testecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\controllers\\testecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\controllers\\testecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\controllers\\testecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,7 +47,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "TesteController.cs",
               "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Controllers\\TesteController.cs",
               "RelativeDocumentMoniker": "ApiAuthentication\\Controllers\\TesteController.cs",
@@ -55,8 +55,7 @@
               "RelativeToolTip": "ApiAuthentication\\Controllers\\TesteController.cs",
               "ViewState": "AQIAAAoAAAAAAAAAAAAWwBIAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-23T07:09:35.871Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-23T07:09:35.871Z"
             },
             {
               "$type": "Document",
@@ -66,20 +65,20 @@
               "RelativeDocumentMoniker": "ApiAuthentication\\Controllers\\GerencylLoginController.cs",
               "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Controllers\\GerencylLoginController.cs",
               "RelativeToolTip": "ApiAuthentication\\Controllers\\GerencylLoginController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAPAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-12-23T05:44:11.527Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Program.cs",
               "RelativeDocumentMoniker": "ApiAuthentication\\Program.cs",
               "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Program.cs",
               "RelativeToolTip": "ApiAuthentication\\Program.cs",
-              "ViewState": "AQIAAGkAAAAAAAAAAAAAAIgAAAAEAAAA",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAAAFkAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-12-23T04:23:56.727Z",
               "EditorCaption": ""

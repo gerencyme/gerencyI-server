@@ -15,6 +15,7 @@ using Interfaces.IGeneric;
 using Repository.Generic;
 using MongoDB.Driver;
 using ApiAuthentication.Models;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -134,7 +135,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerencyl V1");
     });
     //app.MapControllers();
-    app.MapControllers().AllowAnonymous(); //method for disable authentication
+    //app.MapControllers().AllowAnonymous(); //method for disable authentication
 }
 else app.MapControllers();
 

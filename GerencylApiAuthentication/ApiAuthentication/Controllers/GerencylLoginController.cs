@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiAuthentication.Controllers
 {
     [ApiController]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class GerencylLoginController : ControllerBase
     {
         private readonly IAuthenticationServicess _authenticationService;
@@ -14,7 +14,6 @@ namespace ApiAuthentication.Controllers
         {
             _authenticationService = authenticationService;
         }
-
 
         [Produces("application/json")]
         [HttpPost("/api/ReturnUser")]
@@ -37,6 +36,7 @@ namespace ApiAuthentication.Controllers
             }
         }
 
+        [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/GenereateTokenIdentity")]
         public async Task<IActionResult> CriarTokenIdentity([FromBody] GerencylLoginView login)
@@ -53,6 +53,7 @@ namespace ApiAuthentication.Controllers
             }
         }
 
+        [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/AddUserIdentity")]
         public async Task<IActionResult> AddUserIdentity([FromBody] GerencylRegisterView register)
