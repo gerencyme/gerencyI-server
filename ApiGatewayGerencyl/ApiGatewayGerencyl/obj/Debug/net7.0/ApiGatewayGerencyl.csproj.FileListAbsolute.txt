@@ -35,3 +35,4 @@ C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\obj\D
 C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\obj\Debug\net7.0\ApiGatewayGerencyl.pdb
 C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\obj\Debug\net7.0\ApiGatewayGerencyl.genruntimeconfig.cache
 C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\obj\Debug\net7.0\ref\ApiGatewayGerencyl.dll
+C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\obj\Debug\net7.0\ApiGatewayGerencyl.sourcelink.json

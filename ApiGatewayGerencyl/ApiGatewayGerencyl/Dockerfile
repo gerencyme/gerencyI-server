@@ -9,10 +9,9 @@ ENV ASPNETCORE_ENVIRONMENT=Development
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["ApiGatewayGerencyl/ApiGatewayGerencyl.csproj", "ApiGatewayGerencyl/"]
-RUN dotnet restore "ApiGatewayGerencyl/ApiGatewayGerencyl.csproj"
 COPY . .
-WORKDIR "/src/ApiGatewayGerencyl"
+RUN dotnet restore
+COPY ApiAuthentication.csproj .
 RUN dotnet build "ApiGatewayGerencyl.csproj" -c Release -o /app/build
 
 FROM build AS publish

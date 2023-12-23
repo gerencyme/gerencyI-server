@@ -138,7 +138,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "GerencyI V1");
     });
 
-    app.MapControllers().AllowAnonymous(); //method for disable authentication
+    //app.MapControllers().AllowAnonymous(); //method for disable authentication
 }
 else app.MapControllers();
 app.UseStaticFiles();

@@ -1,14 +1,27 @@
 {
   "Routes": [
-    //Api1
+    // ApiAuthentication
+    {
+      "UpstreamPathTemplate": "/api/ReturnUser",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyiauthentication.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/ReturnUser"
+    },
+
     {
       "UpstreamPathTemplate": "/api/GenereateTokenIdentity",
       "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5252
+          "Host": "gerencyiauthentication.azurewebsites.net",
+          "Port": 443
         }
       ],
       "DownstreamPathTemplate": "/api/GenereateTokenIdentity"
@@ -17,14 +30,27 @@
     {
       "UpstreamPathTemplate": "/api/AddUserIdentity",
       "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5252
+          "Host": "gerencyiauthentication.azurewebsites.net",
+          "Port": 443
         }
       ],
       "DownstreamPathTemplate": "/api/AddUserIdentity"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/UpdateUserIdentity",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyiauthentication.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/UpdateUserIdentity"
     },
 
     //Api2
