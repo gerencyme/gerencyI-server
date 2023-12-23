@@ -82,6 +82,6 @@
   ],
 
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5185"
+    "BaseUrl": "https://gerencyigateway.azurewebsites.net"
   }
 }
