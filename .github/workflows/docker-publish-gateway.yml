@@ -7,20 +7,19 @@ name: Docker
 
 on:
   schedule:
-    - cron: '30 17 * * *'
+    - cron: '30 5 * * *'
   push:
-    branches: [ "dev" ]
+    branches: ["dev"]
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: ['v*.*.*']
   pull_request:
-    branches: [ "dev" ]
+    branches: ["dev"]
 
 env:
   # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
+  REGISTRY: docker.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
-
+  IMAGE_NAME: zsly/repo-dws
 
 jobs:
   build:
@@ -58,9 +57,13 @@ jobs:
         uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
+          username: ${{ secrets.DOCKERUSER }}
+          password: ${{ secrets.DOCKERPASSW }}
+          
+      - name: Prune Buildx cache
+        if: github.event_name == 'schedule'
+        run: docker buildx prune --all
+        
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
@@ -68,6 +71,7 @@ jobs:
         uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          dockerfile: GerencylApiAuthentication/ApiGatewayGerencyl/Dockerfile  # Specify the correct path to the Dockerfile
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
@@ -75,12 +79,27 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
-          context: .
+          context: GerencylApiAuthentication/ApiGatewayGerencyl
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: ${{ steps.meta.outputs.labels }} # Specify the correct path to the Dockerfile
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      # ... (seu código existente)
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Add a condition to check if the build was successful
+      - name: Check if .NET build was successful
+        if: failure()
+        run: exit 1  # Esta etapa será executada apenas se o build do .NET falhar
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
