@@ -96,5 +96,59 @@ namespace WebAPIs.Token
             return new TokenJWT(token);
 
         }
+
+        public TokenJWT Builder(bool isRefreshToken = false)
+        {
+            EnsureArguments();
+
+            var claims = new List<Claim>
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, this.subject),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        }
+            .Union(this.claims.Select(item => new Claim(item.Key, item.Value)));
+
+            DateTime expiration = isRefreshToken
+                ? DateTime.UtcNow.AddMinutes(refreshTokenExpiryInMinutes)
+                : DateTime.UtcNow.AddMinutes(expiryInMinutes);
+
+            var token = new JwtSecurityToken(
+                issuer: this.issuer,
+                audience: this.audience,
+                claims: claims,
+                expires: expiration,
+                signingCredentials: new SigningCredentials(this.securityKey, SecurityAlgorithms.HmacSha256)
+            );
+
+            if (isRefreshToken)
+            {
+                var refreshExpiration = DateTime.UtcNow.AddMinutes(refreshTokenExpiryInMinutes);
+                var refreshClaim = new Claim("refresh_token", "true");
+                var refreshJwt = new JwtSecurityToken(
+                    issuer: this.issuer,
+                    audience: this.audience,
+                    claims: new[] { refreshClaim },
+                    expires: refreshExpiration,
+                    signingCredentials: new SigningCredentials(this.securityKey, SecurityAlgorithms.HmacSha256)
+                );
+                ((List<Claim>)token.Claims).AddRange(refreshJwt.Claims);
+            }
+
+            return new TokenJWT(token, isRefreshToken);
+        }
+
+        private int refreshTokenExpiryInMinutes = 1440; // valor padrão, ajuste conforme necessário
+
+        public TokenJWTBuilder WithRefreshTokenExpiration(int minutes)
+        {
+            this.refreshTokenExpiryInMinutes = minutes;
+            return this;
+        }
+
+        public TokenJWTBuilder WithExpiration(int minutes)
+        {
+            this.expiryInMinutes = minutes;
+            return this;
+        }
     }
 }

@@ -5,12 +5,16 @@ namespace WebAPIs.Token
     public class TokenJWT
     {
         private JwtSecurityToken token;
-        internal TokenJWT(JwtSecurityToken token)
+
+        internal TokenJWT(JwtSecurityToken token, bool isRefreshToken = false)
         {
             this.token = token;
+            this.IsRefreshToken = isRefreshToken;
         }
         public DateTime ValidTo => token.ValidTo;
 
-        public string value => new JwtSecurityTokenHandler().WriteToken(this.token);
+        public string Value => new JwtSecurityTokenHandler().WriteToken(this.token);
+
+        public bool IsRefreshToken { get; }
     }
 }

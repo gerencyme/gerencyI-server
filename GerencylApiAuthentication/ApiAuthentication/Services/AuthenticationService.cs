@@ -49,21 +49,35 @@ namespace ApiAuthentication.Services
 
                     var token = new TokenJWTBuilder()
                         .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
-                        .AddSubject("Empresa - GerencyI")
+                        .AddSubject(cnpj)
                         .AddIssuer(_jwtSettings.Issuer)
                         .AddAudience(_jwtSettings.Audience)
+                        .AddClaim("user", "comum")
                         .AddExpiry(60)
                         .Builder();
 
                     var returnLogin = await ReturnUser(cnpj);
 
-                    returnLogin.Token = token.value;
+                    returnLogin.Token = token.Value;
 
                     return returnLogin;
                 }
             }
 
             throw new UnauthorizedAccessException();
+        }
+
+        public async Task<string> GenerateRefreshTokenAsync(string userId)
+        {
+            var tokenBuilder = new TokenJWTBuilder()
+                .AddSubject(userId)  // Set the user ID as the subject
+                .WithRefreshTokenExpiration(2880);  // Set refresh token expiration to 48 hours
+
+            var refreshToken = tokenBuilder.Builder(isRefreshToken: true);
+
+            // Store the refresh token securely (implementation not shown)
+
+            return refreshToken.Value;
         }
 
         public async Task<GerencylFullRegisterView> ReturnUser(string cnpj)

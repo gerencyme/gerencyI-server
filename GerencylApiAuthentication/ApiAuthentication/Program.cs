@@ -67,7 +67,7 @@ builder.Services.AddSingleton(typeof(IGenericMongoDb<>), typeof(RepositoryMongoD
 // Registra o Identity com MongoDB
 builder.Services.AddIdentity<GerencylRegister, IdentityRole2>()
     .AddMongoDbStores<GerencylRegister, IdentityRole2, Guid>(
-        mongoDbSettings.ConnectionString, 
+        mongoDbSettings.ConnectionString,
         mongoDbSettings.DatabaseName)
     .AddDefaultTokenProviders();
 
@@ -91,8 +91,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
           var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
           option.TokenValidationParameters = new TokenValidationParameters
           {
-              ValidateIssuer = false,
-              ValidateAudience = false,
+              ValidateIssuer = true,
+              ValidateAudience = true,
               ValidateLifetime = true,
               ValidateIssuerSigningKey = true,
 
@@ -108,12 +108,29 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                   Console.WriteLine("OnAuthenticationFailed: " + context.Exception.Message);
                   return Task.CompletedTask;
               },
-              OnTokenValidated = context =>
+              OnTokenValidated = async context =>
               {
+                  var isRefreshTokenClaim = context.Principal.Claims.FirstOrDefault(c => c.Type == "refresh_token")?.Value;
+                  if (!string.IsNullOrEmpty(isRefreshTokenClaim) && isRefreshTokenClaim.ToLower() == "true")
+                  {
+                      // Se é um Refresh Token, use a lógica da classe TokenJWTBuilder para gerar um novo Access Token
+                      var jwtBuilder = new TokenJWTBuilder()
+                          .AddSecurityKey(JwtSecurityKey.Create(jwtSettings.SecurityKey))
+                          .AddIssuer(jwtSettings.Issuer)
+                          .AddAudience(jwtSettings.Audience)
+                          .AddSubject("novousuario@exemplo.com") // Substitua pelo sub do usuário real
+                          .WithExpiration(jwtSettings.TokenExpirationMinutes)
+                          .Builder();
+
+                      // Acessa diretamente a propriedade Response para substituir o token na resposta
+                      context.HttpContext.Response.Headers.Add("new-access-token", jwtBuilder.Value);
+                  }
+
                   Console.WriteLine("OnTokenValidated: " + context.SecurityToken);
-                  return Task.CompletedTask;
-              }
+                  await Task.CompletedTask;
+              },
           };
+
       });
 
 //SENDGRID
