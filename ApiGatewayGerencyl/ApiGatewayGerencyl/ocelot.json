@@ -117,11 +117,10 @@
         }
       ],
       "DownstreamPathTemplate": "/api/DeleteByEntityId"
-    },
-
-    "GlobalConfiguration",
-    :,
-    {
-      "BaseUrl": "https://gerencyigateway.azurewebsites.net"
     }
+  ],
+
+  "GlobalConfiguration": {
+    "BaseUrl": "https://gerencyigateway.azurewebsites.net"
+  }
 }
