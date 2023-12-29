@@ -15,7 +15,6 @@ using Interfaces.IGeneric;
 using Repository.Generic;
 using MongoDB.Driver;
 using ApiAuthentication.Models;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 

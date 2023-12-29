@@ -13,7 +13,6 @@ namespace ApiAuthentication.Services
     public class AuthenticationService : IAuthenticationServicess
     {
         private readonly IMongoCollection<GerencylRegister> _usersCollection;
-        private readonly SignInManager<GerencylRegister> _signInManager;
         private readonly UserManager<GerencylRegister> _userManager;
         private readonly JwtSettings _jwtSettings;
         private readonly IMapper _mapper;
