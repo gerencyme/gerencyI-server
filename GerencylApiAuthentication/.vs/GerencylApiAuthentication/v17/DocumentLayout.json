@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,24 +18,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\appsettings.json",
-              "RelativeDocumentMoniker": "ApiAuthentication\\appsettings.json",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\appsettings.json",
-              "RelativeToolTip": "ApiAuthentication\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAA5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2023-12-29T01:44:23.426Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthenticationService.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Services\\AuthenticationService.cs",
+              "RelativeDocumentMoniker": "ApiAuthentication\\Services\\AuthenticationService.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Services\\AuthenticationService.cs",
+              "RelativeToolTip": "ApiAuthentication\\Services\\AuthenticationService.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAUwBwAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-29T02:24:55.623Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Dockerfile",
+              "RelativeDocumentMoniker": "ApiAuthentication\\Dockerfile",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Dockerfile",
+              "RelativeToolTip": "ApiAuthentication\\Dockerfile",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2023-12-29T02:23:49.19Z",
+              "EditorCaption": ""
             }
           ]
         }

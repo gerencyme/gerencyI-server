@@ -18,12 +18,11 @@ namespace ApiAuthentication.Services
         private readonly IMapper _mapper;
         private readonly EmailConfirmationService _sendEmaail;
 
-        public AuthenticationService(IMongoDatabase database, SignInManager<GerencylRegister> signInManager, UserManager<GerencylRegister> userManager,
+        public AuthenticationService(IMongoDatabase database, UserManager<GerencylRegister> userManager,
             IOptions<JwtSettings> jwtSettings, EmailConfirmationService sendEmaail, IMapper mapper)
         {
             _mapper = mapper;
             _jwtSettings = jwtSettings.Value;
-            _signInManager = signInManager;
             _userManager = userManager;
             _sendEmaail = sendEmaail;
             _usersCollection = database.GetCollection<GerencylRegister>("Users");
