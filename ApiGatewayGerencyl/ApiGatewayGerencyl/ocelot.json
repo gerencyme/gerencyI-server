@@ -53,35 +53,75 @@
       "DownstreamPathTemplate": "/api/UpdateUserIdentity"
     },
 
-    //Api2
+    //////////////////////////////////////ApiNewOrder/////////////////////////////////////////////////
     {
-      "UpstreamPathTemplate": "/api/AddDemand",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
-      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/GetByNewOrderId",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5092
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
         }
       ],
-      "DownstreamPathTemplate": "/api/AddDemand"
+      "DownstreamPathTemplate": "/api/GetByNewOrderId"
     },
 
     {
-      "UpstreamPathTemplate": "/api/DeleteDemand/{customerId}",
-      "UpstreamHttpMethod": [ "Get", "Delete" ],
-      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/GetLast10NewOrders",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5092
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
         }
       ],
-      "DownstreamPathTemplate": "/api/DeleteDemand/{customerId}"
-    }
-  ],
+      "DownstreamPathTemplate": "/api/GetLast10NewOrders"
+    },
 
-  "GlobalConfiguration": {
-    "BaseUrl": "https://gerencyigateway.azurewebsites.net"
-  }
+    {
+      "UpstreamPathTemplate": "/api/AddNewOrder",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/AddNewOrder"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/UpdateNewOrder",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/UpdateNewOrder"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/DeleteByEntityId",
+      "UpstreamHttpMethod": [ "Post", "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/DeleteByEntityId"
+    },
+
+    "GlobalConfiguration",
+    :,
+    {
+      "BaseUrl": "https://gerencyigateway.azurewebsites.net"
+    }
 }
