@@ -22,14 +22,14 @@ namespace ApiAuthentication.Services
 
         public AuthenticationService(IMongoDatabase database, UserManager<GerencylRegister> userManager,
             IOptions<JwtSettings> jwtSettings, EmailConfirmationService sendEmaail, IMapper mapper,
-            IAuthenticationRepository IrepositoryNewOrder)
+            IAuthenticationRepository iauthenticationRepository)
         {
             _mapper = mapper;
             _jwtSettings = jwtSettings.Value;
             _userManager = userManager;
             _sendEmaail = sendEmaail;
             _usersCollection = database.GetCollection<GerencylRegister>("Users");
-            _iauthenticationRepository = IrepositoryNewOrder;
+            _iauthenticationRepository = iauthenticationRepository;
         }
 
         public async Task<GerencylFullRegisterView> CriarTokenAsync(string cnpj, string senha)
