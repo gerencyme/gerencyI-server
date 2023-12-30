@@ -26,6 +26,11 @@ namespace ApiAuthentication.Repository
                 entity.Id = existingEntity.Id;
                 entity.Name = existingEntity.Name;
                 entity.CNPJ = existingEntity.CNPJ;
+                entity.Claims = existingEntity.Claims;
+                entity.CreationDate = existingEntity.CreationDate;
+                entity.PasswordHash = existingEntity.PasswordHash;
+                entity.AccessFailedCount = existingEntity.AccessFailedCount;
+                entity.CorporateReason = existingEntity.CorporateReason;
                 await _collection.ReplaceOneAsync(filter, entity);
             }
             else

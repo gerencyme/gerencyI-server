@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\repository\\repositories\\repositoryauthentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\repository\\repositories\\repositoryauthentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\repository\\repositories\\repositorymongodbgeneric.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\repository\\repositories\\repositorymongodbgeneric.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\repository\\repositories\\repositoryauthentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|solutionrelative:apiauthentication\\repository\\repositories\\repositoryauthentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02520165-430C-445C-85B6-6D14A73CF22D}|ApiAuthentication\\ApiAuthentication.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencylapiauthentication\\apiauthentication\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,7 +46,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Program.cs",
               "RelativeDocumentMoniker": "ApiAuthentication\\Program.cs",
@@ -67,8 +67,7 @@
               "RelativeToolTip": "ApiAuthentication\\Services\\AuthenticationService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAABOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-30T19:38:43.205Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-30T19:38:43.205Z"
             },
             {
               "$type": "Document",
@@ -80,8 +79,7 @@
               "RelativeToolTip": "ApiAuthentication\\Services\\Interfaces\\InterfacesServices\\IAuthenticationServicess.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-30T07:32:44.488Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-30T07:32:44.488Z"
             },
             {
               "$type": "Document",
@@ -93,25 +91,24 @@
               "RelativeToolTip": "ApiAuthentication\\Services\\Interfaces\\InterfacesRepositories\\IAuthenticationRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwAcAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-30T06:40:26.75Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-30T06:40:26.75Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "RepositoryAuthentication.cs",
               "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Repository\\Repositories\\RepositoryAuthentication.cs",
               "RelativeDocumentMoniker": "ApiAuthentication\\Repository\\Repositories\\RepositoryAuthentication.cs",
               "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Repository\\Repositories\\RepositoryAuthentication.cs",
               "RelativeToolTip": "ApiAuthentication\\Repository\\Repositories\\RepositoryAuthentication.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACMAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-12-30T06:35:34.793Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "RepositoryMongoDbGeneric.cs",
               "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\GerencylApiAuthentication\\ApiAuthentication\\Repository\\Repositories\\RepositoryMongoDbGeneric.cs",
               "RelativeDocumentMoniker": "ApiAuthentication\\Repository\\Repositories\\RepositoryMongoDbGeneric.cs",
@@ -119,8 +116,7 @@
               "RelativeToolTip": "ApiAuthentication\\Repository\\Repositories\\RepositoryMongoDbGeneric.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-30T06:18:51.04Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-30T06:18:51.04Z"
             },
             {
               "$type": "Document",
