@@ -158,7 +158,7 @@ if (app.Environment.IsDevelopment())
 }
 else app.MapControllers();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Hello Worl0!");
 
 /*var devClient = " http://localhost:4200 ";
 app.UseCors(x => x
