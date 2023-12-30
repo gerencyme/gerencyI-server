@@ -95,7 +95,7 @@
 
     {
       "UpstreamPathTemplate": "/api/UpdateNewOrder",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [ "Post" ],'te pa'
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
