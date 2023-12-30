@@ -15,6 +15,7 @@ using Interfaces.IGeneric;
 using Repository.Generic;
 using MongoDB.Driver;
 using ApiAuthentication.Models;
+using ApiAuthentication.Services.Interfaces.InterfacesRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,6 +63,7 @@ builder.Services.AddScoped<ContextMongoDb>();
 
 // Registra o RepositoryMongoDBGeneric como serviço
 builder.Services.AddSingleton(typeof(IGenericMongoDb<>), typeof(RepositoryMongoDBGeneric<>));
+builder.Services.AddSingleton(typeof(IAuthenticationRepository), typeof(RepositoryMongoDBGeneric<>));
 
 // Registra o Identity com MongoDB
 builder.Services.AddIdentity<GerencylRegister, IdentityRole2>()

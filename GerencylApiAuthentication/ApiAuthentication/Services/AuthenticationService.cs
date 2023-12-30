@@ -1,4 +1,5 @@
 ﻿using ApiAuthentication.Models;
+using ApiAuthentication.Services.Interfaces.InterfacesRepositories;
 using ApiAuthentication.Services.Interfaces.InterfacesServices;
 using ApiAuthentication.Token;
 using ApiAuthentication.Views;
@@ -13,19 +14,22 @@ namespace ApiAuthentication.Services
     public class AuthenticationService : IAuthenticationServicess
     {
         private readonly IMongoCollection<GerencylRegister> _usersCollection;
+        private readonly IAuthenticationRepository _iauthenticationRepository;
         private readonly UserManager<GerencylRegister> _userManager;
         private readonly JwtSettings _jwtSettings;
         private readonly IMapper _mapper;
         private readonly EmailConfirmationService _sendEmaail;
 
         public AuthenticationService(IMongoDatabase database, UserManager<GerencylRegister> userManager,
-            IOptions<JwtSettings> jwtSettings, EmailConfirmationService sendEmaail, IMapper mapper)
+            IOptions<JwtSettings> jwtSettings, EmailConfirmationService sendEmaail, IMapper mapper,
+            IAuthenticationRepository IrepositoryNewOrder)
         {
             _mapper = mapper;
             _jwtSettings = jwtSettings.Value;
             _userManager = userManager;
             _sendEmaail = sendEmaail;
             _usersCollection = database.GetCollection<GerencylRegister>("Users");
+            _iauthenticationRepository = IrepositoryNewOrder;
         }
 
         public async Task<GerencylFullRegisterView> CriarTokenAsync(string cnpj, string senha)
@@ -131,7 +135,7 @@ namespace ApiAuthentication.Services
             return retornaToken;
         }
 
-        public async Task<string> UpdateUserAsync(GerencylFullRegisterView register)
+        /*public async Task<string> UpdateUserAsync(GerencylFullRegisterView register)
         {
             var user = _mapper.Map<GerencylRegister>(register);
 
@@ -155,6 +159,8 @@ namespace ApiAuthentication.Services
                 .Set(u => u.Supplier.Cnpj, user.Supplier.Cnpj)
                 .Set(u => u.Supplier.Email, user.Supplier.Email);
 
+            var updateResult2 = _usersCollection.ReplaceOne(filter, user);
+
             // Execute a atualização apenas se o usuário existir
             var updateResult = await _usersCollection.UpdateOneAsync(filter, updateDefinition);
 
@@ -163,6 +169,16 @@ namespace ApiAuthentication.Services
                 throw new HttpStatusExceptionCustom(StatusCodeEnum.NoContent, "Não houve alteraçào no usuário.");
                 //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionCustom(StatusCodeEnum.NoContent);
             }
+
+            return "Update User Success";
+        }*/
+
+
+        public async Task<string> UpdateUserAsync(GerencylFullRegisterView register)
+        {
+            var user = _mapper.Map<GerencylRegister>(register);
+
+            await _iauthenticationRepository.UpdateNewOrder(user, register.CNPJ);
 
             return "Update User Success";
         }

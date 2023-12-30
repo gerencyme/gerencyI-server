@@ -82,7 +82,7 @@
 
     {
       "UpstreamPathTemplate": "/api/AddNewOrder",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [ "Post", "Get" ],
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
