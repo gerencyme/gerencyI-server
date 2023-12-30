@@ -28,7 +28,7 @@ namespace ApiAuthentication.Repository
                 entity.CNPJ = existingEntity.CNPJ;
                 entity.Claims = existingEntity.Claims;
                 entity.CreationDate = existingEntity.CreationDate;
-                entity.PasswordHash = existingEntity.PasswordHash;
+                entity.Password = existingEntity.Password;
                 entity.AccessFailedCount = existingEntity.AccessFailedCount;
                 entity.CorporateReason = existingEntity.CorporateReason;
                 await _collection.ReplaceOneAsync(filter, entity);
