@@ -26,7 +26,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v2", new OpenApiInfo { Title = "Gerencyl", Version = "v2" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gerencyl", Version = "v1" });
 
     // Configuração para autenticação com Bearer Token
     var securityScheme = new OpenApiSecurityScheme
@@ -151,7 +151,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerencyl V2");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerencyl V1");
     });
     //app.MapControllers();
     //app.MapControllers().AllowAnonymous(); //method for disable authentication
