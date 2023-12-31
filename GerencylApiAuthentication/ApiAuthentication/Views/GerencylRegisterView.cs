@@ -6,7 +6,6 @@ namespace ApiAuthentication.Views
     [Serializable]
     public class GerencylRegisterView
     {
-        //public string? Id { get; set; }
 
         [EmailAddress()]
         public required string Email { get; set; }
@@ -23,8 +22,6 @@ namespace ApiAuthentication.Views
         public DateTime CreationDate { get; set; }
 
         public DateTime UpdateDate { get; set; }
-
-        public string CompanyImg { get; set; }
 
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$",
             ErrorMessage = "A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número, um caractere especial e ter pelo menos 8 caracteres.")]
