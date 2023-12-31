@@ -98,6 +98,7 @@ namespace ApiAuthentication.Services
 
         public async Task<GerencylFullRegisterView> AdicionarUsuarioAsync(GerencylRegisterView register)
         {
+
             var verifica = await VerifyUserAsync(register.CNPJ, register.Email);
 
             if (verifica == true)
@@ -114,10 +115,8 @@ namespace ApiAuthentication.Services
             }
 
             var user = _mapper.Map<GerencylRegister>(register);
-            // Realize operações personalizadas para adicionar um usuário ao MongoDB
-            // Por exemplo, configurar propriedades adicionais, manipular senhas, etc.
 
-            user.PasswordHash = register.Password;// hash da senha, se necessário;
+            user.PasswordHash = register.Password;
 
             user.ZipCode.Code = "88888888";
 
@@ -135,47 +134,19 @@ namespace ApiAuthentication.Services
             return retornaToken;
         }
 
-        /*public async Task<string> UpdateUserAsync(GerencylFullRegisterView register)
-        {
-            var user = _mapper.Map<GerencylRegister>(register);
-
-            // Localize o usuário no MongoDB pelo Id
-            var filter = Builders<GerencylRegister>.Filter.Eq(u => u.Id, user.Id);
-
-            // Crie a atualização usando o operador $set
-            var updateDefinition = Builders<GerencylRegister>.Update
-                .Set(u => u.Telephone, user.Telephone)
-                .Set(u => u.ZipCode.Street, user.ZipCode.Street)
-                .Set(u => u.ZipCode.State, user.ZipCode.State)
-                .Set(u => u.ZipCode.City, user.ZipCode.City)
-                .Set(u => u.ZipCode.Code, user.ZipCode.Code)
-                .Set(u => u.ZipCode.Complement, user.ZipCode.Complement)
-                .Set(u => u.ZipCode.Country, user.ZipCode.Country)
-                .Set(u => u.ZipCode.Number, user.ZipCode.Number)
-                .Set(u => u.Supplier.Endereco, user.Supplier.Endereco)
-                .Set(u => u.Supplier.Nome, user.Supplier.Nome)
-                .Set(u => u.Supplier.SupplierId, user.Supplier.SupplierId)
-                .Set(u => u.Supplier.Telephone, user.Supplier.Telephone)
-                .Set(u => u.Supplier.Cnpj, user.Supplier.Cnpj)
-                .Set(u => u.Supplier.Email, user.Supplier.Email);
-
-            var updateResult2 = _usersCollection.ReplaceOne(filter, user);
-
-            // Execute a atualização apenas se o usuário existir
-            var updateResult = await _usersCollection.UpdateOneAsync(filter, updateDefinition);
-
-            if (updateResult.ModifiedCount == 0)
-            {
-                throw new HttpStatusExceptionCustom(StatusCodeEnum.NoContent, "Não houve alteraçào no usuário.");
-                //throw HttpStatusExceptionCustom.HtttpStatusCodeExceptionCustom(StatusCodeEnum.NoContent);
-            }
-
-            return "Update User Success";
-        }*/
-
-
         public async Task<string> UpdateUserAsync(GerencylFullRegisterView register)
         {
+            byte[] imagemBytes = Convert.FromBase64String(register.CompanyImg);
+            if (!IsPng(imagemBytes))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem não é do tipo PNG.");
+
+            }
+            if(!IsJpeg(imagemBytes))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem não é do tipo JPEG.");
+
+            }
             var user = _mapper.Map<GerencylRegister>(register);
 
             await _iauthenticationRepository.UpdateNewOrder(user, register.CNPJ);
@@ -196,6 +167,49 @@ namespace ApiAuthentication.Services
             }
             else
                 return false;
+        }
+
+
+        static bool IsPng(byte[] bytes)
+        {
+            if (bytes.Length < 8)
+            {
+                return false;
+            }
+
+            // Assinatura PNG
+            byte[] pngSignature = { 137, 80, 78, 71, 13, 10, 26, 10 };
+
+            for (int i = 0; i < pngSignature.Length; i++)
+            {
+                if (bytes[i] != pngSignature[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        static bool IsJpeg(byte[] bytes)
+        {
+            if (bytes.Length < 2)
+            {
+                return false;
+            }
+
+            // Assinatura JPEG
+            byte[] jpegSignature = { 0xFF, 0xD8 };
+
+            for (int i = 0; i < jpegSignature.Length; i++)
+            {
+                if (bytes[i] != jpegSignature[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

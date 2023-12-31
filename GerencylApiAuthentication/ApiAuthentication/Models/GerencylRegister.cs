@@ -7,6 +7,7 @@
         private string _cnpj;
         private string? _corporateReason;
         private string? _telephone;
+        private string _companyImg;
 
         private ZipCode _zipCode { get; set; } = new ZipCode();
 
@@ -54,5 +55,10 @@
             set { _corporateReason = value; }
         }
 
+        public string CompanyImg
+        {
+            get { return _companyImg; }
+            set { _companyImg = value; }
+        }
     }
 }

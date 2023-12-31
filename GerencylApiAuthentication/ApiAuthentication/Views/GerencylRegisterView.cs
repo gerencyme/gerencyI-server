@@ -24,7 +24,7 @@ namespace ApiAuthentication.Views
 
         public DateTime UpdateDate { get; set; }
 
-        //public byte[] UserImg { get; set; }
+        public string CompanyImg { get; set; }
 
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$",
             ErrorMessage = "A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número, um caractere especial e ter pelo menos 8 caracteres.")]
