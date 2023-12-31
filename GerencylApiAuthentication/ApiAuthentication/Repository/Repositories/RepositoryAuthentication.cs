@@ -24,6 +24,7 @@ namespace ApiAuthentication.Repository
             {
                 var updateDefinition = Builders<GerencylRegister>.Update
                 .Set(u => u.Telephone, entity.Telephone)
+                .Set(u => u.CompanyImg, entity.CompanyImg)
                 .Set(u => u.ZipCode.Street, entity.ZipCode.Street)
                 .Set(u => u.ZipCode.State, entity.ZipCode.State)
                 .Set(u => u.ZipCode.City, entity.ZipCode.City)
