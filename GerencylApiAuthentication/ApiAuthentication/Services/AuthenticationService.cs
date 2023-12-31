@@ -131,13 +131,10 @@ namespace ApiAuthentication.Services
         public async Task<string> UpdateUserAsync(GerencylFullRegisterView register)
         {
             byte[] imagemBytes = Convert.FromBase64String(register.CompanyImg);
-            if (IsPng(imagemBytes))
+
+            if (!IsPng(imagemBytes) && !IsJpeg(imagemBytes))
             {
-                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem não é do tipo PNG.");
-            }
-            if(IsJpeg(imagemBytes))
-            {
-                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem não é do tipo JPEG.");
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem deve ser do tipo PNG ou JPEG.");
             }
             var user = _mapper.Map<GerencylRegister>(register);
 
