@@ -68,7 +68,7 @@
     },
 
     {
-      "UpstreamPathTemplate": "/api/GetLast10NewOrders",
+      "UpstreamPathTemplate": "/api/GetLast12NewOrders",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -77,7 +77,7 @@
           "Port": 443
         }
       ],
-      "DownstreamPathTemplate": "/api/GetLast10NewOrders"
+      "DownstreamPathTemplate": "/api/GetLast12NewOrders"
     },
 
     {
