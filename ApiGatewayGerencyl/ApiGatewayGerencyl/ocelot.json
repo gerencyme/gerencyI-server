@@ -81,6 +81,19 @@
     },
 
     {
+      "UpstreamPathTemplate": "/api/GetOrdersByDateWithPagination",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/GetOrdersByDateWithPagination"
+    },
+
+    {
       "UpstreamPathTemplate": "/api/AddNewOrder",
       "UpstreamHttpMethod": [ "Post", "Get" ],
       "DownstreamScheme": "https",
