@@ -153,18 +153,11 @@ if (app.Environment.IsDevelopment())
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerencyl V1");
     });
-    //app.MapControllers();
-    //app.MapControllers().AllowAnonymous(); //method for disable authentication
 }
 else app.MapControllers();
 
-app.MapGet("/", () => "Hello Worl0!");
+app.MapGet("/", () => "Hello GerencyI!");
 
-/*var devClient = " http://localhost:4200 ";
-app.UseCors(x => x
-.AllowAnyOrigin()
-.AllowAnyMethod()
-.AllowAnyHeader().WithOrigins(devClient));*/
 
 app.UseHttpsRedirection();
 

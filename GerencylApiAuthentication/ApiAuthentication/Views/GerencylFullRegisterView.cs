@@ -23,17 +23,15 @@ namespace ApiAuthentication.Views
         [StringLength(150, MinimumLength = 2, ErrorMessage = "Name cannot have less than 2 characters.")]
         public required string Name { get; set; }
 
-        public string CompanyImg { get; set; }
+        public string? CompanyImg { get; set; }
 
         public string? Telephone { get; set; }
 
         public DateTime UpdateDate { get; set; }
 
-        //public byte[] UserImg { get; set; }
+        public ZipCode? ZipCode { get; set; }
 
-        public ZipCode ZipCode { get; set; }
-
-        public Supplier Supplier { get; set; }
+        public Supplier? Supplier { get; set; }
 
     }
 }

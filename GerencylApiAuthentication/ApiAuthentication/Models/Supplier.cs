@@ -1,16 +1,14 @@
-﻿using MongoDB.Bson;
-
-namespace ApiAuthentication.Models
+﻿namespace ApiAuthentication.Models
 {
     [Serializable]
     public class Supplier
     {
         private Guid _supplierId;
-        private string _nome;
-        private string _cnpj;
-        private string _endereco;
-        private string _email;
-        private string _telephone;
+        private string? _nome;
+        private string? _cnpj;
+        private string? _endereco;
+        private string? _email;
+        private string? _telephone;
 
         public Supplier()
         {
@@ -52,6 +50,5 @@ namespace ApiAuthentication.Models
             get { return _telephone; }
             set { _telephone = value; }
         }
-
     }
 }

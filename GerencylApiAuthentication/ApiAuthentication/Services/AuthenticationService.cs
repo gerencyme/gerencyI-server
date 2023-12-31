@@ -34,7 +34,6 @@ namespace ApiAuthentication.Services
 
         public async Task<GerencylFullRegisterView> CriarTokenAsync(string cnpj, string senha)
         {
-            // Verifica se o usuário existe no MongoDB
             var usuario = await _usersCollection.Find(u =>
                 u.CNPJ.Equals(cnpj, StringComparison.OrdinalIgnoreCase) &&
                 u.PasswordHash.Equals(senha, StringComparison.Ordinal))
@@ -42,10 +41,7 @@ namespace ApiAuthentication.Services
 
             if (usuario != null)
             {
-                // Simula a autenticação (sem acessar o banco de dados real)
-                var resultado = IdentityResult.Success;
-
-                if (!string.IsNullOrEmpty(senha) && resultado.Succeeded)
+                if (!string.IsNullOrEmpty(senha))
                 {
                     var idUsuario = usuario.Id;
 
@@ -72,12 +68,10 @@ namespace ApiAuthentication.Services
         public async Task<string> GenerateRefreshTokenAsync(string userId)
         {
             var tokenBuilder = new TokenJWTBuilder()
-                .AddSubject(userId)  // Set the user ID as the subject
-                .WithRefreshTokenExpiration(2880);  // Set refresh token expiration to 48 hours
+                .AddSubject(userId)
+                .WithRefreshTokenExpiration(2880);
 
             var refreshToken = tokenBuilder.Builder(isRefreshToken: true);
-
-            // Store the refresh token securely (implementation not shown)
 
             return refreshToken.Value;
         }
@@ -140,12 +134,10 @@ namespace ApiAuthentication.Services
             if (!IsPng(imagemBytes))
             {
                 throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem não é do tipo PNG.");
-
             }
             if(!IsJpeg(imagemBytes))
             {
                 throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem não é do tipo JPEG.");
-
             }
             var user = _mapper.Map<GerencylRegister>(register);
 
@@ -168,7 +160,6 @@ namespace ApiAuthentication.Services
             else
                 return false;
         }
-
 
         static bool IsPng(byte[] bytes)
         {
