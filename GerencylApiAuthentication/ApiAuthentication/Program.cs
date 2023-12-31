@@ -156,7 +156,7 @@ if (app.Environment.IsDevelopment())
 }
 else app.MapControllers();
 
-app.MapGet("/", () => "Hello GerencyI V1!");
+app.MapGet("/", () => "Hello GerencyI v1!");
 
 
 app.UseHttpsRedirection();
