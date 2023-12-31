@@ -132,10 +132,14 @@ namespace ApiAuthentication.Services
         {
             byte[] imagemBytes = Convert.FromBase64String(register.CompanyImg);
 
-            if (!IsPng(imagemBytes) && !IsJpeg(imagemBytes))
+            if (register.CompanyImg != "")
             {
-                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem deve ser do tipo PNG ou JPEG.");
+                if (!IsPng(imagemBytes) && !IsJpeg(imagemBytes))
+                {
+                    throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem deve ser do tipo PNG ou JPEG.");
+                }
             }
+            
             var user = _mapper.Map<GerencylRegister>(register);
 
             await _iauthenticationRepository.UpdateNewOrder(user, register.CNPJ);
