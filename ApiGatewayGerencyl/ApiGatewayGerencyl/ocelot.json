@@ -94,6 +94,19 @@
     },
 
     {
+      "UpstreamPathTemplate": "/api/GetOrdersByIsLiked",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/GetOrdersByIsLiked"
+    },
+
+    {
       "UpstreamPathTemplate": "/api/AddNewOrder",
       "UpstreamHttpMethod": [ "Post", "Get" ],
       "DownstreamScheme": "https",
@@ -117,6 +130,19 @@
         }
       ],
       "DownstreamPathTemplate": "/api/UpdateNewOrder"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/UpdateIsLikedField",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/UpdateIsLikedField"
     },
 
     {
