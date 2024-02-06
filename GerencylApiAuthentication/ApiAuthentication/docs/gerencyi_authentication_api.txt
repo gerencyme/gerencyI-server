@@ -1,0 +1,40 @@
+A API Gerencyl Auth fornece uma interface segura e eficiente para autenticar usuários em sua aplicação. Ela oferece suporte a diversos métodos de autenticação, como login com senha e tokens de acesso.
+
+Funcionalidades:
+
+Login com senha
+Autenticação com token
+Gerenciamento de tokens
+Redefinição de senha
+Logout
+
+Benefícios:
+
+Segurança: Proteja sua aplicação contra acesso não autorizado.
+Eficiência: Autentique seus usuários de forma rápida e fácil.
+Flexibilidade: Suporte a diversos métodos de autenticação.
+Escalabilidade: Suporte a um grande número de usuários.
+Casos de uso:
+
+Lojas online
+Sistemas de ERP
+Aplicativos móveis
+APIs RESTful
+Sites web
+
+A documentação completa da API Gerencyl New Order está disponível em: [Documentação Gerencyi](https://www.gerencyi.com/)
+
+Suporte:
+
+Se você tiver alguma dúvida ou precisar de ajuda para usar a API, entre em contato com o suporte da Gerencyl em: [Suporte Gerencyi](https://www.gerencyi.com/)
+
+Observações:
+
+A API Gerencyl New Order é um serviço pago.
+Você precisa de uma conta Gerencyl para usar a API.
+
+Outras Apis:
+
+[Gerencyi NewOrder](https://gerencyineworder.azurewebsites.net/)
+
+[Gerencyi Gateway](https://gerencyigateway.azurewebsites.net/)

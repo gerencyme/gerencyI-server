@@ -1,10 +1,8 @@
 ﻿using ApiAuthentication.Models;
 using ApiAuthentication.Services.Interfaces.InterfacesRepositories;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Repository.Generic;
-using SharpCompress.Common;
 
 namespace ApiAuthentication.Repository
 {

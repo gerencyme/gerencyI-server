@@ -17,17 +17,30 @@ using MongoDB.Driver;
 using ApiAuthentication.Models;
 using ApiAuthentication.Services.Interfaces.InterfacesRepositories;
 using ApiAuthentication.Repository;
-using System.Net;
+using System.Text;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
-
+string descriptionText = File.ReadAllText("docs/gerencyi_authentication_api.txt");
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gerencyl", Version = "v1" });
+    c.SwaggerDoc("v1",
+        new OpenApiInfo
+        {
+            Title = "Gerencyl",
+            Version = "v1",
+            Description = descriptionText,
+            Contact = new OpenApiContact
+            {
+                Name = "Contact",
+                Url = new Uri("https://gerencyi.com")
+            },
+        });
 
     // Configuração para autenticação com Bearer Token
     var securityScheme = new OpenApiSecurityScheme
