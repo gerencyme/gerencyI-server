@@ -11,6 +11,8 @@ namespace ApiAuthentication.Views
 
         public string? Token { get; set; }
 
+        public string? RefreshToken { get; set; }
+
         [EmailAddress()]
         public required string Email { get; set; }
 

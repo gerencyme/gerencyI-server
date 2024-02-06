@@ -7,6 +7,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using WebAPIs.Token;
 
 namespace ApiAuthentication.Services
@@ -15,16 +17,18 @@ namespace ApiAuthentication.Services
     {
         private readonly IMongoCollection<GerencylRegister> _usersCollection;
         private readonly IAuthenticationRepository _iauthenticationRepository;
+        private readonly ILogger<AuthenticationService> _logger;
+        private readonly IMapper _mapper;
         private readonly UserManager<GerencylRegister> _userManager;
         private readonly JwtSettings _jwtSettings;
-        private readonly IMapper _mapper;
         private readonly EmailConfirmationService _sendEmaail;
 
         public AuthenticationService(IMongoDatabase database, UserManager<GerencylRegister> userManager,
             IOptions<JwtSettings> jwtSettings, EmailConfirmationService sendEmaail, IMapper mapper,
-            IAuthenticationRepository iauthenticationRepository)
+            IAuthenticationRepository iauthenticationRepository, ILogger<AuthenticationService> logger)
         {
             _mapper = mapper;
+            _logger = logger;
             _jwtSettings = jwtSettings.Value;
             _userManager = userManager;
             _sendEmaail = sendEmaail;
@@ -43,42 +47,124 @@ namespace ApiAuthentication.Services
             {
                 if (!string.IsNullOrEmpty(senha))
                 {
-                    var idUsuario = usuario.Id;
+                    //var idUsuario = usuario.Id;
 
-                    var token = new TokenJWTBuilder()
-                        .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
-                        .AddSubject(cnpj)
-                        .AddIssuer(_jwtSettings.Issuer)
-                        .AddAudience(_jwtSettings.Audience)
-                        .AddClaim("user", "comum")
-                        .AddExpiry(60)
-                        .Builder();
+                    // Verifique se o usuário já possui um refresh token
+                    var existingRefreshToken = usuario.RefreshToken;
 
-                    var returnLogin = await ReturnUser(cnpj);
+                    // Valide o Refresh Token existente
+                    if (ValidateRefreshToken(existingRefreshToken))
+                    {
+                        // Gere um novo access token
+                        var token = new TokenJWTBuilder()
+                            .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                            .AddSubject(cnpj)
+                            .AddIssuer(_jwtSettings.Issuer)
+                            .AddAudience(_jwtSettings.Audience)
+                            .AddClaim(ClaimTypes.Role, "Comum")
+                            .AddExpiry(1)
+                            .Builder();
 
-                    returnLogin.Token = token.Value;
+                        var returnLogin = await ReturnUser(cnpj);
 
-                    return returnLogin;
+                        returnLogin.RefreshToken = existingRefreshToken;
+                        returnLogin.Token = token.Value;
+
+                        return returnLogin;
+                    }
+                    else
+                    {
+                        var newRefreshToken = await GenerateRefreshTokenAsync(usuario.CNPJ);
+
+                        var token = new TokenJWTBuilder()
+                            .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                            .AddSubject(cnpj)
+                            .AddIssuer(_jwtSettings.Issuer)
+                            .AddAudience(_jwtSettings.Audience)
+                            .AddClaim(ClaimTypes.Role, "Comum")
+                            .AddExpiry(60)
+                            .Builder();
+
+                        await _iauthenticationRepository.SaveRefreshTokenAsync(usuario.CNPJ, newRefreshToken);
+
+                        var returnLogin = await ReturnUser(cnpj);
+
+                        returnLogin.RefreshToken = newRefreshToken;
+                        returnLogin.Token = token.Value;
+
+                        return returnLogin;
+                    }
                 }
             }
-
             throw new UnauthorizedAccessException();
         }
 
-        public async Task<string> GenerateRefreshTokenAsync(string userId)
+        public async Task<string> GenerateRefreshTokenAsync(string cnpj)
         {
             var tokenBuilder = new TokenJWTBuilder()
-                .AddSubject(userId)
+                .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                .AddSubject(cnpj)
+                .AddIssuer(_jwtSettings.Issuer)
+                .AddAudience(_jwtSettings.Audience)
+                .AddClaim(ClaimTypes.Role, "Comum")
                 .WithRefreshTokenExpiration(2880);
 
             var refreshToken = tokenBuilder.Builder(isRefreshToken: true);
+            var retorna = refreshToken.Value;
+            return retorna;
+        }
 
-            return refreshToken.Value;
+        public async Task<string> RefreshTokenAsync(string refreshToken)
+        {
+            var user = await _iauthenticationRepository.GetUserByRefreshTokenAsync(refreshToken);
+
+            if (user != null)
+            {
+                var isValidRefreshToken = ValidateRefreshToken(refreshToken);
+
+                if (isValidRefreshToken)
+                {
+                    var newAccessToken = new TokenJWTBuilder()
+                        .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                        .AddSubject(user.CNPJ)
+                        .AddIssuer(_jwtSettings.Issuer)
+                        .AddAudience(_jwtSettings.Audience)
+                        .AddClaim(ClaimTypes.Role, "Comum")
+                        .AddExpiry(60)
+                        .Builder();
+                    return newAccessToken.Value;
+                }
+            }
+            return "Token inválido";
+        }
+
+        private bool ValidateRefreshToken(string refreshToken)
+        {
+            try
+            {
+                // Decode o token para acessar suas informações
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadToken(refreshToken) as JwtSecurityToken;
+
+                var expiryDate = jsonToken?.ValidTo;
+
+                if (expiryDate.HasValue)
+                {
+                    var currentTime = DateTime.UtcNow;
+                    return expiryDate > currentTime;
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public async Task<GerencylFullRegisterView> ReturnUser(string cnpj)
         {
-            var recupera = await _usersCollection.Find(r => r.CNPJ == cnpj).FirstOrDefaultAsync();
+            var recupera = await _iauthenticationRepository.ReturnUser(cnpj);
 
             if (recupera == null)
             {
@@ -116,12 +202,7 @@ namespace ApiAuthentication.Services
 
             await _userManager.UpdateSecurityStampAsync(user);
 
-            await _usersCollection.InsertOneAsync(user);
-
-            var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
-
-            await _sendEmaail.SendEmailConfirmationAsync(confirmationLink, user.Email);
-
+            await _iauthenticationRepository.AdicionarUsuarioAsync(user);
 
             var retornaToken = await CriarTokenAsync(user.CNPJ, register.Password);
 
@@ -132,14 +213,14 @@ namespace ApiAuthentication.Services
         {
             byte[] imagemBytes = Convert.FromBase64String(register.CompanyImg);
 
-            if (register.CompanyImg != "")
+            if (!string.IsNullOrWhiteSpace(register.CompanyImg))
             {
                 if (!IsPng(imagemBytes) && !IsJpeg(imagemBytes))
                 {
                     throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "A imagem deve ser do tipo PNG ou JPEG.");
                 }
             }
-            
+
             var user = _mapper.Map<GerencylRegister>(register);
 
             await _iauthenticationRepository.UpdateNewOrder(user, register.CNPJ);
@@ -147,19 +228,9 @@ namespace ApiAuthentication.Services
             return "Update User Success";
         }
 
-        private async Task<bool> VerifyUserAsync(string cnpj, string email)
+        public async Task<bool> VerifyUserAsync(string cnpj, string email)
         {
-            var filter = Builders<GerencylRegister>.Filter.Eq(u => u.CNPJ, cnpj);
-            var filter2 = Builders<GerencylRegister>.Filter.Eq(u => u.Email, email);
-            var userExists = await _usersCollection.Find(filter).AnyAsync();
-            var userExists2 = await _usersCollection.Find(filter2).AnyAsync();
-
-            if (userExists || userExists2)
-            {
-                return true;
-            }
-            else
-                return false;
+            return await _iauthenticationRepository.VerifyUserAsync(cnpj, email);
         }
 
         static bool IsPng(byte[] bytes)
@@ -205,3 +276,7 @@ namespace ApiAuthentication.Services
         }
     }
 }
+
+//var confirmationLink = await _sendEmaail.GenerateConfirmRegister(user);
+
+//await _sendEmaail.SendEmailConfirmationAsync(confirmationLink, user.Email);

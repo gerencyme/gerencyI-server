@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\apigatewaygerencyl\\apigatewaygerencyl\\tokenvalidationmiddleware\\tokenvalidationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|solutionrelative:apigatewaygerencyl\\tokenvalidationmiddleware\\tokenvalidationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\apigatewaygerencyl\\apigatewaygerencyl\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|solutionrelative:apigatewaygerencyl\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\apigatewaygerencyl\\apigatewaygerencyl\\tokenvalidationmiddleware\\jwttokenresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|solutionrelative:apigatewaygerencyl\\tokenvalidationmiddleware\\jwttokenresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\apigatewaygerencyl\\apigatewaygerencyl\\ocelot.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|solutionrelative:apigatewaygerencyl\\ocelot.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\apigatewaygerencyl\\apigatewaygerencyl\\tokenvalidationmiddleware\\jwtsecuritykey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|solutionrelative:apigatewaygerencyl\\tokenvalidationmiddleware\\jwtsecuritykey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\apigatewaygerencyl\\apigatewaygerencyl\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|solutionrelative:apigatewaygerencyl\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\apigatewaygerencyl\\apigatewaygerencyl\\tokenvalidationmiddleware\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F20A75A4-952C-4F5F-A983-BDA2E3DBBC92}|ApiGatewayGerencyl\\ApiGatewayGerencyl.csproj|solutionrelative:apigatewaygerencyl\\tokenvalidationmiddleware\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,13 +46,91 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JwtTokenResponse.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtTokenResponse.cs",
+              "RelativeDocumentMoniker": "ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtTokenResponse.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtTokenResponse.cs",
+              "RelativeToolTip": "ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtTokenResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-04T20:53:14.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "JwtSecurityKey.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSecurityKey.cs",
+              "RelativeDocumentMoniker": "ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSecurityKey.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSecurityKey.cs",
+              "RelativeToolTip": "ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSecurityKey.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-04T20:14:55.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "JwtSettings.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSettings.cs",
+              "RelativeDocumentMoniker": "ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSettings.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSettings.cs",
+              "RelativeToolTip": "ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSettings.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-04T20:14:28.311Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\appsettings.json",
+              "RelativeDocumentMoniker": "ApiGatewayGerencyl\\appsettings.json",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\appsettings.json",
+              "RelativeToolTip": "ApiGatewayGerencyl\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-02-04T18:35:58.452Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "TokenValidationMiddleware.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
+              "RelativeDocumentMoniker": "ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
+              "RelativeToolTip": "ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-04T05:17:45.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\Program.cs",
+              "RelativeDocumentMoniker": "ApiGatewayGerencyl\\Program.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\Program.cs",
+              "RelativeToolTip": "ApiGatewayGerencyl\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-04T05:13:08.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ocelot.json",
               "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\ocelot.json",
               "RelativeDocumentMoniker": "ApiGatewayGerencyl\\ocelot.json",
               "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\ocelot.json",
               "RelativeToolTip": "ApiGatewayGerencyl\\ocelot.json",
-              "ViewState": "AQIAAEIAAAAAAAAAAAAAAGUAAAA3AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2023-09-07T22:47:54.224Z",
               "EditorCaption": ""

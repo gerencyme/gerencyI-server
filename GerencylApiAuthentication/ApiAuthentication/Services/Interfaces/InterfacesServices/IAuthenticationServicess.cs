@@ -13,5 +13,9 @@ namespace ApiAuthentication.Services.Interfaces.InterfacesServices
         Task<string> UpdateUserAsync(GerencylFullRegisterView register);
 
         Task<GerencylFullRegisterView> ReturnUser(string cnpj);
+
+        Task<bool> VerifyUserAsync(string cnpj, string email);
+
+        Task<string> RefreshTokenAsync(string refreshToken);
     }
 }

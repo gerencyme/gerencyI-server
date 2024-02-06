@@ -38,10 +38,35 @@ namespace ApiAuthentication.Controllers
 
         [AllowAnonymous]
         [Produces("application/json")]
-        [HttpPost("/api/GenereateTokenIdentity")]
-        public async Task<IActionResult> CriarTokenIdentity([FromBody] GerencylLoginView login)
+        [HttpPost("/api/RefreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestView refreshTokenRequest)
         {
+            try
+            {
+                var newToken = await _authenticationService.RefreshTokenAsync(refreshTokenRequest.RefreshToken);
 
+                if (newToken != null)
+                {
+                    var returnToken = new RefreshTokenRequestView();
+
+                    returnToken.AccessToken = newToken;
+                    returnToken.RefreshToken = refreshTokenRequest.RefreshToken;
+                    return Ok(returnToken);
+                }
+
+                return Unauthorized("Refresh token inválido ou expirado");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro durante a renovação do token: {ex.Message}");
+            }
+        }
+
+        [AllowAnonymous]
+        [Produces("application/json")]
+        [HttpPost("/api/GenereateTokenIdentity")]
+        public async Task<IActionResult> GenereateTokenIdentity([FromBody] GerencylLoginView login)
+        {
             try
             {
                 var token = await _authenticationService.CriarTokenAsync(login.CNPJ, login.Password);

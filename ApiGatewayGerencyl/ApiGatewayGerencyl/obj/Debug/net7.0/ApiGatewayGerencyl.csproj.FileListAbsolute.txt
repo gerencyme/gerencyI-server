@@ -36,3 +36,11 @@ C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\obj\D
 C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\obj\Debug\net7.0\ApiGatewayGerencyl.genruntimeconfig.cache
 C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\obj\Debug\net7.0\ref\ApiGatewayGerencyl.dll
 C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\obj\Debug\net7.0\ApiGatewayGerencyl.sourcelink.json
+C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Projetos\Gerencyl\gerencyI-server\ApiGatewayGerencyl\ApiGatewayGerencyl\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll

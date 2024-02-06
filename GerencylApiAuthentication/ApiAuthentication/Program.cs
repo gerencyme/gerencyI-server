@@ -17,6 +17,7 @@ using MongoDB.Driver;
 using ApiAuthentication.Models;
 using ApiAuthentication.Services.Interfaces.InterfacesRepositories;
 using ApiAuthentication.Repository;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +49,8 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityRequirement(securityRequirement);
 });
+
+builder.Services.AddLogging();
 
 // Configure as configurações do MongoDB
 var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
@@ -115,21 +118,29 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                   var isRefreshTokenClaim = context.Principal.Claims.FirstOrDefault(c => c.Type == "refresh_token")?.Value;
                   if (!string.IsNullOrEmpty(isRefreshTokenClaim) && isRefreshTokenClaim.ToLower() == "true")
                   {
-                      // Se é um Refresh Token, use a lógica da classe TokenJWTBuilder para gerar um novo Access Token
-                      var jwtBuilder = new TokenJWTBuilder()
-                          .AddSecurityKey(JwtSecurityKey.Create(jwtSettings.SecurityKey))
-                          .AddIssuer(jwtSettings.Issuer)
-                          .AddAudience(jwtSettings.Audience)
-                          .AddSubject("novousuario@exemplo.com") // Substitua pelo sub do usuário real
-                          .WithExpiration(jwtSettings.TokenExpirationMinutes)
-                          .Builder();
+                      try
+                      {
+                          // Obtenha o subject do usuário associado ao refresh token
+                          var subject = context.Principal.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
 
-                      // Acessa diretamente a propriedade Response para substituir o token na resposta
-                      context.HttpContext.Response.Headers.Add("new-access-token", jwtBuilder.Value);
+                          // Use a lógica da classe TokenJWTBuilder para gerar um novo Access Token
+                          var jwtBuilder = new TokenJWTBuilder()
+                              .AddSecurityKey(JwtSecurityKey.Create(jwtSettings.SecurityKey))
+                              .AddIssuer(jwtSettings.Issuer)
+                              .AddAudience(jwtSettings.Audience)
+                              .AddSubject(subject)
+                              .WithExpiration(jwtSettings.TokenExpirationMinutes)
+                              .Builder();
+
+                          // Substitua o token original pelo novo token na resposta
+                          context.Response.Headers["Authorization"] = $"Bearer {jwtBuilder.Value}";
+                      }
+                      catch (Exception ex)
+                      {
+                          // Lidar com qualquer exceção durante a geração do novo token
+                          throw new Exception("Erro durante a geração do novo Access Token.");
+                      }
                   }
-
-                  Console.WriteLine("OnTokenValidated: " + context.SecurityToken);
-                  await Task.CompletedTask;
               },
           };
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiGatewayGerencyl")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4114eff9b2a510d2b0ca930fd1f41c7f0b606c72")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiGatewayGerencyl")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiGatewayGerencyl")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

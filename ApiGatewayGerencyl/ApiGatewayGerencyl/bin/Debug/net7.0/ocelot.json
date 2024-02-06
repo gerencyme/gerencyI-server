@@ -53,35 +53,113 @@
       "DownstreamPathTemplate": "/api/UpdateUserIdentity"
     },
 
-    //Api2
+    //////////////////////////////////////ApiNewOrder/////////////////////////////////////////////////
     {
-      "UpstreamPathTemplate": "/api/AddDemand",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
-      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/GetByNewOrderId",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5092
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
         }
       ],
-      "DownstreamPathTemplate": "/api/AddDemand"
+      "DownstreamPathTemplate": "/api/GetByNewOrderId"
     },
 
     {
-      "UpstreamPathTemplate": "/api/DeleteDemand/{customerId}",
-      "UpstreamHttpMethod": [ "Get", "Delete" ],
-      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/GetLast12NewOrders",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5092
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
         }
       ],
-      "DownstreamPathTemplate": "/api/DeleteDemand/{customerId}"
+      "DownstreamPathTemplate": "/api/GetLast12NewOrders"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/GetOrdersByDateWithPagination",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/GetOrdersByDateWithPagination"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/GetOrdersByIsLiked",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/GetOrdersByIsLiked"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/AddNewOrder",
+      "UpstreamHttpMethod": [ "Post", "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/AddNewOrder"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/UpdateNewOrder",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/UpdateNewOrder"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/UpdateIsLikedField",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/UpdateIsLikedField"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/DeleteByEntityId",
+      "UpstreamHttpMethod": [ "Post", "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gerencyineworder.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/DeleteByEntityId"
     }
   ],
 
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5185"
+    "BaseUrl": "https://gerencyigateway.azurewebsites.net"
   }
 }

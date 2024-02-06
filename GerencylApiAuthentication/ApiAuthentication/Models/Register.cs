@@ -19,6 +19,8 @@ namespace ApiAuthentication.Models
              set { _userImg = value; }
          }*/
 
+        public string? RefreshToken { get; set; }
+        public string? Token { get; set; }
         [MaxLength(30)]
         public string Password
         {
