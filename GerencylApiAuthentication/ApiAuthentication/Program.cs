@@ -18,10 +18,10 @@ using ApiAuthentication.Models;
 using ApiAuthentication.Services.Interfaces.InterfacesRepositories;
 using ApiAuthentication.Repository;
 using System.Text;
-using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
-string descriptionText = File.ReadAllText("docs/gerencyi_authentication_api.txt");
+//string descriptionText = File.ReadAllText("docs/gerencyi_authentication_api.txt");
+string descricao = "A API Gerencyl Auth fornece uma interface segura e eficiente para autenticar usuários em sua aplicação. Ela oferece suporte a diversos métodos de autenticação, como login com senha e tokens de acesso.\r\n\r\nFuncionalidades:\r\n\r\nLogin com senha\r\nAutenticação com token\r\nGerenciamento de tokens\r\nRedefinição de senha\r\nLogout\r\n\r\nBenefícios:\r\n\r\nSegurança: Proteja sua aplicação contra acesso não autorizado.\r\nEficiência: Autentique seus usuários de forma rápida e fácil.\r\nFlexibilidade: Suporte a diversos métodos de autenticação.\r\nEscalabilidade: Suporte a um grande número de usuários.\r\nCasos de uso:\r\n\r\nLojas online\r\nSistemas de ERP\r\nAplicativos móveis\r\nAPIs RESTful\r\nSites web\r\n\r\nA documentação completa da API Gerencyl New Order está disponível em: [Documentação Gerencyi](https://www.gerencyi.com/)\r\n\r\nSuporte:\r\n\r\nSe você tiver alguma dúvida ou precisar de ajuda para usar a API, entre em contato com o suporte da Gerencyl em: [Suporte Gerencyi](https://www.gerencyi.com/)\r\n\r\nObservações:\r\n\r\nA API Gerencyl New Order é um serviço pago.\r\nVocê precisa de uma conta Gerencyl para usar a API.\r\n\r\nOutras Apis:\r\n\r\n[Gerencyi NewOrder](https://gerencyineworder.azurewebsites.net/)\r\n\r\n[Gerencyi Gateway](https://gerencyigateway.azurewebsites.net/)\r\n";
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -34,7 +34,7 @@ builder.Services.AddSwaggerGen(c =>
         {
             Title = "Gerencyl",
             Version = "v1",
-            Description = descriptionText,
+            Description = descricao,
             Contact = new OpenApiContact
             {
                 Name = "Contact",
