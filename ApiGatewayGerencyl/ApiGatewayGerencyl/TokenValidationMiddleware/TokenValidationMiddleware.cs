@@ -33,11 +33,18 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
 
         public async Task Invoke(HttpContext context)
         {
+            // Extrair o token de acesso e o refresh token
+            var accessToken = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            var refreshToken = context.Request.Headers["RefreshToken"].FirstOrDefault();
+
+            if (!string.IsNullOrEmpty(accessToken) && !string.IsNullOrEmpty(refreshToken))
+            {
+               await _next(context);
+               return;
+            }
             try
             {
-                // Extrair o token de acesso e o refresh token
-                var accessToken = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-                var refreshToken = context.Request.Headers["RefreshToken"].FirstOrDefault();
+                
 
                 // Verificação do token de acesso no cache
                 if (_tokenCache.TryGetValidToken(accessToken, out var isAccessTokenValid) && isAccessTokenValid)
@@ -64,7 +71,7 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
                 // Validação do refresh token
                 if (!string.IsNullOrEmpty(refreshToken))
                 {
-                     var authenticationServiceUrl = _configuration["AuthenticationServiceUrl"];
+                    var authenticationServiceUrl = "https://gerencyiauthentication.azurewebsites.net/";//_configuration["AuthenticationServiceUrl"];
 
                     using (var httpClient = new HttpClient())
                     {

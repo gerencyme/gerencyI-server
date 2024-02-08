@@ -54,8 +54,7 @@
               "RelativeToolTip": "ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtTokenResponse.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-04T20:53:14.499Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-04T20:53:14.499Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSecurityKey.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-04T20:14:55.252Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-04T20:14:55.252Z"
             },
             {
               "$type": "Document",
@@ -80,8 +78,7 @@
               "RelativeToolTip": "ApiGatewayGerencyl\\TokenValidationMiddleware\\JwtSettings.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-04T20:14:28.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-04T20:14:28.311Z"
             },
             {
               "$type": "Document",
@@ -93,8 +90,7 @@
               "RelativeToolTip": "ApiGatewayGerencyl\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-02-04T18:35:58.452Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-04T18:35:58.452Z"
             },
             {
               "$type": "Document",
@@ -104,7 +100,7 @@
               "RelativeDocumentMoniker": "ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
               "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
               "RelativeToolTip": "ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABEAAAA",
+              "ViewState": "AQIAABEAAAAAAAAAAAAQwB0AAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-04T05:17:45.669Z",
               "EditorCaption": ""
@@ -119,8 +115,7 @@
               "RelativeToolTip": "ApiGatewayGerencyl\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-04T05:13:08.447Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-04T05:13:08.447Z"
             },
             {
               "$type": "Document",
@@ -132,8 +127,7 @@
               "RelativeToolTip": "ApiGatewayGerencyl\\ocelot.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2023-09-07T22:47:54.224Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-09-07T22:47:54.224Z"
             }
           ]
         }
