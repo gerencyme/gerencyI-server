@@ -37,7 +37,8 @@
           "Port": 443
         }
       ],
-      "DownstreamPathTemplate": "/api/GenereateTokenIdentity"
+      "DownstreamPathTemplate": "/api/GenereateTokenIdentity",
+      "PreAuthentication": true
     },
 
     {
