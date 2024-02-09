@@ -48,76 +48,80 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
             var accessToken = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             var refreshToken = context.Request.Headers["RefreshToken"].FirstOrDefault();
             try
+            {
+
+                if (TokenIsInvalid(accessToken))
                 {
-                _tokenCache.AddValidToken(accessToken);
+                    _tokenCache.AddValidToken(accessToken);
+                };
                 // Verificação do token de acesso no cache
                 if (_tokenCache.TryGetValidToken(accessToken, out var isAccessTokenValid) && isAccessTokenValid)
+                {
+                    _logger.LogInformation("Token de acesso válido encontrado no cache. Permitindo a requisição.");
+                    await _next(context);
+                    return;
+                }
+
+                // Validação do token de acesso
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    var isValid = TokenIsInvalid(accessToken);
+                    if (!isValid)
                     {
-                        _logger.LogInformation("Token de acesso válido encontrado no cache. Permitindo a requisição.");
+                        _logger.LogInformation("Token de acesso válido. Permitindo a requisição.");
+                        // Update the cache with the new tokens
+                        _tokenCache.AddValidToken(accessToken);
                         await _next(context);
                         return;
                     }
+                }
 
-                    // Validação do token de acesso
-                    if (!string.IsNullOrEmpty(accessToken))
+                // Validação do refresh token
+                if (!string.IsNullOrEmpty(refreshToken))
+                {
+                    var authenticationServiceUrl = "https://gerencyiauthentication.azurewebsites.net/";//_configuration["AuthenticationServiceUrl"];
+
+                    using (var httpClient = new HttpClient())
                     {
-                        var isValid = TokenIsInvalid(accessToken);
-                        if (!isValid)
+                        var jwtReponse = new JwtTokenResponse();
+                        jwtReponse.accessToken = accessToken;
+                        jwtReponse.refreshToken = refreshToken;
+
+                        // Serialize the object
+                        string jsonContent = System.Text.Json.JsonSerializer.Serialize(jwtReponse);
+                        var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                        var response = await httpClient.PostAsync($"{authenticationServiceUrl}/api/RefreshToken", stringContent);
+
+                        if (response.IsSuccessStatusCode)
                         {
-                            _logger.LogInformation("Token de acesso válido. Permitindo a requisição.");
+                            var newTokens = await System.Text.Json.JsonSerializer.DeserializeAsync<JwtTokenResponse>(response.Content.ReadAsStream());
+
                             // Update the cache with the new tokens
-                            _tokenCache.AddValidToken(accessToken);
+                            _tokenCache.AddValidToken(newTokens.accessToken);
+                            _tokenCache.AddValidToken(newTokens.refreshToken);
+
+                            // **Update the original request with the new access token:**
+                            context.Request.Headers["Authorization"] = $"bearer {newTokens.accessToken}";
+                            context.Response.Headers["Authorization"] = $"bearer {newTokens.accessToken}";
+
+                            // **Proceed with the original request using the updated token:**
                             await _next(context);
                             return;
                         }
                     }
-
-                    // Validação do refresh token
-                    if (!string.IsNullOrEmpty(refreshToken))
-                    {
-                        var authenticationServiceUrl = "https://gerencyiauthentication.azurewebsites.net/";//_configuration["AuthenticationServiceUrl"];
-
-                        using (var httpClient = new HttpClient())
-                        {
-                            var jwtReponse = new JwtTokenResponse();
-                            jwtReponse.accessToken = accessToken;
-                            jwtReponse.refreshToken = refreshToken;
-
-                            // Serialize the object
-                            string jsonContent = System.Text.Json.JsonSerializer.Serialize(jwtReponse);
-                            var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-                            var response = await httpClient.PostAsync($"{authenticationServiceUrl}/api/RefreshToken", stringContent);
-
-                            if (response.IsSuccessStatusCode)
-                            {
-                                var newTokens = await System.Text.Json.JsonSerializer.DeserializeAsync<JwtTokenResponse>(response.Content.ReadAsStream());
-
-                                // Update the cache with the new tokens
-                                _tokenCache.AddValidToken(newTokens.accessToken);
-                                _tokenCache.AddValidToken(newTokens.refreshToken);
-
-                                // **Update the original request with the new access token:**
-                                context.Request.Headers["Authorization"] = $"bearer {newTokens.accessToken}";
-                                context.Response.Headers["Authorization"] = $"bearer {newTokens.accessToken}";
-
-                                // **Proceed with the original request using the updated token:**
-                                await _next(context);
-                                return;
-                            }
-                        }
-                    }
-
-                    // Se o token de acesso e o refresh token forem inválidos, negar a requisição
-                    _logger.LogWarning("Token de acesso e/ou refresh token inválidos. Negando a requisição.");
-                    context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                    return;
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Ocorreu um erro ao processar a requisição.");
-                    throw;
-                }
+
+                // Se o token de acesso e o refresh token forem inválidos, negar a requisição
+                _logger.LogWarning("Token de acesso e/ou refresh token inválidos. Negando a requisição.");
+                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                return;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ocorreu um erro ao processar a requisição.");
+                throw;
+            }
 
 
         }
