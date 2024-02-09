@@ -33,11 +33,6 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
 
         public async Task Invoke(HttpContext context)
         {
-            /*if (context.Request.Path.Value == "//api/GenereateTokenIdentity")
-            {
-                await _next(context);
-                return;
-            }*/
             if (context.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase) &&
                 context.Request.Path.Value.Equals("/api/GenereateTokenIdentity", StringComparison.OrdinalIgnoreCase))
             {
@@ -54,8 +49,9 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
             var refreshToken = context.Request.Headers["RefreshToken"].FirstOrDefault();
             try
                 {
-                    // Verificação do token de acesso no cache
-                    if (_tokenCache.TryGetValidToken(accessToken, out var isAccessTokenValid) && isAccessTokenValid)
+                _tokenCache.AddValidToken(accessToken);
+                // Verificação do token de acesso no cache
+                if (_tokenCache.TryGetValidToken(accessToken, out var isAccessTokenValid) && isAccessTokenValid)
                     {
                         _logger.LogInformation("Token de acesso válido encontrado no cache. Permitindo a requisição.");
                         await _next(context);
