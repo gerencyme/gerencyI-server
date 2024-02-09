@@ -121,7 +121,7 @@ namespace ApiAuthentication.Services
 
                 if (expiryDate.HasValue)
                 {
-                    var currentTime = DateTime.UtcNow;
+                    var currentTime = DateTime.Now;
                     return expiryDate > currentTime;
                 }
 
