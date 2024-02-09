@@ -62,7 +62,7 @@ namespace ApiAuthentication.Services
                             .AddIssuer(_jwtSettings.Issuer)
                             .AddAudience(_jwtSettings.Audience)
                             .AddClaim(ClaimTypes.Role, "Comum")
-                            .AddExpiry(1)
+                            .AddExpiry(60)
                             .Builder();
 
                         var returnLogin = await ReturnUser(cnpj);
