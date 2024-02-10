@@ -50,10 +50,10 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
             try
             {
 
-                if (TokenIsInvalid(accessToken))
+                /*if (TokenIsInvalid(accessToken))
                 {
                     _tokenCache.AddValidToken(accessToken);
-                };
+                };*/
                 // Verificação do token de acesso no cache
                 if (_tokenCache.TryGetValidToken(accessToken, out var isAccessTokenValid) && isAccessTokenValid)
                 {
@@ -79,7 +79,7 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
                 // Validação do refresh token
                 if (!string.IsNullOrEmpty(refreshToken))
                 {
-                    var authenticationServiceUrl = "https://gerencyiauthentication.azurewebsites.net/";//_configuration["AuthenticationServiceUrl"];
+                    var authenticationServiceUrl = "http://localhost:5252";// "https://gerencyiauthentication.azurewebsites.net/";//_configuration["AuthenticationServiceUrl"];
 
                     using (var httpClient = new HttpClient())
                     {

@@ -85,27 +85,23 @@ namespace ApiAuthentication.Services
             return retorna;
         }
 
-        public async Task<string> RefreshTokenAsync(string refreshToken)
+        public async Task<string> RefreshTokenAsync(string refreshToken, string cnpj)
         {
-            var user = await _iauthenticationRepository.GetUserByRefreshTokenAsync(refreshToken);
-
-            if (user != null)
-            {
                 var isValidRefreshToken = ValidateRefreshToken(refreshToken);
 
                 if (isValidRefreshToken)
                 {
                     var newAccessToken = new TokenJWTBuilder()
                         .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
-                        .AddSubject(user.CNPJ)
+                        .AddSubject("77.777.777/7777-79")
                         .AddIssuer(_jwtSettings.Issuer)
                         .AddAudience(_jwtSettings.Audience)
                         .AddClaim(ClaimTypes.Role, "Comum")
                         .AddExpiry(60)
                         .Builder();
-                    return newAccessToken.Value;
+                var teste = newAccessToken.Value;
+                    return teste;
                 }
-            }
             return "Token inválido";
         }
 

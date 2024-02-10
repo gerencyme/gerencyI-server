@@ -2,6 +2,7 @@
 using ApiAuthentication.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ApiAuthentication.Controllers
 {
@@ -43,7 +44,8 @@ namespace ApiAuthentication.Controllers
         {
             try
             {
-                var newToken = await _authenticationService.RefreshTokenAsync(refreshTokenRequest.RefreshToken);
+                var userCNPJ = User.FindFirst(ClaimTypes.Name)?.Value;
+                var newToken = await _authenticationService.RefreshTokenAsync(refreshTokenRequest.RefreshToken, userCNPJ);
 
                 if (newToken != null)
                 {

@@ -16,6 +16,6 @@ namespace ApiAuthentication.Services.Interfaces.InterfacesServices
 
         Task<bool> VerifyUserAsync(string cnpj, string email);
 
-        Task<string> RefreshTokenAsync(string refreshToken);
+        Task<string> RefreshTokenAsync(string refreshToken, string cnpj);
     }
 }
