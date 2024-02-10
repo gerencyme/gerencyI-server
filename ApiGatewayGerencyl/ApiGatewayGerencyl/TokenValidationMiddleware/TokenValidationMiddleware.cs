@@ -79,7 +79,7 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
                 // Validação do refresh token
                 if (!string.IsNullOrEmpty(refreshToken))
                 {
-                    var authenticationServiceUrl = "http://localhost:5252";// "https://gerencyiauthentication.azurewebsites.net/";//_configuration["AuthenticationServiceUrl"];
+                    var authenticationServiceUrl = "https://gerencyiauthentication.azurewebsites.net/"; // "http://localhost:5252"; _configuration["AuthenticationServiceUrl"];
 
                     using (var httpClient = new HttpClient())
                     {
