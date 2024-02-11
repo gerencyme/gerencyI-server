@@ -1,6 +1,4 @@
-﻿using ApiAuthentication.Models;
-using ApiAuthentication.Views;
-using Microsoft.AspNetCore.Mvc;
+﻿using ApiAuthentication.Views;
 
 namespace ApiAuthentication.Services.Interfaces.InterfacesServices
 {
@@ -16,6 +14,6 @@ namespace ApiAuthentication.Services.Interfaces.InterfacesServices
 
         Task<bool> VerifyUserAsync(string cnpj, string email);
 
-        Task<string> RefreshTokenAsync(string refreshToken, string cnpj);
+        Task<string> RefreshTokenAsync(string refreshToken);
     }
 }

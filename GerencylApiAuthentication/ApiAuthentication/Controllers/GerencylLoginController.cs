@@ -44,8 +44,8 @@ namespace ApiAuthentication.Controllers
         {
             try
             {
-                var userCNPJ = User.FindFirst(ClaimTypes.Name)?.Value;
-                var newToken = await _authenticationService.RefreshTokenAsync(refreshTokenRequest.RefreshToken, userCNPJ);
+                //var userCNPJ = User.FindFirst(ClaimTypes.Name)?.Value;
+                var newToken = await _authenticationService.RefreshTokenAsync(refreshTokenRequest.RefreshToken);
 
                 if (newToken != null)
                 {

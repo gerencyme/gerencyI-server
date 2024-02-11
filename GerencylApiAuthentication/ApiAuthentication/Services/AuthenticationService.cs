@@ -6,6 +6,7 @@ using ApiAuthentication.Views;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -47,24 +48,25 @@ namespace ApiAuthentication.Services
             {
                 if (!string.IsNullOrEmpty(senha))
                 {
-                   
+
                     var newRefreshToken = await GenerateRefreshTokenAsync(usuario.CNPJ);
 
-                        var token = new TokenJWTBuilder()
-                            .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
-                            .AddSubject(cnpj)
-                            .AddIssuer(_jwtSettings.Issuer)
-                            .AddAudience(_jwtSettings.Audience)
-                            .AddClaim(ClaimTypes.Role, "Comum")
-                            .AddExpiry(60)
-                            .Builder();
+                    var token = new TokenJWTBuilder()
+                        .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                        .AddSubject(cnpj)
+                        .AddIssuer(_jwtSettings.Issuer)
+                        .AddAudience(_jwtSettings.Audience)
+                        .AddClaim(ClaimTypes.Role, "Comum")
+                        .AddExpiry(60)
+                        .Builder();
 
-                        var returnLogin = await ReturnUser(cnpj);
+                    var returnLogin = await ReturnUser(cnpj);
+                    returnLogin.RefreshToken = newRefreshToken;
+                    returnLogin.Token = token.Value;
+                    
+                    await _iauthenticationRepository.SaveRefreshTokenAsync(usuario.CNPJ, newRefreshToken);
 
-                        returnLogin.RefreshToken = newRefreshToken;
-                        returnLogin.Token = token.Value;
-
-                        return returnLogin;
+                    return returnLogin;
                 }
             }
             throw new UnauthorizedAccessException();
@@ -72,36 +74,42 @@ namespace ApiAuthentication.Services
 
         public async Task<string> GenerateRefreshTokenAsync(string cnpj)
         {
+
+            var randomNumber = new Random();
+
+            var hash = randomNumber.Next().ToString() + cnpj;
+
             var tokenBuilder = new TokenJWTBuilder()
                 .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
-                .AddSubject(cnpj)
+                .AddSubject(hash)
                 .AddIssuer(_jwtSettings.Issuer)
                 .AddAudience(_jwtSettings.Audience)
                 .AddClaim(ClaimTypes.Role, "Comum")
-                .WithRefreshTokenExpiration(2880);
+                .WithRefreshTokenExpiration(20);
 
             var refreshToken = tokenBuilder.Builder(isRefreshToken: true);
             var retorna = refreshToken.Value;
             return retorna;
         }
 
-        public async Task<string> RefreshTokenAsync(string refreshToken, string cnpj)
+        public async Task<string> RefreshTokenAsync(string refreshToken)
         {
-                var isValidRefreshToken = ValidateRefreshToken(refreshToken);
+            var user = await _iauthenticationRepository.GetUserByRefreshTokenAsync(refreshToken);
+            var isValidRefreshToken = ValidateRefreshToken(refreshToken);
+            
+            if (isValidRefreshToken)
+            {
+                var newAccessToken = new TokenJWTBuilder()
+                    .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                    .AddSubject(user.CNPJ)
+                    .AddIssuer(_jwtSettings.Issuer)
+                    .AddAudience(_jwtSettings.Audience)
+                    .AddClaim(ClaimTypes.Role, "Comum")
+                    .AddExpiry(60)
+                    .Builder();
 
-                if (isValidRefreshToken)
-                {
-                    var newAccessToken = new TokenJWTBuilder()
-                        .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
-                        .AddSubject("77.777.777/7777-79")
-                        .AddIssuer(_jwtSettings.Issuer)
-                        .AddAudience(_jwtSettings.Audience)
-                        .AddClaim(ClaimTypes.Role, "Comum")
-                        .AddExpiry(60)
-                        .Builder();
-                var teste = newAccessToken.Value;
-                    return teste;
-                }
+                return newAccessToken.Value;
+            }
             return "Token inválido";
         }
 
@@ -117,14 +125,25 @@ namespace ApiAuthentication.Services
 
                 if (expiryDate.HasValue)
                 {
-                    var currentTime = DateTime.Now;
-                    return expiryDate > currentTime;
+                    var currentTimeUtc = DateTime.Now;
+                    var expiryDateUtc = expiryDate.Value.ToUniversalTime();
+
+                    // Adicionar uma janela de tolerância de alguns minutos, se necessário
+                    var toleranceWindow = TimeSpan.FromMinutes(5);
+                    return expiryDateUtc > currentTimeUtc - toleranceWindow;
                 }
 
                 return false;
             }
-            catch (Exception)
+            catch (SecurityTokenExpiredException)
             {
+                // Lidar especificamente com tokens expirados
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção para fins de depuração
+                _logger.LogError(ex, "Erro ao validar o token de atualização");
                 return false;
             }
         }
