@@ -85,7 +85,7 @@ namespace ApiAuthentication.Services
                 .AddIssuer(_jwtSettings.Issuer)
                 .AddAudience(_jwtSettings.Audience)
                 .AddClaim(ClaimTypes.Role, "Comum")
-                .WithRefreshTokenExpiration(20);
+                .WithRefreshTokenExpiration(2880);
 
             var refreshToken = tokenBuilder.Builder(isRefreshToken: true);
             var retorna = refreshToken.Value;
