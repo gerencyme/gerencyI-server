@@ -48,25 +48,48 @@ namespace ApiAuthentication.Services
             {
                 if (!string.IsNullOrEmpty(senha))
                 {
+                    var validRefresh = ValidateRefreshToken(usuario.RefreshToken);
 
-                    var newRefreshToken = await GenerateRefreshTokenAsync(usuario.CNPJ);
+                    if (validRefresh)
+                    {
+                        var token = new TokenJWTBuilder()
+                            .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                            .AddSubject(cnpj)
+                            .AddIssuer(_jwtSettings.Issuer)
+                            .AddAudience(_jwtSettings.Audience)
+                            .AddClaim(ClaimTypes.Role, "Comum")
+                            .AddExpiry(60)
+                            .Builder();
 
-                    var token = new TokenJWTBuilder()
-                        .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
-                        .AddSubject(cnpj)
-                        .AddIssuer(_jwtSettings.Issuer)
-                        .AddAudience(_jwtSettings.Audience)
-                        .AddClaim(ClaimTypes.Role, "Comum")
-                        .AddExpiry(60)
-                        .Builder();
+                        var returnLogin = await ReturnUser(cnpj);
+                        returnLogin.RefreshToken = usuario.RefreshToken;
+                        returnLogin.Token = token.Value;
 
-                    var returnLogin = await ReturnUser(cnpj);
-                    returnLogin.RefreshToken = newRefreshToken;
-                    returnLogin.Token = token.Value;
-                    
-                    await _iauthenticationRepository.SaveRefreshTokenAsync(usuario.CNPJ, newRefreshToken);
+                        return returnLogin;
+                    }
 
-                    return returnLogin;
+                    if (!validRefresh)
+                    {
+                        var newRefreshToken = await GenerateRefreshTokenAsync(usuario.CNPJ);
+
+                        var token = new TokenJWTBuilder()
+                            .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                            .AddSubject(cnpj)
+                            .AddIssuer(_jwtSettings.Issuer)
+                            .AddAudience(_jwtSettings.Audience)
+                            .AddClaim(ClaimTypes.Role, "Comum")
+                            .AddExpiry(60)
+                            .Builder();
+
+                        var returnLogin = await ReturnUser(cnpj);
+                        returnLogin.RefreshToken = newRefreshToken;
+                        returnLogin.Token = token.Value;
+
+                        await _iauthenticationRepository.SaveRefreshTokenAsync(usuario.CNPJ, newRefreshToken);
+
+                        return returnLogin;
+                    }
+                   
                 }
             }
             throw new UnauthorizedAccessException();
