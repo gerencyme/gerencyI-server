@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
-using System.Text;
 
 namespace ApiGatewayGerencyl.TokenValidationMiddleware
 {
@@ -78,6 +77,49 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
                 return;
             }
 
+            if (context.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase) &&
+                context.Request.Path.Value.Equals("/api/RefreshToken", StringComparison.OrdinalIgnoreCase))
+            {
+                // Lógica para lidar com solicitação de login
+                // Neste caso, você pode permitir a solicitação passar sem mais verificações
+                Console.WriteLine("Request para GenerateTokenIdentity recebida. Permitindo a passagem.");
+                Console.WriteLine($"Method: {context.Request.Method}, Path: {context.Request.Path}");
+
+                // Armazenar o corpo da resposta em uma variável
+                string responseBody;
+
+                // Intercepta a resposta para obter o corpo da resposta
+                using (var memoryStream = new MemoryStream())
+                {
+                    var originalResponseBody = context.Response.Body;
+                    context.Response.Body = memoryStream;
+
+                    await _next(context);
+
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    responseBody = new StreamReader(memoryStream).ReadToEnd();
+
+                    // Restaura o corpo original para a resposta
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    await memoryStream.CopyToAsync(originalResponseBody);
+                    context.Response.Body = originalResponseBody;
+                }
+
+                // Deserializar o corpo da resposta em um objeto JSON
+                var responseObject = JsonConvert.DeserializeObject<dynamic>(responseBody);
+
+                // Extrair o token do objeto JSON
+                var token = responseObject?.acessToken?.Value;
+
+                if (!string.IsNullOrEmpty(token))
+                {
+                    // Armazenar o token no cache
+                    _tokenCache.AddValidToken(token);
+                }
+
+                return;
+            }
+
 
             try
             {
@@ -107,7 +149,7 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
                     }
                 }
 
-                // Validação do refresh token
+                /*// Validação do refresh token
                 if (!string.IsNullOrEmpty(refreshToken))
                 {
                     var authenticationServiceUrl = "https://gerencyiauthentication.azurewebsites.net/"; //"http://localhost:5252"; _configuration["AuthenticationServiceUrl"];
@@ -141,7 +183,7 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
                             return;
                         }
                     }
-                }
+                }*/
 
                 // Se o token de acesso e o refresh token forem inválidos, negar a requisição
                 _logger.LogWarning("Token de acesso e/ou refresh token inválidos. Negando a requisição.");
