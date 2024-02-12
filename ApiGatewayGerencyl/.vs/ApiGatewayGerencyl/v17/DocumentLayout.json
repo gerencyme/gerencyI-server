@@ -100,7 +100,7 @@
               "RelativeDocumentMoniker": "ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
               "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\ApiGatewayGerencyl\\ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
               "RelativeToolTip": "ApiGatewayGerencyl\\TokenValidationMiddleware\\TokenValidationMiddleware.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAowCcAAAAMAAAA",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAowHAAAABmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-04T05:17:45.669Z",
               "EditorCaption": ""
@@ -127,8 +127,7 @@
               "RelativeToolTip": "ApiGatewayGerencyl\\ocelot.json",
               "ViewState": "AQIAABIAAAAAAAAAAAAAACoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2023-09-07T22:47:54.224Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-09-07T22:47:54.224Z"
             }
           ]
         }
