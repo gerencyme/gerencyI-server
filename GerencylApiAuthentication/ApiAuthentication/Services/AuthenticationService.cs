@@ -94,6 +94,26 @@ namespace ApiAuthentication.Services
             }
             throw new UnauthorizedAccessException();
         }
+        public async Task<string> RefreshTokenAsync(string refreshToken)
+        {
+            var user = await _iauthenticationRepository.GetUserByRefreshTokenAsync(refreshToken);
+            var isValidRefreshToken = ValidateRefreshToken(refreshToken);
+            
+            if (isValidRefreshToken)
+            {
+                var newAccessToken = new TokenJWTBuilder()
+                    .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
+                    .AddSubject(user.CNPJ)
+                    .AddIssuer(_jwtSettings.Issuer)
+                    .AddAudience(_jwtSettings.Audience)
+                    .AddClaim(ClaimTypes.Role, "Comum")
+                    .AddExpiry(60)
+                    .Builder();
+
+                return newAccessToken.Value;
+            }
+            return "Token inválido";
+        }
 
         public async Task<string> GenerateRefreshTokenAsync(string cnpj)
         {
@@ -115,26 +135,6 @@ namespace ApiAuthentication.Services
             return retorna;
         }
 
-        public async Task<string> RefreshTokenAsync(string refreshToken)
-        {
-            var user = await _iauthenticationRepository.GetUserByRefreshTokenAsync(refreshToken);
-            var isValidRefreshToken = ValidateRefreshToken(refreshToken);
-            
-            if (isValidRefreshToken)
-            {
-                var newAccessToken = new TokenJWTBuilder()
-                    .AddSecurityKey(JwtSecurityKey.Create(_jwtSettings.SecurityKey))
-                    .AddSubject(user.CNPJ)
-                    .AddIssuer(_jwtSettings.Issuer)
-                    .AddAudience(_jwtSettings.Audience)
-                    .AddClaim(ClaimTypes.Role, "Comum")
-                    .AddExpiry(60)
-                    .Builder();
-
-                return newAccessToken.Value;
-            }
-            return "Token inválido";
-        }
 
         private bool ValidateRefreshToken(string refreshToken)
         {

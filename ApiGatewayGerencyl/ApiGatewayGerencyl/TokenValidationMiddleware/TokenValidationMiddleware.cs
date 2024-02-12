@@ -109,7 +109,7 @@ namespace ApiGatewayGerencyl.TokenValidationMiddleware
                 var responseObject = JsonConvert.DeserializeObject<dynamic>(responseBody);
 
                 // Extrair o token do objeto JSON
-                var token = responseObject?.acessToken?.Value;
+                var token = responseObject?.accessToken?.Value;
 
                 if (!string.IsNullOrEmpty(token))
                 {
