@@ -1,5 +1,4 @@
-﻿using Domain.Interfaces.IGeneric;
-using Infrastructure.Configuration;
+﻿/*using Domain.Interfaces.IGeneric;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -57,4 +56,4 @@ namespace Infrastructure.Repository.Generic
         }
 
     }
-}
+}*/

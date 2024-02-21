@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4C07CF9D-D08B-4873-B12A-81A3443A46FA}|GerencylApi\\GerencylApiWorkService.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencyl\\gerencylapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C07CF9D-D08B-4873-B12A-81A3443A46FA}|GerencylApi\\GerencylApiWorkService.csproj|solutionrelative:gerencylapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C22F601C-1AF1-4877-8F1B-51EE7060D00E}|Infrastructure\\Infrastructure.csproj|c:\\projetos\\gerencyl\\gerencyi-server\\gerencyl\\infrastructure\\repository\\generic\\repositorymongodbgeneric.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C22F601C-1AF1-4877-8F1B-51EE7060D00E}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repository\\generic\\repositorymongodbgeneric.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +18,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RepositoryMongoDBGeneric.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Infrastructure\\Repository\\Generic\\RepositoryMongoDBGeneric.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repository\\Generic\\RepositoryMongoDBGeneric.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\Infrastructure\\Repository\\Generic\\RepositoryMongoDBGeneric.cs",
+              "RelativeToolTip": "Infrastructure\\Repository\\Generic\\RepositoryMongoDBGeneric.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAkwBwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T07:32:51.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\GerencylApi\\Program.cs",
+              "RelativeDocumentMoniker": "GerencylApi\\Program.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\gerencyI-server\\Gerencyl\\GerencylApi\\Program.cs",
+              "RelativeToolTip": "GerencylApi\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T07:32:01.582Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"

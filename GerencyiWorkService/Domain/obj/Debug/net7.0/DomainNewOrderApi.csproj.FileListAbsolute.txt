@@ -1,0 +1,16 @@
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\bin\Debug\net7.0\DomainNewOrderApi.deps.json
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\bin\Debug\net7.0\DomainNewOrderApi.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\bin\Debug\net7.0\DomainNewOrderApi.pdb
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\bin\Debug\net7.0\EntitiesNewOrderApi.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\bin\Debug\net7.0\EntitiesNewOrderApi.pdb
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\DomainNewOrderApi.csproj.AssemblyReference.cache
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\DomainNewOrderApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\DomainNewOrderApi.AssemblyInfoInputs.cache
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\DomainNewOrderApi.AssemblyInfo.cs
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\DomainNewOrderApi.csproj.CoreCompileInputs.cache
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\DomainNewOrderApi.sourcelink.json
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\DomainNewOrderApi.csproj.CopyComplete
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\DomainNewOrderApi.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\refint\DomainNewOrderApi.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\DomainNewOrderApi.pdb
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Domain\obj\Debug\net7.0\ref\DomainNewOrderApi.dll

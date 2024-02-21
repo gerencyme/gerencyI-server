@@ -1,18 +1,10 @@
 using ApiAuthentication.Token;
 using AutoMapper;
-using Domain.Interfaces.IGeneric;
-using Domain.Interfaces.IRepositorys;
-using Domain.Interfaces.IServices;
-using Domain.Services;
 using GerencylApi.Config;
 using GerencylApi.TokenJWT;
-using Infrastructure.Configuration;
-using Infrastructure.Repository.Generic;
-using Infrastructure.Repository.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,18 +78,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Configuration.AddJsonFile("appsettings.json");
 
 // Configure as configurações do MongoDB
-var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
+//var mongoDbSettings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
 
 // Registra as configurações como um serviço no DI (Dependency Injection)
-builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
+//builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
 
 // Registra o RepositoryMongoDBGeneric como serviço
-builder.Services.AddSingleton(typeof(IGenericMongoDb<>), typeof(RepositoryMongoDBGeneric<>));
+//builder.Services.AddSingleton(typeof(IGenericMongoDb<>), typeof(RepositoryMongoDBGeneric<>));
 //builder.Services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGeneric<>));
-builder.Services.AddSingleton<IRepositoryDemand, DemandRepository>();
-builder.Services.AddSingleton<IDemandServices, DemandServices>();
-builder.Services.AddSingleton<IRepositoryProduct, ProductRepository>();
-builder.Services.AddSingleton<IProductServices, ProductServices>();
 
 
 // Config Auto Mapping

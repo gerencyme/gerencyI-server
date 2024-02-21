@@ -1,0 +1,13 @@
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\bin\Debug\net7.0\EntitiesNewOrderApi.deps.json
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\bin\Debug\net7.0\EntitiesNewOrderApi.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\bin\Debug\net7.0\EntitiesNewOrderApi.pdb
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\EntitiesNewOrderApi.csproj.AssemblyReference.cache
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\EntitiesNewOrderApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\EntitiesNewOrderApi.AssemblyInfoInputs.cache
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\EntitiesNewOrderApi.AssemblyInfo.cs
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\EntitiesNewOrderApi.csproj.CoreCompileInputs.cache
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\EntitiesNewOrderApi.sourcelink.json
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\EntitiesNewOrderApi.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\refint\EntitiesNewOrderApi.dll
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\EntitiesNewOrderApi.pdb
+C:\Projetos\Gerencyl\gerencyI-server\GerencyiWorkService\Entities\obj\Debug\net7.0\ref\EntitiesNewOrderApi.dll

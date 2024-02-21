@@ -1,0 +1,38 @@
+A API Gerencyl New Order é uma ferramenta poderosa que permite aos usuários gerenciar seus pedidos de forma eficiente e eficaz. Ela oferece uma variedade de recursos que facilitam o processo de criação, atualização e acompanhamento de pedidos.
+
+Funcionalidades:
+
+Criar novos pedidos: A API fornece um método simples para criar novos pedidos, incluindo informações como cliente, produtos, quantidade e valor total.
+Atualizar pedidos existentes: Você pode facilmente atualizar os detalhes de um pedido existente, como status, data de entrega ou informações de pagamento.
+Obter pedidos: A API oferece vários métodos para recuperar pedidos, incluindo por ID, data, status ou cliente.
+Filtrar pedidos: Você pode filtrar os pedidos por diversos critérios para encontrar rapidamente as informações que precisa.
+Excluir pedidos: A API permite excluir pedidos que não são mais necessários.
+Benefícios:
+
+Eficiência: A API automatiza o processo de gerenciamento de pedidos, economizando tempo e recursos.
+Precisão: A API ajuda a reduzir erros humanos na entrada de dados.
+Visibilidade: A API fornece uma visão geral completa de todos os seus pedidos em um só lugar.
+Escalabilidade: A API pode ser facilmente dimensionada para atender às necessidades do seu negócio.
+Casos de uso:
+
+Lojas online: A API pode ser usada para gerenciar pedidos feitos em uma loja online.
+Sistemas de ERP: A API pode ser integrada a um sistema de ERP para centralizar o gerenciamento de pedidos.
+Aplicativos móveis: A API pode ser usada para criar aplicativos móveis para gerenciar pedidos em tempo real.
+Documentação:
+
+A documentação completa da API Gerencyl New Order está disponível em: [Documentação Gerencyi](https://www.gerencyi.com/)
+
+Suporte:
+
+Se você tiver alguma dúvida ou precisar de ajuda para usar a API, entre em contato com o suporte da Gerencyl em: [Suporte Gerencyi](https://www.gerencyi.com/)
+
+Observações:
+
+A API Gerencyl New Order é um serviço pago.
+Você precisa de uma conta Gerencyl para usar a API.
+
+Outras Apis:
+
+[Gerencyi Autenticação](https://gerencyiauthentication.azurewebsites.net/)
+
+[Gerencyi Gateway](https://gerencyigateway.azurewebsites.net/)

@@ -1,0 +1,46 @@
+# Gerencyl New Order API
+
+## Descrição
+
+A API Gerencyl New Order é uma ferramenta poderosa que permite aos usuários gerenciar seus pedidos de forma eficiente e eficaz. Ela oferece uma variedade de recursos que facilitam o processo de criação, atualização e acompanhamento de pedidos.
+
+## Funcionalidades
+
+* Criar novos pedidos
+* Atualizar pedidos existentes
+* Obter pedidos
+* Filtrar pedidos
+* Excluir pedidos
+
+## Benefícios
+
+* Eficiência
+* Precisão
+* Visibilidade
+* Escalabilidade
+
+## Casos de uso
+
+* Lojas online
+* Sistemas de ERP
+* Aplicativos móveis
+
+## Documentação
+
+A documentação completa da API Gerencyl New Order está disponível em: [Documentação completa da API Gerencyl New Order](https://gerencyl.com/docs/api)
+
+## Suporte
+
+Se você tiver alguma dúvida ou precisar de ajuda para usar a API, entre em contato com o suporte da Gerencyl em: [Suporte Gerencyl](https://gerencyl.com/support)
+
+## Observações
+
+* A API Gerencyl New Order é um serviço pago.
+* Você precisa de uma conta Gerencyl para usar a API.
+
+## Links Úteis
+
+* [Website da Gerencyl](https://gerencyl.com)
+* [Blog da Gerencyl](https://gerencyl.com/blog)
+* [Termos de Serviço](https://gerencyl.com/terms)
+* [Política de Privacidade](https://gerencyl.com/privacy)
