@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/GerencyiWorkService/GerencyiWorkServiceApi/appsettings.json
+/GerencylApiAuthentication/ApiAuthentication/web.config
+/GerencylApiAuthentication/ApiAuthentication/appsettings.json
