@@ -58,7 +58,8 @@ namespace ApiAuthentication.Repository
                     .Set(u => u.Supplier.SupplierId, entity.Supplier.SupplierId)
                     .Set(u => u.Supplier.Telephone, entity.Supplier.Telephone)
                     .Set(u => u.Supplier.Cnpj, entity.Supplier.Cnpj)
-                    .Set(u => u.Supplier.Email, entity.Supplier.Email);
+                    .Set(u => u.Supplier.Email, entity.Supplier.Email)
+                    .Set(u => u.Segment, entity.Segment);
 
                     var updateResult = await _collection.UpdateOneAsync(filter, updateDefinition);
 

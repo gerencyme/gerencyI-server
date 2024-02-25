@@ -21,6 +21,7 @@ namespace ApiAuthentication.Models
 
         public string? RefreshToken { get; set; }
         public string? Token { get; set; }
+
         [MaxLength(30)]
         public string Password
         {

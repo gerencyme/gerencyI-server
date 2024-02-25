@@ -29,6 +29,8 @@ namespace ApiAuthentication.Views
 
         public string? Telephone { get; set; }
 
+        public string? Segment { get; set; }
+
         public DateTime UpdateDate { get; set; }
 
         public ZipCode? ZipCode { get; set; }
